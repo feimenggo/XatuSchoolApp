@@ -205,11 +205,13 @@
 
         </LinearLayout>
     </LinearLayout>
-    <TextView
+    <Button
+        android:id="@+id/find_all_course"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="查看所有课程"
         android:textSize="20dp"
+        android:background="@null"
         android:layout_gravity="center"
         android:layout_marginBottom="5dp"
         />
