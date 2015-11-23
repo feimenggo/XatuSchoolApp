@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rl_header"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:background="#00bbff">
+
+    <ImageButton
+        android:id="@+id/btn_left"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="#00000000"
+        android:contentDescription="左按钮"
+        android:scaleType="centerInside"
+        android:src="@drawable/return_btn" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true">
+
+        <Button
+            android:id="@+id/switch_btn_left"
+            android:layout_width="70dp"
+            android:layout_height="30dp"
+            android:background="@drawable/switch_btn_trans_left_96"
+            android:gravity="center"
+            android:text="所有"
+            android:textColor="#ffffff"
+            android:textSize="14sp" />
+
+        <Button
+            android:id="@+id/switch_btn_right"
+            android:layout_width="70dp"
+            android:layout_height="30dp"
+            android:background="@drawable/switch_btn_pink_right_96"
+            android:gravity="center"
+            android:text="本周"
+            android:textColor="#00bbff"
+            android:textSize="14sp" />
+    </LinearLayout>
+</RelativeLayout>

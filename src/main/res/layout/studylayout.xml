@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+
+    >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#0093dd"
+        >
+        <Button
+            android:id="@+id/id_menu"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@mipmap/reset_icon"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="掌上西工"
+            android:layout_centerInParent="true"
+            android:textSize="25sp"
+            android:textColor="#ffffff"
+            />
+    </RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#0093dd"
+        android:gravity="center"
+        >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_height="35dp"
+            android:layout_margin="30dp"
+            android:background="#ffffff"
+            >
+        <AutoCompleteTextView
+            android:id="@+id/find_course"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="在这里可以搜索我的课程成绩!"
+            android:layout_centerInParent="true"
+            android:background="@null"
+            />
+            <Button
+                android:id="@+id/find_course_btn"
+                android:layout_width="35dp"
+
+                android:layout_height="35dp"
+                android:background="@mipmap/find_icon"
+                android:layout_toRightOf="@+id/find_course"
+                />
+        </RelativeLayout>
+        </LinearLayout>
+<ImageView
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:layout_weight="1"
+    android:src="@drawable/body_icon"
+    />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="这学期你学的怎么样呢？"
+        android:gravity="center"
+        android:textSize="20sp"
+        android:textColor="#7A7E85"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="下面的数据显示的是你的学习情况哦"
+        android:gravity="center"
+        android:layout_marginTop="5dp"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="数学，英语什么的都太简单了!"
+        android:gravity="center"
+        android:textSize="15sp"
+        android:textColor="#7A7E85"
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+
+        >
+
+        <LinearLayout
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+
+            android:gravity="center"
+            >
+            <FrameLayout
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:background="@drawable/text_bg"
+                android:layout_gravity="center"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="总课程数"
+                    android:textColor="#7A7E85"
+                    android:textSize="15sp"
+                    android:layout_marginBottom="15dp"
+                    android:layout_gravity="center"
+                    />
+                <TextView
+                    android:id="@+id/id_allkemu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#0093DD"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="15dp"
+
+                    android:text="50"
+                    android:textSize="20sp" />
+            </FrameLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+
+            android:gravity="center"
+            >
+            <FrameLayout
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:background="@drawable/text_bg"
+                android:layout_gravity="center"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="通过课程数"
+                    android:textColor="#7A7E85"
+                    android:textSize="15sp"
+                    android:layout_marginBottom="15dp"
+                    android:layout_gravity="center"
+                    />
+                <TextView
+                    android:id="@+id/id_tgkms"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#0093DD"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="15dp"
+
+                    android:text="50"
+                    android:textSize="20sp" />
+            </FrameLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            >
+            <FrameLayout
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:background="@drawable/text_bg"
+                android:layout_gravity="center"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="通过率"
+                    android:textColor="#7A7E85"
+                    android:textSize="15sp"
+                    android:layout_marginBottom="15dp"
+                    android:layout_gravity="center"
+                    />
+                <TextView
+                    android:id="@+id/id_tgl"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#0093DD"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="15dp"
+
+                    android:text="100%"
+                    android:textSize="20sp" />
+            </FrameLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="查看所有课程"
+        android:textSize="20dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="5dp"
+        />
+</LinearLayout>

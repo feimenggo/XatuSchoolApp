@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+   >
+
+    <android.support.v4.view.ViewPager
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:id="@+id/id_viewpager"
+        />
+    <LinearLayout
+        android:background="@drawable/tab_bg"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="horizontal"
+        >
+        <xatu.school.view.ChangeColor_myView
+            android:id="@+id/id_study"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:padding="5dp"
+            app:mycolor="#0093dd"
+            app:mytext="学习"
+            app:myicon="@mipmap/study_icon"
+            app:mytext_size="15sp"
+            />
+
+        <xatu.school.view.ChangeColor_myView
+            android:id="@+id/id_course"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:padding="5dp"
+            app:mycolor="#0093dd"
+            app:mytext="课程表"
+            app:myicon="@mipmap/course_icon"
+            app:mytext_size="15sp"
+            />
+        <xatu.school.view.ChangeColor_myView
+            android:id="@+id/id_me"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:padding="5dp"
+            app:mycolor="#0093dd"
+            app:mytext="我"
+            app:myicon="@mipmap/mine_icon"
+            app:mytext_size="15sp"
+            />
+    </LinearLayout>
+
+</LinearLayout>

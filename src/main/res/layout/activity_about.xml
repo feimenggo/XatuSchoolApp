@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F8F8F8">
+
+    <include
+        android:id="@+id/title_bar"
+        layout="@layout/titlebar_white" />
+
+    <ImageView
+        android:id="@+id/icon"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_below="@id/title_bar"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:src="@drawable/xatuapp" />
+
+    <TextView
+        android:id="@+id/version"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/icon"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:text="v0.1 内测版"
+        android:textColor="#969696"
+        android:textSize="15sp" />
+
+    <LinearLayout
+        android:id="@+id/content1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/version"
+        android:layout_marginTop="20dp"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:orientation="vertical"
+        android:paddingLeft="15dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="你是否在为查成绩、看课表、图书馆续借而烦恼？你是否期待拥有一款属于我们自己的应用？你现在不用再担心了！\n\n        为了方便同学，让我们的校园生活更丰富，学习、生活一览无余。一群热爱开发、乐于奉献的同学，聚在一块，精心打造的“掌上西工”，诞生了！"
+            android:textColor="#222222"
+            android:padding="10dp"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+</RelativeLayout>

@@ -1,0 +1,85 @@
+package xatu.school.activity;
+
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+
+import xatu.school.R;
+
+public class SplashActivity extends BaseActivity {
+
+    private Button mToLogin;// 进入登录界面
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_splash);
+        checkVersion();//版本检测和登录状态跳转
+        initViews();// 视图初始化
+        initEvent();// 事件初始化
+    }
+
+    /**
+     * 版本检测
+     */
+    private void checkVersion() {
+        SharedPreferences sp = BaseApplication.getSp();// 得到SP实例
+
+        // 是否初始化(首次启动)
+        boolean firstStart = sp.getBoolean(BaseApplication.SP_FIRST_START, true);
+        if (firstStart) {// 首次启动 进行 数据初始化
+            initOption();// 配置信息初始化
+        }
+
+        // 是否登录
+        boolean isLogin = sp.getBoolean(BaseApplication.SP_IS_LOGIN, false);
+        // 是否获取个人信息
+        boolean isHasStudent = sp.getBoolean(BaseApplication.SP_HAS_STUDENT_INFO, false);
+        // 是否获取课程信息
+        boolean isHasSemester = sp.getBoolean(BaseApplication.SP_HAS_COURSEGRADES_INFO, false);
+
+        Intent intent;
+        if (isLogin && isHasStudent && isHasSemester) {
+            // 进入 主界面
+            intent = new Intent(SplashActivity.this, MainActivity.class);
+        } else {
+            // 进入 登录界面
+            intent = new Intent(SplashActivity.this, LoginActivity.class);
+        }
+        startActivity(intent);// 跳转
+        finish();// 销毁
+    }
+
+    /**
+     * 配置信息初始化
+     */
+    private void initOption() {
+        SharedPreferences.Editor editor = BaseApplication.getEditor();
+        editor.putBoolean(BaseApplication.SP_FIRST_START, false);
+        editor.putBoolean(BaseApplication.SP_IS_LOGIN, false);
+        editor.putInt(BaseApplication.SP_VERSION, BaseApplication.VERSION);
+        editor.putBoolean(BaseApplication.SP_HAS_STUDENT_INFO, false);
+        editor.putBoolean(BaseApplication.SP_HAS_COURSEGRADES_INFO, false);
+        editor.putBoolean(BaseApplication.SP_HAS_COURSETABLE_INFO, false);
+        editor.apply();// 异步提交SP信息
+    }
+
+    private void initEvent() {
+        mToLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // 进入登录界面
+                Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+    }
+
+    private void initViews() {
+        // 得到登录按钮控件
+        mToLogin = (Button) findViewById(R.id.btn_to_login);
+    }
+}

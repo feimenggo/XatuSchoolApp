@@ -1,0 +1,204 @@
+package xatu.school.service;
+
+import android.content.ContentValues;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import xatu.school.activity.BaseApplication;
+import xatu.school.bean.CourseTable;
+import xatu.school.bean.SourceSingleCourse;
+import xatu.school.bean.Semester;
+import xatu.school.bean.StudentInfo;
+import xatu.school.bean.CourseGrades;
+import xatu.school.db.UniversityDbOpenHelper;
+
+/**
+ * 数据库管理器
+ * Created by penfi on 2015/10/21.
+ */
+public class DBManager {
+    private SQLiteDatabase mDb;
+
+    public DBManager() {
+        UniversityDbOpenHelper mDbHelper = BaseApplication.getDBHelper();
+        this.mDb = mDbHelper.getWritableDatabase();
+    }
+
+    public long saveStudentInfo(StudentInfo info) {
+        ContentValues values = new ContentValues();
+        values.put(StudentInfo.COLUMN_NAME, info.getName());
+        values.put(StudentInfo.COLUMN_BANJI, info.getBanji());
+        values.put(StudentInfo.COLUMN_SHENGRI, info.getShengri());
+        values.put(StudentInfo.COLUMN_XIBU, info.getXibu());
+        values.put(StudentInfo.COLUMN_XINGBIE, info.getXingbie());
+        values.put(StudentInfo.COLUMN_XUEHAO, info.getXuehao());
+        values.put(StudentInfo.COLUMN_ZHUANYE, info.getZhuanye());
+        //        Log.i("test_semester", "学生ID：" + id);
+        return mDb.insert(StudentInfo.TABLE_NAME, null, values);
+    }
+
+    /**
+     * 将学期信息存入数据库
+     */
+    public void saveUniversity(CourseGrades courseGrades) {
+
+        List<Semester> semesters = courseGrades.getSemester();
+        ContentValues values = new ContentValues();
+        long semesterId;
+        for (Semester semester : semesters) {
+            values.put(Semester.COLUMN_NAME, semester.getName());
+            semesterId = mDb.insert(Semester.TABLE_NAME, null, values);
+            values.clear();
+//            Log.i("test_semester", semesterId + " 学期：" + semester.getName());
+            saveCourse(values, semesterId, semester.getSourceSingleCourses());
+        }
+    }
+
+    /**
+     * 将课程信息存入数据库
+     */
+    private void saveCourse(ContentValues values, long semesterId, List<SourceSingleCourse> sourceSingleCourses) {
+        for (SourceSingleCourse sourceSingleCourse : sourceSingleCourses) {
+            values.put(SourceSingleCourse.COLUMN_SEMESTER_ID, semesterId);
+            values.put(SourceSingleCourse.COLUMN_NAME, sourceSingleCourse.getName());
+            values.put(SourceSingleCourse.COLUMN_KAOSHIFANGSHI, sourceSingleCourse.getKaoshifangshi());
+            values.put(SourceSingleCourse.COLUMN_KAOSHILEIXING, sourceSingleCourse.getKaoshileixing());
+            values.put(SourceSingleCourse.COLUMN_KECHENGLEIBIE, sourceSingleCourse.getKechengleibie());
+            values.put(SourceSingleCourse.COLUMN_RENKEJIAOSHI, sourceSingleCourse.getRenkejiaoshi());
+            values.put(SourceSingleCourse.COLUMN_YUANSHICHENGJI, sourceSingleCourse.getYuanshichengji());
+            values.put(SourceSingleCourse.COLUMN_ZHUANGTAI, sourceSingleCourse.getZhuangtai());
+            values.put(SourceSingleCourse.COLUMN_JIDIAN, sourceSingleCourse.getJidian());
+            values.put(SourceSingleCourse.COLUMN_XUEFEN, sourceSingleCourse.getXuefen());
+            mDb.insert(SourceSingleCourse.TABLE_NAME, null, values);
+            values.clear();
+        }
+    }
+
+    public void saveCourseTable(CourseTable courseTable) {
+        ContentValues values = new ContentValues();
+        CourseTable.Day day;
+        CourseTable.Subject subject;
+        for (int i = 1; i <= 5; i++) {
+            day = courseTable.get(i);
+            for (int j = 1; j <= 5; j++) {
+                subject = day.get(j);
+                values.put(CourseTable.COLUMN_day, i);
+                values.put(CourseTable.COLUMN_JIECI_ID, j);
+                values.put(CourseTable.COLUMN_NAME, subject.courseName);
+                values.put(CourseTable.COLUMN_ZHOUCI, subject.zhouci);
+                values.put(CourseTable.COLUMN_JIECI, subject.jieci);
+                values.put(CourseTable.COLUMN_JIAOSHI, subject.jiaoshi);
+                mDb.insert(CourseTable.TABLE_NAME, null, values);
+                values.clear();
+            }
+        }
+    }
+
+    public StudentInfo getStudentInfo() {
+        StudentInfo info;
+        String sql = "select * from " + StudentInfo.TABLE_NAME + " where _id = 1";
+        Cursor cursor = mDb.rawQuery(sql, null);
+        cursor.moveToFirst();
+        info = new StudentInfo(
+                cursor.getString(cursor.getColumnIndex(StudentInfo.COLUMN_NAME)),
+                cursor.getString(cursor.getColumnIndex(StudentInfo.COLUMN_XIBU)),
+                cursor.getString(cursor.getColumnIndex(StudentInfo.COLUMN_ZHUANYE)),
+                cursor.getString(cursor.getColumnIndex(StudentInfo.COLUMN_XINGBIE)),
+                cursor.getString(cursor.getColumnIndex(StudentInfo.COLUMN_BANJI)),
+                cursor.getString(cursor.getColumnIndex(StudentInfo.COLUMN_XUEHAO)),
+                cursor.getString(cursor.getColumnIndex(StudentInfo.COLUMN_SHENGRI)));
+        cursor.close();
+        return info;
+    }
+
+    public CourseGrades getCourseGrades() {
+        CourseGrades courseGrades = new CourseGrades();
+        String sql = "select * from " + Semester.TABLE_NAME;
+        Cursor cursor = mDb.rawQuery(sql, null);
+        if (cursor.moveToFirst()) {
+            Cursor cursorCourse;
+            do {
+                int id = cursor.getInt(cursor.getColumnIndex("_id"));
+                String sqlCourse = "select * from " +
+                        SourceSingleCourse.TABLE_NAME + " where " + SourceSingleCourse.COLUMN_SEMESTER_ID
+                        + " = " + id;
+                cursorCourse = mDb.rawQuery(sqlCourse, null);
+                List<SourceSingleCourse> sourceSingleCourses = new ArrayList<>();
+                if (cursorCourse.moveToFirst()) {
+                    do {
+                        sourceSingleCourses.add(new SourceSingleCourse(
+                                cursorCourse.getString(cursorCourse.getColumnIndex(SourceSingleCourse.COLUMN_NAME)),
+                                cursorCourse.getString(cursorCourse.getColumnIndex(SourceSingleCourse.COLUMN_KECHENGLEIBIE)),
+                                cursorCourse.getString(cursorCourse.getColumnIndex(SourceSingleCourse.COLUMN_YUANSHICHENGJI)),
+                                cursorCourse.getString(cursorCourse.getColumnIndex(SourceSingleCourse.COLUMN_RENKEJIAOSHI)),
+                                cursorCourse.getString(cursorCourse.getColumnIndex(SourceSingleCourse.COLUMN_KAOSHILEIXING)),
+                                cursorCourse.getString(cursorCourse.getColumnIndex(SourceSingleCourse.COLUMN_ZHUANGTAI)),
+                                cursorCourse.getString(cursorCourse.getColumnIndex(SourceSingleCourse.COLUMN_KAOSHIFANGSHI)),
+                                cursorCourse.getString(cursorCourse.getColumnIndex(SourceSingleCourse.COLUMN_JIDIAN)),
+                                cursorCourse.getString(cursorCourse.getColumnIndex(SourceSingleCourse.COLUMN_XUEFEN))
+                        ));
+                    } while (cursorCourse.moveToNext());
+                }
+                cursorCourse.close();
+                courseGrades.addSemester(new Semester(
+                        cursor.getString(cursor.getColumnIndex(Semester.COLUMN_NAME)), sourceSingleCourses));
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        return courseGrades;
+    }
+
+    public CourseTable getCourseTable() {
+        CourseTable courseTable = new CourseTable();
+        String sql = "select * from " + CourseTable.TABLE_NAME;
+        Cursor cursor = mDb.rawQuery(sql, null);
+        String courseName, zhouci, jieci, jiaoshi;
+        CourseTable.Subject subject;
+        if (cursor.moveToFirst()) {
+            do {
+                courseName = cursor.getString(cursor.getColumnIndex(CourseTable.COLUMN_NAME));// 课程名
+                zhouci = cursor.getString(cursor.getColumnIndex(CourseTable.COLUMN_ZHOUCI));//周次
+                jieci = cursor.getString(cursor.getColumnIndex(CourseTable.COLUMN_JIECI));// 节次
+                jiaoshi = cursor.getString(cursor.getColumnIndex(CourseTable.COLUMN_JIAOSHI));// 教室
+
+                subject = courseTable.get(cursor.getInt(cursor.getColumnIndex(CourseTable.COLUMN_day))).get(
+                        cursor.getInt(cursor.getColumnIndex(CourseTable.COLUMN_JIECI_ID)));
+
+                subject.courseName = courseName;
+                subject.zhouci = zhouci;
+                subject.jieci = jieci;
+                subject.jiaoshi = jiaoshi;
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        return courseTable;
+    }
+
+    /**
+     * 清空数据库所有的表
+     *
+     * @return true 操作成功，false 操作失败
+     */
+    public boolean clearAllTable() {
+        mDb.execSQL("delete from " + Semester.TABLE_NAME);  //清空学期表数据
+        mDb.execSQL("update sqlite_sequence SET seq = 0 where name ='" +
+                Semester.TABLE_NAME + "'");//自增长ID为0
+
+        mDb.execSQL("delete from " + SourceSingleCourse.TABLE_NAME);  //清空课程信息表数据
+        mDb.execSQL("update sqlite_sequence SET seq = 0 where name ='" +
+                SourceSingleCourse.TABLE_NAME + "'");//自增长ID为0
+
+        mDb.execSQL("delete from " + StudentInfo.TABLE_NAME);  //清空学生个人信息表数据
+        mDb.execSQL("update sqlite_sequence SET seq = 0 where name ='" +
+                StudentInfo.TABLE_NAME + "'");//自增长ID为0
+
+        mDb.execSQL("delete from " + CourseTable.TABLE_NAME);  //清空课程表信息表数据
+        mDb.execSQL("update sqlite_sequence SET seq = 0 where name ='" +
+                CourseTable.TABLE_NAME + "'");//自增长ID为0
+
+        return true;
+    }
+}
