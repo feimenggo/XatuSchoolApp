@@ -3,8 +3,8 @@
     android:id="@+id/title_bar"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/blue"
-    android:orientation="horizontal" >
+    android:background="@color/colorPrimary"
+    android:orientation="horizontal">
 
     <ImageButton
         android:id="@+id/btn_left"

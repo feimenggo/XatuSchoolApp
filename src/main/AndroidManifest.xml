@@ -22,7 +22,6 @@
         <activity android:name=".activity.LoginActivity" />
         <activity android:name=".activity.BaseActivity" />
         <activity android:name=".activity.FindScore" />
-        <activity android:name=".activity.CourseTableActivity" />
         <activity android:name=".activity.AboutActivity" />
 
         <service android:name=".activity.SchoolLoginService" />

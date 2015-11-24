@@ -43,7 +43,7 @@ public class UniversityDbOpenHelper extends SQLiteOpenHelper {
                 SourceSingleCourse.COLUMN_NAME + " text , " +
                 SourceSingleCourse.COLUMN_KAOSHIFANGSHI + " text , " +
                 SourceSingleCourse.COLUMN_KAOSHILEIXING + " text , " +
-                SourceSingleCourse.COLUMN_KECHENGLEIBIE + " text , " +
+                SourceSingleCourse.COLUMN_URL + " text , " +
                 SourceSingleCourse.COLUMN_RENKEJIAOSHI + " text , " +
                 SourceSingleCourse.COLUMN_YUANSHICHENGJI + " text , " +
                 SourceSingleCourse.COLUMN_JIDIAN + " text , " +

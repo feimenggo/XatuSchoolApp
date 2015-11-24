@@ -3,7 +3,7 @@
     android:id="@+id/rl_header"
     android:layout_width="match_parent"
     android:layout_height="50dp"
-    android:background="#00bbff">
+    android:background="@color/colorPrimary">
 
 
 
@@ -29,7 +29,7 @@
             android:background="@drawable/switch_btn_pink_right_96"
             android:gravity="center"
             android:text="本周"
-            android:textColor="#00bbff"
+            android:textColor="@color/colorPrimary"
             android:textSize="14sp" />
     </LinearLayout>
 </RelativeLayout>

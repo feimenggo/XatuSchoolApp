@@ -66,7 +66,7 @@ public class DBManager {
             values.put(SourceSingleCourse.COLUMN_NAME, sourceSingleCourse.getName());
             values.put(SourceSingleCourse.COLUMN_KAOSHIFANGSHI, sourceSingleCourse.getKaoshifangshi());
             values.put(SourceSingleCourse.COLUMN_KAOSHILEIXING, sourceSingleCourse.getKaoshileixing());
-            values.put(SourceSingleCourse.COLUMN_KECHENGLEIBIE, sourceSingleCourse.getKechengleibie());
+            values.put(SourceSingleCourse.COLUMN_URL, sourceSingleCourse.getUrl());
             values.put(SourceSingleCourse.COLUMN_RENKEJIAOSHI, sourceSingleCourse.getRenkejiaoshi());
             values.put(SourceSingleCourse.COLUMN_YUANSHICHENGJI, sourceSingleCourse.getYuanshichengji());
             values.put(SourceSingleCourse.COLUMN_ZHUANGTAI, sourceSingleCourse.getZhuangtai());
@@ -131,7 +131,6 @@ public class DBManager {
                     do {
                         sourceSingleCourses.add(new SourceSingleCourse(
                                 cursorCourse.getString(cursorCourse.getColumnIndex(SourceSingleCourse.COLUMN_NAME)),
-                                cursorCourse.getString(cursorCourse.getColumnIndex(SourceSingleCourse.COLUMN_KECHENGLEIBIE)),
                                 cursorCourse.getString(cursorCourse.getColumnIndex(SourceSingleCourse.COLUMN_YUANSHICHENGJI)),
                                 cursorCourse.getString(cursorCourse.getColumnIndex(SourceSingleCourse.COLUMN_RENKEJIAOSHI)),
                                 cursorCourse.getString(cursorCourse.getColumnIndex(SourceSingleCourse.COLUMN_KAOSHILEIXING)),

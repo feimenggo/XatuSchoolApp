@@ -2,11 +2,14 @@ package xatu.school.activity;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -16,10 +19,11 @@ import xatu.school.R;
 import xatu.school.bean.CourseTable;
 import xatu.school.control.CourseTableManager;
 
-public class CourseTableActivity extends BaseActivity implements View.OnClickListener {
+/**
+ * Created by mmcc on 2015/11/7.
+ */
+public class CourseTableFragment extends Fragment implements View.OnClickListener {
     private TextView mTitle;// 标题栏 内容
-    private ImageButton mReturn;// 标题栏 返回按钮
-
     private Button mSwitchBtnLeft;// 所有课程表
     private Button mSwitchBtnRight;// 本周课程表
 
@@ -29,13 +33,61 @@ public class CourseTableActivity extends BaseActivity implements View.OnClickLis
     private ArrayList<SimpleSection> mALlSimpleSections = new ArrayList<>();// 所有课程
     private ArrayList<SimpleSection> mPresentSections = new ArrayList<>();// 本周课程
 
+    @Nullable
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_course_table);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.courselayout, container, false);
         initDatas();// 数据初始化
-        initViews();// 控件初始化
+        initViews(view);// 控件初始化
         initEvent();// 事件初始化
+
+        return view;
+    }
+
+    private void initEvent() {
+
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.switch_btn_left:
+                mSwitchBtnLeft.setTextColor(Color.parseColor("#0093dd"));
+                mSwitchBtnRight.setTextColor(Color.WHITE);
+                mSwitchBtnLeft
+                        .setBackgroundResource(R.drawable.switch_btn_pink_left_96);
+                mSwitchBtnRight
+                        .setBackgroundResource(R.drawable.switch_btn_trans_right_96);
+
+                mCourseTable.updateSimpleSections(mALlSimpleSections);
+                break;
+            case R.id.switch_btn_right:
+                mSwitchBtnLeft.setTextColor(Color.WHITE);
+                mSwitchBtnRight.setTextColor(Color.parseColor("#0093dd"));
+                mSwitchBtnLeft
+                        .setBackgroundResource(R.drawable.switch_btn_trans_left_96);
+                mSwitchBtnRight
+                        .setBackgroundResource(R.drawable.switch_btn_pink_right_96);
+
+                mCourseTable.updateSimpleSections(mPresentSections);
+                break;
+        }
+    }
+
+    private void initViews(View view) {
+        mCourseTable = (CouresTableView) view.findViewById(R.id.coursetable);
+
+
+        mSwitchBtnLeft = (Button) view.findViewById(R.id.switch_btn_left);
+        mSwitchBtnRight = (Button) view.findViewById(R.id.switch_btn_right);
+
+
+        mCourseTable.setmDayTitle(mDayTitle);
+        mCourseTable.setmSectionTitle(mSectionTitle);
+        mCourseTable.setmSimpleSections(mPresentSections);
+
+        mSwitchBtnLeft.setOnClickListener(this);
+        mSwitchBtnRight.setOnClickListener(this);
     }
 
     private void initDatas() {
@@ -86,57 +138,5 @@ public class CourseTableActivity extends BaseActivity implements View.OnClickLis
 //        mSimpleSections.add(new SimpleSection(5, 1, 2, "汇编程序设计与微机接口@教2-307"));
 //        mSimpleSections.add(new SimpleSection(5, 3, 4, "操作系统@教1-205"));
 //        mSimpleSections.add(new SimpleSection(5, 5, 8, "计算机通信与网络实验工@1-204"));
-    }
-
-    private void initEvent() {
-
-    }
-
-    private void initViews() {
-        mCourseTable = (CouresTableView) findViewById(R.id.coursetable);
-        mReturn = (ImageButton) findViewById(R.id.btn_left);
-
-        mSwitchBtnLeft = (Button) findViewById(R.id.switch_btn_left);
-        mSwitchBtnRight = (Button) findViewById(R.id.switch_btn_right);
-
-
-        mCourseTable.setmDayTitle(mDayTitle);
-        mCourseTable.setmSectionTitle(mSectionTitle);
-        mCourseTable.setmSimpleSections(mPresentSections);
-        mCourseTable.setmBorderColor(Color.parseColor("#00bbff"));
-
-        mReturn.setOnClickListener(this);
-
-        mSwitchBtnLeft.setOnClickListener(this);
-        mSwitchBtnRight.setOnClickListener(this);
-    }
-
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.btn_left:
-                finish();
-                break;
-            case R.id.switch_btn_left:
-                mSwitchBtnLeft.setTextColor(Color.parseColor("#00bbff"));
-                mSwitchBtnRight.setTextColor(Color.WHITE);
-                mSwitchBtnLeft
-                        .setBackgroundResource(R.drawable.switch_btn_pink_left_96);
-                mSwitchBtnRight
-                        .setBackgroundResource(R.drawable.switch_btn_trans_right_96);
-
-                mCourseTable.updateSimpleSections(mALlSimpleSections);
-                break;
-            case R.id.switch_btn_right:
-                mSwitchBtnLeft.setTextColor(Color.WHITE);
-                mSwitchBtnRight.setTextColor(Color.parseColor("#00bbff"));
-                mSwitchBtnLeft
-                        .setBackgroundResource(R.drawable.switch_btn_trans_left_96);
-                mSwitchBtnRight
-                        .setBackgroundResource(R.drawable.switch_btn_pink_right_96);
-
-                mCourseTable.updateSimpleSections(mPresentSections);
-                break;
-        }
     }
 }

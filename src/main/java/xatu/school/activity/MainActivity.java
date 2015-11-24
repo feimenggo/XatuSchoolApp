@@ -58,8 +58,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void theCourseFragment() {
-        CourseFragment courseFragment=new CourseFragment();
-        mTabs.add(courseFragment);
+        CourseTableFragment courseTableFragment =new CourseTableFragment();
+        mTabs.add(courseTableFragment);
     }
 
     private void theStudyFragment() {
