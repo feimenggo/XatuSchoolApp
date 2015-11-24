@@ -14,7 +14,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import feimeng.linechartview.LineChartView;
 import xatu.school.R;
 import xatu.school.bean.CourseInfoSection;
 import xatu.school.control.MainManager;
@@ -28,14 +30,30 @@ public class StudyFragment extends Fragment{
     private TextView mTongCourse;  //通过课程数
     private TextView mTongguolv;  //通过率
     private Button find_all_course;
+
+    private LineChartView mLineChart; //曲线图
+    private List<LineChartView.Coord> mDatas;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View view=inflater.inflate(R.layout.studylayout,container,false);
+        initData();   //初始化曲线表
         initView(view);
         displayCourseInfoSection();//获取课程信息，并显示在课程信息区
         return view;
+    }
+
+    private void initData() {
+        mDatas=new ArrayList<LineChartView.Coord>();
+        mDatas.add(new LineChartView.Coord(62, "大一上"));
+        mDatas.add(new LineChartView.Coord(77, "大一下"));
+        mDatas.add(new LineChartView.Coord(92, "大二上"));
+        mDatas.add(new LineChartView.Coord(76, "大二下"));
+        mDatas.add(new LineChartView.Coord(83, "大三上"));
+        mDatas.add(new LineChartView.Coord(61, "大三下"));
+        mDatas.add(new LineChartView.Coord(88, "大四上"));
+        mDatas.add(new LineChartView.Coord(81, "大四下"));
     }
 
     private void displayCourseInfoSection() {
@@ -48,6 +66,8 @@ public class StudyFragment extends Fragment{
         mAllCourse= (TextView) view.findViewById(R.id.id_allkemu);
         mTongCourse= (TextView) view.findViewById(R.id.id_tgkms);
         mTongguolv= (TextView) view.findViewById(R.id.id_tgl);
+        mLineChart= (LineChartView) view.findViewById(R.id.linechart);
+        mLineChart.setCoords(mDatas);
         find_all_course= (Button) view.findViewById(R.id.find_all_course);
         find_all_course.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,6 +77,9 @@ public class StudyFragment extends Fragment{
             }
         });
 
+
     }
+
+
 
 }

@@ -1,11 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:quxian="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
 
     >
-
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:scrollbars="none"
+    >
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       android:orientation="vertical"
+       >
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
@@ -17,7 +28,7 @@
             android:layout_height="40dp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:background="@mipmap/reset_icon" />
+            android:background="@mipmap/reset" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -93,17 +104,16 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
         android:orientation="horizontal"
-
+        android:gravity="center_vertical"
         >
 
         <LinearLayout
             android:layout_width="1dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-
             android:gravity="center">
 
             <FrameLayout
@@ -137,7 +147,7 @@
 
         <LinearLayout
             android:layout_width="1dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
 
             android:gravity="center">
@@ -173,7 +183,7 @@
 
         <LinearLayout
             android:layout_width="1dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center">
 
@@ -216,4 +226,15 @@
         android:background="@null"
         android:text="查看所有课程"
         android:textSize="20dp" />
+       <feimeng.linechartview.LineChartView
+           android:id="@+id/linechart"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           quxian:linColorOnCoord="#0093dd"
+           quxian:lineColorOnAxis="#7a7e85"
+           android:layout_marginBottom="10dp"
+           quxian:bgColor="#fafafa"
+           />
+       </LinearLayout>
+    </ScrollView>
 </LinearLayout>

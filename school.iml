@@ -94,5 +94,6 @@
     <orderEntry type="library" exported="" name="jsoup-1.8.3" level="project" />
     <orderEntry type="library" exported="" name="android-async-http-1.4.9" level="project" />
     <orderEntry type="module" module-name="coursetableview" exported="" />
+    <orderEntry type="module" module-name="linechartview" exported="" />
   </component>
 </module>

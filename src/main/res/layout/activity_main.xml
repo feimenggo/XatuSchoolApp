@@ -20,16 +20,16 @@
         android:orientation="horizontal"
         >
         <xatu.school.view.ChangeColor_myView
-            android:id="@+id/id_study"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="match_parent"
-            android:padding="5dp"
-            app:mycolor="#0093dd"
-            app:mytext="学习"
-            app:myicon="@mipmap/study_icon"
-            app:mytext_size="15sp"
-            />
+        android:id="@+id/id_study"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="match_parent"
+        android:padding="5dp"
+        app:mycolor="#0093dd"
+        app:mytext="学习"
+        app:myicon="@mipmap/study_icon"
+        app:mytext_size="15sp"
+        />
 
         <xatu.school.view.ChangeColor_myView
             android:id="@+id/id_course"
