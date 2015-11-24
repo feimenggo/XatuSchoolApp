@@ -14,6 +14,7 @@ import org.jsoup.select.Elements;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import cz.msebera.android.httpclient.Header;
 import xatu.school.bean.CourseGrades;
@@ -64,18 +65,16 @@ public class SemesterInfoImp implements ISemesterInfo {
         CourseGrades sc = new CourseGrades();
         String name = null;
         String xuefen = null;
-        String kechengleibie = null;
         String yuanshichengji = null;
         String zhuanhuanchengji = null;
         String jidian = null;
-        String mingci = null;
-        String renshu = null;
         String renkejiaoshi = null;
         String kaoshileixing = null;
         String kaoshishijian = null;
         String kaoshifangshi = null;
         String zhuangtai = null;
         String caozuo = null;
+        String url = null;
         Document doc = Jsoup.parse(htmlOfsc);
         Elements link = doc.getElementsByTag("table");
         List<Semester> xq = new ArrayList<Semester>();
@@ -89,7 +88,7 @@ public class SemesterInfoImp implements ISemesterInfo {
                     if (count == 1) {
 
                         int index = str.indexOf('-');
-                        if (index == 2) {
+                        if (index > 0 && str.indexOf("学期") > 0) {
                             sc.addSemester(new Semester());
                             sc.getSemester().get(i).setName(str);
                             i++;
@@ -107,61 +106,93 @@ public class SemesterInfoImp implements ISemesterInfo {
                             }
                         }
                     } else
-                        switch (count % 14) {
+                        switch (count % 12) {
                             case 2:
                                 xuefen = str;
                                 break;
                             case 3:
-                                kechengleibie = str;
-                                break;
-                            case 4:
                                 yuanshichengji = str;
                                 break;
-                            case 5:
+                            case 4:
                                 zhuanhuanchengji = str;
                                 break;
-                            case 6:
+                            case 5:
                                 jidian = str;
                                 break;
-                            case 7:
-                                mingci = str;
-                                break;
-                            case 8:
-                                renshu = str;
-                                break;
-                            case 9:
+                            case 6:
                                 renkejiaoshi = str;
                                 break;
-                            case 10:
+                            case 7:
                                 kaoshileixing = str;
                                 break;
-                            case 11:
+                            case 8:
                                 kaoshishijian = str;
                                 break;
-                            case 12:
+                            case 9:
                                 kaoshifangshi = str;
                                 break;
-                            case 13:
+                            case 10:
                                 zhuangtai = str;
                                 break;
-                            case 14:
-                                caozuo = str;
-                                break;
+                            case 11: {
+//                                Log.e("mmm", e.toString());
+                                String reg[] = e.toString().split("\"");
+                                url = reg[3];
+                                caozuo = str.split(" ")[1];
+                            }
+                            break;
                             default:
                                 break;
                         }
                 }
-                if (count == 0) count++;
+                if (count == 0)
+                    count++;
                 else {
-                    count = count % 14 + 1;
-                    if (count == 1)
-                        sc.getSemester().get(i - 1).addCourse(new SourceSingleCourse(name, xuefen, kechengleibie, yuanshichengji, zhuanhuanchengji, jidian, mingci, renshu, renkejiaoshi, kaoshileixing, kaoshishijian, kaoshifangshi, zhuangtai, caozuo));
+                    count = count % 11 + 1;
+                    if (count == 1) {
+                        SourceSingleCourse ss = new SourceSingleCourse(name, xuefen, yuanshichengji, zhuanhuanchengji, jidian, renkejiaoshi, kaoshileixing, kaoshishijian, kaoshifangshi, zhuangtai, caozuo, url);
+                        int tmp = get_real_chengji(ss);
+//                        Log.e("num", String.valueOf(tmp));
+                        ss.setYuanshichengji(String.valueOf(tmp));
+                        sc.getSemester().get(i - 1).addCourse(ss);
+                    }
 
                 }
             }
         }
         margeSC(sc, m);
 //        Log.e("html", "OK");
+    }
+
+    static public int get_real_chengji(SourceSingleCourse c) {
+        int max = 0;
+        String reg = "\\d+";
+        boolean b1 = Pattern.compile(reg).matcher(c.getZhuanhuanchengji()).find();
+        boolean b2 = Pattern.compile(reg).matcher(c.getJidian()).find();
+        boolean b3 = Pattern.compile(reg).matcher(c.getYuanshichengji()).find();
+
+        if (b1) {
+            int tmp = Integer.parseInt(replace(c.getZhuanhuanchengji()));
+            max = max > tmp ? max : tmp;
+        }
+        if (b2) {
+            int tmp = Integer.parseInt(replace(c.getJidian()));
+            max = max > tmp ? max : tmp;
+        }
+        if (b3) {
+            int tmp = Integer.parseInt(replace(c.getYuanshichengji()));
+            max = max > tmp ? max : tmp;
+        }
+        return max;
+    }
+
+    static public String replace(String str) {
+
+        String tr = str;
+        tr = tr.replace("  ", "");
+        tr = tr.replace(" ", "");
+        tr = tr.replace(" ", "");
+        return tr;
     }
 
     private void margeSC(CourseGrades sc, InitMsg m) {

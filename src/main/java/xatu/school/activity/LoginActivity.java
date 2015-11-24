@@ -126,6 +126,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
         }
     };
+    private MyReceiver receiver;
 
     private void reset(boolean cleanUser) {
         // 清空输入信息
@@ -163,10 +164,14 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         //绑定服务
         startService();
         //注册广播接收器
-        MyReceiver receiver = new MyReceiver();
+        receiver = new MyReceiver();
         IntentFilter filter = new IntentFilter();
         filter.addAction(MyReceiver.RECEIVER);
         this.registerReceiver(receiver, filter);
+    }
+
+    private void stopReceiver() {
+        unregisterReceiver(receiver);
     }
 
     /**
@@ -285,7 +290,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
     @Override
     protected void onDestroy() {
-        stopService();
+        stopService();// 关闭服务
+        stopReceiver();// 关闭广播
         super.onDestroy();
     }
 
