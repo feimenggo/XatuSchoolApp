@@ -156,7 +156,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         initViews();// 视图初始化
         initEvent();// 事件初始化
         initCheckcode();// 获取验证码
-        initReceiver();
+        initReceiver();// 初始化服务
     }
 
     private void initReceiver() {
