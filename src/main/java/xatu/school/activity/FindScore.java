@@ -12,7 +12,7 @@ import java.util.List;
 import xatu.school.R;
 import xatu.school.adapter.UseAdapter;
 import xatu.school.bean.FileBean;
-import xatu.school.control.FindScoreManager;
+import xatu.school.control.CourseGradesManager;
 
 /**
  * 所有成绩界面
@@ -41,7 +41,7 @@ public class FindScore extends BaseActivity implements View.OnClickListener {
     }
 
     private void initData() {
-        mDatas = FindScoreManager.getInstance().getCourseGradesInfo();
+        mDatas = CourseGradesManager.getInstance().getCourseGradesInfo();
     }
 
     private void initViews() {

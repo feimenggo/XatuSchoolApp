@@ -35,7 +35,7 @@ public class DBManager {
         values.put(StudentInfo.COLUMN_NAME, info.getName());
         values.put(StudentInfo.COLUMN_BANJI, info.getBanji());
         values.put(StudentInfo.COLUMN_SHENGRI, info.getShengri());
-        values.put(StudentInfo.COLUMN_XIBU, info.getXibu());
+        values.put(StudentInfo.COLUMN_XIBU, info.getYuanxi());
         values.put(StudentInfo.COLUMN_XINGBIE, info.getXingbie());
         values.put(StudentInfo.COLUMN_XUEHAO, info.getXuehao());
         values.put(StudentInfo.COLUMN_ZHUANYE, info.getZhuanye());
@@ -179,10 +179,8 @@ public class DBManager {
 
     /**
      * 清空数据库所有的表
-     *
-     * @return true 操作成功，false 操作失败
      */
-    public boolean clearAllTable() {
+    public void clearAllTable() {
         mDb.execSQL("delete from " + Semester.TABLE_NAME);  //清空学期表数据
         mDb.execSQL("update sqlite_sequence SET seq = 0 where name ='" +
                 Semester.TABLE_NAME + "'");//自增长ID为0
@@ -198,7 +196,5 @@ public class DBManager {
         mDb.execSQL("delete from " + CourseTable.TABLE_NAME);  //清空课程表信息表数据
         mDb.execSQL("update sqlite_sequence SET seq = 0 where name ='" +
                 CourseTable.TABLE_NAME + "'");//自增长ID为0
-
-        return true;
     }
 }
