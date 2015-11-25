@@ -42,6 +42,9 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     private FrameLayout mProgress;// 进度条
     private TextView mProgressContent;// 进度条显示文字
 
+    private String mUsernameValue;// 用户名
+    private String mPasswordValue;// 密码
+
     private SchoolLoginService.MyBinder binder;
 
     private Handler mHandler = new Handler() {
@@ -58,7 +61,12 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                     case Code.CONTROL.LOGIN:// 登录
                         // 修改登录状态 (PersistentCookieStore 会自动保存Cookie信息)
                         BaseApplication.getEditor().putBoolean(BaseApplication.SP_IS_LOGIN, true);
+
+                        // 保存登录信息
+                        BaseApplication.getEditor().putString(BaseApplication.SP_USERNAME, mUsernameValue);
+                        BaseApplication.getEditor().putString(BaseApplication.SP_PASSWORD, mPasswordValue);
                         BaseApplication.getEditor().apply();
+
                         Toast.makeText(LoginActivity.this, "登录成功！", Toast.LENGTH_SHORT).show();
                         mProgressContent.setText("正在加载数据...");
 
@@ -264,6 +272,9 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         mProgressContent.setText("正在登录...");
         //显示进度条
         mProgress.setVisibility(View.VISIBLE);
+
+        mUsernameValue = username;
+        mPasswordValue = password;
         //学生登录操作
         LoginManager.getInstance().login(this, mHandler, username,
                 password, checkcode);

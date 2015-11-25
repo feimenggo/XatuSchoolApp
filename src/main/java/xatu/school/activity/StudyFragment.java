@@ -1,6 +1,5 @@
 package xatu.school.activity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -8,15 +7,11 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.Button;
-import android.widget.ListView;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-
 import xatu.school.R;
-import xatu.school.bean.CourseInfoSection;
+import xatu.school.bean.CoursePassRate;
 import xatu.school.control.MainManager;
 
 /**
@@ -39,7 +34,7 @@ public class StudyFragment extends Fragment{
     }
 
     private void displayCourseInfoSection() {
-        CourseInfoSection courseInfo = MainManager.getInstance().getCourseInfo();
+        CoursePassRate courseInfo = MainManager.getInstance().getCourseInfo();
         mAllCourse.setText(String.valueOf(courseInfo.getTotal()));
         mTongCourse.setText(String.valueOf(courseInfo.getPass()));
         mTongguolv.setText(String.valueOf(courseInfo.getPassRate()) + "%");

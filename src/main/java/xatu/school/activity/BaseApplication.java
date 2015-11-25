@@ -17,6 +17,10 @@ public class BaseApplication extends Application {
     public static final String SP_HAS_COURSEGRADES_INFO = "has_coursegrades_info";// 是否存在课程成绩信息
     public static final String SP_HAS_COURSETABLE_INFO = "has_coursetable_info";// 是否存在课程表信息
 
+    public static final String SP_USERNAME = "username";// 用户名
+    public static final String SP_PASSWORD = "passwrod";// 密码
+    public static final String SP_COOKIE_TIME = "cookie_time";// 获取或更新cookie的时间戳
+
     private static final String SP_NAME = "school_sp";
     public static final int VERSION = 1;
 

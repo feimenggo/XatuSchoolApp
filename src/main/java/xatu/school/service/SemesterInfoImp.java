@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 import cz.msebera.android.httpclient.Header;
+import xatu.school.bean.BaseSingleCourse;
 import xatu.school.bean.CourseGrades;
 import xatu.school.bean.InitMsg;
 import xatu.school.bean.Semester;
@@ -186,21 +187,16 @@ public class SemesterInfoImp implements ISemesterInfo {
         return max;
     }
 
-    static public String replace(String str) {
-
-        String tr = str;
-        tr = tr.replace("  ", "");
-        tr = tr.replace(" ", "");
-        tr = tr.replace(" ", "");
-        return tr;
+    public static String replace(String str) {
+        return str.replace("  ", "").replace(" ", "").replace(" ", "");
     }
 
     private void margeSC(CourseGrades sc, InitMsg m) {
         for (int i = 0; i < sc.getSemester().size(); i++) {
             for (int l = i + 1; l < sc.getSemester().size(); l++) {
                 if (sc.getSemester().get(i).getName().equals(sc.getSemester().get(l).getName()) == true) {
-                    for (SourceSingleCourse c : sc.getSemester().get(l).getSourceSingleCourses()) {
-                        sc.getSemester().get(i).addCourse(c);
+                    for (BaseSingleCourse c : sc.getSemester().get(l).getSourceSingleCourses()) {
+                        sc.getSemester().get(i).addCourse((SourceSingleCourse) c);
                     }
                     sc.getSemester().remove(l);
                     --l;

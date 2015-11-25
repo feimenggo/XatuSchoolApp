@@ -12,12 +12,12 @@ public class Semester {
     public static final String COLUMN_NAME = "name";// 学期名
 
     private String name;// 学期名
-    private List<SourceSingleCourse> sourceSingleCourses = new ArrayList<SourceSingleCourse>();// 该学期的单科课程集合
+    private List<BaseSingleCourse> sourceSingleCourses = new ArrayList<BaseSingleCourse>();// 该学期的单科课程集合
 
     public Semester() {
     }
 
-    public Semester(String name, List<SourceSingleCourse> sourceSingleCourses) {
+    public Semester(String name, List<BaseSingleCourse> sourceSingleCourses) {
         this.name = name;
         this.sourceSingleCourses = sourceSingleCourses;
     }
@@ -30,7 +30,7 @@ public class Semester {
         return this.name;
     }
 
-    public List<SourceSingleCourse> getSourceSingleCourses() {
+    public List<BaseSingleCourse> getSourceSingleCourses() {
         return sourceSingleCourses;
     }
 

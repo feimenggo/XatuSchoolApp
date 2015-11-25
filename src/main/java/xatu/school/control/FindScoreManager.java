@@ -4,10 +4,12 @@ package xatu.school.control;
 import java.util.ArrayList;
 import java.util.List;
 
+import xatu.school.bean.BaseSingleCourse;
 import xatu.school.bean.CourseGrades;
 import xatu.school.bean.FileBean;
 import xatu.school.bean.ScoreItem;
 import xatu.school.bean.Semester;
+import xatu.school.bean.SingleCourse;
 import xatu.school.bean.SourceSingleCourse;
 import xatu.school.service.DBManager;
 
@@ -53,18 +55,31 @@ public class FindScoreManager {
         return data;
     }
 
-    private void addSingleCourse(int maxSemester, int semester, List<FileBean> data, List<SourceSingleCourse> mSemester) {
-        SourceSingleCourse sourceSingleCourse;
+    private void addSingleCourse(int maxSemester, int semester, List<FileBean> data, List<BaseSingleCourse> mSemester) {
+        SingleCourse singleCourse;
         for (int courseId = 0; courseId < mSemester.size(); courseId++) {
-            sourceSingleCourse = mSemester.get(courseId);
+            singleCourse = (SingleCourse) mSemester.get(courseId);
             String grade;
-            if (sourceSingleCourse.getJidian() == null || sourceSingleCourse.getJidian().length() <= 1) {
-                grade = "暂无";
-            } else {
-                grade = sourceSingleCourse.getJidian() + "分";
+            switch (singleCourse.getStatus()) {
+                case 1:
+                    grade = "没考试";
+                    break;
+                case 2:
+                    grade = "归档中";
+                    break;
+                case 3:
+                    grade = "未评价";
+                    break;
+                case 4:
+                    grade = String.valueOf(singleCourse.getChengji());
+                    break;
+                default:
+                    grade = "未知错误";
+                    break;
             }
+
             ScoreItem scoreItem = new ScoreItem();
-            scoreItem.setCourseName(sourceSingleCourse.getName());
+            scoreItem.setCourseName(singleCourse.getName());
             scoreItem.setCouresScore(grade);
             FileBean fileBean = new FileBean(maxSemester, semester, scoreItem);
             data.add(fileBean);

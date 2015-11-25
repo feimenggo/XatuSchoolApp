@@ -1,17 +1,16 @@
 package xatu.school.bean;
 
 /**
- * 主界面 课程信息区 类
- *
+ * 学习界面 课程通过率类
  * Created by penfi on 2015/11/4.
  */
-public class CourseInfoSection {
+public class CoursePassRate {
     private int total;// 总课程数
     private int pass;// 通过课程数
     private int passRate;// 通过率
     private String evaluation;// 评价
 
-    public CourseInfoSection(int total, int pass, int passRate, String evaluation) {
+    public CoursePassRate(int total, int pass, int passRate, String evaluation) {
         this.total = total;
         this.pass = pass;
         this.passRate = passRate;

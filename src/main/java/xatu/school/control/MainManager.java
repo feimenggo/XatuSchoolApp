@@ -3,15 +3,15 @@ package xatu.school.control;
 import java.text.ParseException;
 
 import xatu.school.activity.BaseApplication;
-import xatu.school.bean.CourseInfoSection;
+import xatu.school.bean.CoursePassRate;
 import xatu.school.bean.CourseTable;
 import xatu.school.bean.StudentInfo;
 import xatu.school.bean.CourseGrades;
 import xatu.school.service.CourseTableImp;
 import xatu.school.service.DBManager;
 import xatu.school.service.ICourseTable;
-import xatu.school.service.IMainSectionInfo;
-import xatu.school.service.MainSectionInfoImp;
+import xatu.school.service.IGetStudyStatisticsInfo;
+import xatu.school.service.GetStudyStatisticsInfoImp;
 import xatu.school.utils.WeekNumber;
 
 /**
@@ -56,8 +56,8 @@ public class MainManager {
     /**
      * 获取课程概况信息
      */
-    public CourseInfoSection getCourseInfo() {
-        IMainSectionInfo info = new MainSectionInfoImp();
+    public CoursePassRate getCourseInfo() {
+        IGetStudyStatisticsInfo info = new GetStudyStatisticsInfoImp();
         CourseGrades semesterInfo = getSemesterInfo();
         return info.getCourseInfoSection(semesterInfo);
     }

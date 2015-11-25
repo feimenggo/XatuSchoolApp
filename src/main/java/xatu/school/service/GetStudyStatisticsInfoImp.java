@@ -1,15 +1,17 @@
 package xatu.school.service;
 
 
+import xatu.school.bean.BaseSingleCourse;
 import xatu.school.bean.CourseGrades;
-import xatu.school.bean.CourseInfoSection;
+import xatu.school.bean.CoursePassRate;
 import xatu.school.bean.Semester;
-import xatu.school.bean.SourceSingleCourse;
+import xatu.school.bean.SemesterAverageScore;
+import xatu.school.bean.SingleCourse;
 
 /**
  * Created by Administrator on 2015-11-5.
  */
-public class MainSectionInfoImp implements IMainSectionInfo {
+public class GetStudyStatisticsInfoImp implements IGetStudyStatisticsInfo {
     private int total = 0;// 总课程数
     private int pass = 0;// 通过课程数
     private int passRate;// 通过率
@@ -19,18 +21,19 @@ public class MainSectionInfoImp implements IMainSectionInfo {
     private double passR;
     int count = 0;
 
-    public CourseInfoSection getCourseInfoSection(CourseGrades courseGrades) {
+    public CoursePassRate getCourseInfoSection(CourseGrades courseGrades) {
         for (Semester s : courseGrades.getSemester()) {
-            for (SourceSingleCourse c : s.getSourceSingleCourses()) {
+            for (BaseSingleCourse c : s.getSourceSingleCourses()) {
+                SingleCourse source = (SingleCourse) c;
 
-                if (!c.getZhuangtai().equals("") && c.getZhuangtai().indexOf("档") > 0) {
-                    int num = Integer.parseInt(c.getYuanshichengji());
+                if (source.getStatus() == 4) {
+                    int num = source.getChengji();
                     if (num != 0) {
                         total++;
                         if (num > 59)
                             pass++;
-                        sum += Integer.parseInt(c.getYuanshichengji().replaceAll(" ", "")) * Double.parseDouble(c.getXuefen().replaceAll(" ", ""));
-                        xf += Double.parseDouble(c.getXuefen().replaceAll(" ", ""));
+                        sum += source.getChengji() * source.getXuefen();
+                        xf += source.getXuefen();
                     }
                 }
             }
@@ -50,7 +53,12 @@ public class MainSectionInfoImp implements IMainSectionInfo {
             evaluation += "需加油了";
         }
 
-        return new CourseInfoSection(total, pass, passRate, evaluation);
+        return new CoursePassRate(total, pass, passRate, evaluation);
+    }
+
+    @Override
+    public SemesterAverageScore getAverageScore(CourseGrades courseGrades) {
+        return null;
     }
 
 }

@@ -8,12 +8,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import xatu.school.activity.BaseApplication;
+import xatu.school.bean.BaseSingleCourse;
 import xatu.school.bean.CourseTable;
+import xatu.school.bean.SingleCourse;
 import xatu.school.bean.SourceSingleCourse;
 import xatu.school.bean.Semester;
 import xatu.school.bean.StudentInfo;
 import xatu.school.bean.CourseGrades;
 import xatu.school.db.UniversityDbOpenHelper;
+import xatu.school.utils.SourceToSingleCourse;
 
 /**
  * 数据库管理器
@@ -60,19 +63,18 @@ public class DBManager {
     /**
      * 将课程信息存入数据库
      */
-    private void saveCourse(ContentValues values, long semesterId, List<SourceSingleCourse> sourceSingleCourses) {
-        for (SourceSingleCourse sourceSingleCourse : sourceSingleCourses) {
-            values.put(SourceSingleCourse.COLUMN_SEMESTER_ID, semesterId);
-            values.put(SourceSingleCourse.COLUMN_NAME, sourceSingleCourse.getName());
-            values.put(SourceSingleCourse.COLUMN_KAOSHIFANGSHI, sourceSingleCourse.getKaoshifangshi());
-            values.put(SourceSingleCourse.COLUMN_KAOSHILEIXING, sourceSingleCourse.getKaoshileixing());
-            values.put(SourceSingleCourse.COLUMN_URL, sourceSingleCourse.getUrl());
-            values.put(SourceSingleCourse.COLUMN_RENKEJIAOSHI, sourceSingleCourse.getRenkejiaoshi());
-            values.put(SourceSingleCourse.COLUMN_YUANSHICHENGJI, sourceSingleCourse.getYuanshichengji());
-            values.put(SourceSingleCourse.COLUMN_ZHUANGTAI, sourceSingleCourse.getZhuangtai());
-            values.put(SourceSingleCourse.COLUMN_JIDIAN, sourceSingleCourse.getJidian());
-            values.put(SourceSingleCourse.COLUMN_XUEFEN, sourceSingleCourse.getXuefen());
-            mDb.insert(SourceSingleCourse.TABLE_NAME, null, values);
+    private void saveCourse(ContentValues values, long semesterId, List<BaseSingleCourse> sourceSingleCourses) {
+        for (BaseSingleCourse sourceSingleCourse : sourceSingleCourses) {
+            SingleCourse singleCourse = SourceToSingleCourse.toSingleCourse((SourceSingleCourse) sourceSingleCourse);
+            values.put(SingleCourse.COLUMN_SEMESTER_ID, semesterId);
+            values.put(SingleCourse.COLUMN_NAME, singleCourse.getName());
+            values.put(SingleCourse.COLUMN_XUEFEN, singleCourse.getXuefen());
+            values.put(SingleCourse.COLUMN_CHENGJI, singleCourse.getChengji());
+            values.put(SingleCourse.COLUMN_RENKEJIAOSHI, singleCourse.getRenkejiaoshi());
+            values.put(SingleCourse.COLUMN_KAOSHILEIXING, singleCourse.getKaoshileixing());
+            values.put(SingleCourse.COLUMN_URL, singleCourse.getUrl());
+            values.put(SingleCourse.COLUMN_STATUS, singleCourse.getStatus());
+            mDb.insert(SingleCourse.TABLE_NAME, null, values);
             values.clear();
         }
     }
@@ -123,27 +125,26 @@ public class DBManager {
             do {
                 int id = cursor.getInt(cursor.getColumnIndex("_id"));
                 String sqlCourse = "select * from " +
-                        SourceSingleCourse.TABLE_NAME + " where " + SourceSingleCourse.COLUMN_SEMESTER_ID
+                        SingleCourse.TABLE_NAME + " where " + SingleCourse.COLUMN_SEMESTER_ID
                         + " = " + id;
                 cursorCourse = mDb.rawQuery(sqlCourse, null);
-                List<SourceSingleCourse> sourceSingleCourses = new ArrayList<>();
+                List<BaseSingleCourse> singleCourses = new ArrayList<>();
                 if (cursorCourse.moveToFirst()) {
                     do {
-                        sourceSingleCourses.add(new SourceSingleCourse(
-                                cursorCourse.getString(cursorCourse.getColumnIndex(SourceSingleCourse.COLUMN_NAME)),
-                                cursorCourse.getString(cursorCourse.getColumnIndex(SourceSingleCourse.COLUMN_YUANSHICHENGJI)),
-                                cursorCourse.getString(cursorCourse.getColumnIndex(SourceSingleCourse.COLUMN_RENKEJIAOSHI)),
-                                cursorCourse.getString(cursorCourse.getColumnIndex(SourceSingleCourse.COLUMN_KAOSHILEIXING)),
-                                cursorCourse.getString(cursorCourse.getColumnIndex(SourceSingleCourse.COLUMN_ZHUANGTAI)),
-                                cursorCourse.getString(cursorCourse.getColumnIndex(SourceSingleCourse.COLUMN_KAOSHIFANGSHI)),
-                                cursorCourse.getString(cursorCourse.getColumnIndex(SourceSingleCourse.COLUMN_JIDIAN)),
-                                cursorCourse.getString(cursorCourse.getColumnIndex(SourceSingleCourse.COLUMN_XUEFEN))
+                        singleCourses.add(new SingleCourse(
+                                cursorCourse.getString(cursorCourse.getColumnIndex(SingleCourse.COLUMN_NAME)),
+                                cursorCourse.getFloat(cursorCourse.getColumnIndex(SingleCourse.COLUMN_XUEFEN)),
+                                cursorCourse.getInt(cursorCourse.getColumnIndex(SingleCourse.COLUMN_CHENGJI)),
+                                cursorCourse.getString(cursorCourse.getColumnIndex(SingleCourse.COLUMN_RENKEJIAOSHI)),
+                                cursorCourse.getString(cursorCourse.getColumnIndex(SingleCourse.COLUMN_KAOSHILEIXING)),
+                                cursorCourse.getString(cursorCourse.getColumnIndex(SingleCourse.COLUMN_URL)),
+                                cursorCourse.getInt(cursorCourse.getColumnIndex(SingleCourse.COLUMN_STATUS))
                         ));
                     } while (cursorCourse.moveToNext());
                 }
                 cursorCourse.close();
                 courseGrades.addSemester(new Semester(
-                        cursor.getString(cursor.getColumnIndex(Semester.COLUMN_NAME)), sourceSingleCourses));
+                        cursor.getString(cursor.getColumnIndex(Semester.COLUMN_NAME)), singleCourses));
             } while (cursor.moveToNext());
         }
         cursor.close();
@@ -186,9 +187,9 @@ public class DBManager {
         mDb.execSQL("update sqlite_sequence SET seq = 0 where name ='" +
                 Semester.TABLE_NAME + "'");//自增长ID为0
 
-        mDb.execSQL("delete from " + SourceSingleCourse.TABLE_NAME);  //清空课程信息表数据
+        mDb.execSQL("delete from " + SingleCourse.TABLE_NAME);  //清空课程信息表数据
         mDb.execSQL("update sqlite_sequence SET seq = 0 where name ='" +
-                SourceSingleCourse.TABLE_NAME + "'");//自增长ID为0
+                SingleCourse.TABLE_NAME + "'");//自增长ID为0
 
         mDb.execSQL("delete from " + StudentInfo.TABLE_NAME);  //清空学生个人信息表数据
         mDb.execSQL("update sqlite_sequence SET seq = 0 where name ='" +

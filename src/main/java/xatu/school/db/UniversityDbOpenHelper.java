@@ -5,11 +5,13 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import xatu.school.bean.CourseTable;
+import xatu.school.bean.SingleCourse;
 import xatu.school.bean.SourceSingleCourse;
 import xatu.school.bean.Semester;
 import xatu.school.bean.StudentInfo;
 
 /**
+ * 数据库工具类
  * Created by penfi on 2015/10/21.
  */
 public class UniversityDbOpenHelper extends SQLiteOpenHelper {
@@ -37,18 +39,16 @@ public class UniversityDbOpenHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         // 创建课程表
-        String sql = "create table " + SourceSingleCourse.TABLE_NAME + " ( " +
+        String sql = "create table " + SingleCourse.TABLE_NAME + " ( " +
                 "_id integer primary key autoincrement , " +
-                SourceSingleCourse.COLUMN_SEMESTER_ID + " integer , " +
-                SourceSingleCourse.COLUMN_NAME + " text , " +
-                SourceSingleCourse.COLUMN_KAOSHIFANGSHI + " text , " +
-                SourceSingleCourse.COLUMN_KAOSHILEIXING + " text , " +
-                SourceSingleCourse.COLUMN_URL + " text , " +
-                SourceSingleCourse.COLUMN_RENKEJIAOSHI + " text , " +
-                SourceSingleCourse.COLUMN_YUANSHICHENGJI + " text , " +
-                SourceSingleCourse.COLUMN_JIDIAN + " text , " +
-                SourceSingleCourse.COLUMN_XUEFEN + " text , " +
-                SourceSingleCourse.COLUMN_ZHUANGTAI + " text" +
+                SingleCourse.COLUMN_SEMESTER_ID + " integer , " +
+                SingleCourse.COLUMN_NAME + " text , " +
+                SingleCourse.COLUMN_XUEFEN + " text , " +
+                SingleCourse.COLUMN_CHENGJI + " text , " +
+                SingleCourse.COLUMN_RENKEJIAOSHI + " text , " +
+                SingleCourse.COLUMN_KAOSHILEIXING + " text , " +
+                SingleCourse.COLUMN_URL + " text , " +
+                SingleCourse.COLUMN_STATUS + " text" +
                 ")";
         sqLiteDatabase.execSQL(sql);
         // 创建学期表

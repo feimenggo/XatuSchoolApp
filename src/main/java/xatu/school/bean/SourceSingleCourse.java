@@ -1,23 +1,12 @@
 package xatu.school.bean;
 
+import android.text.TextUtils;
+
 /**
  * 原始单科课程类
  * Created by Administrator on 2015-10-18.
  */
-public class SourceSingleCourse {
-    public static final String TABLE_NAME = "tb_course";// 课程表名
-    public static final String COLUMN_SEMESTER_ID = "semester_id";// 学期号
-    public static final String COLUMN_NAME = "name";// 课程名
-    public static final String COLUMN_URL = "url";// 评价url
-    public static final String COLUMN_YUANSHICHENGJI = "yuanshichengji";// 原始成绩
-    public static final String COLUMN_RENKEJIAOSHI = "renkejiaoshi";// 任课老师
-    public static final String COLUMN_KAOSHILEIXING = "kaoshileixing";// 考试类型
-    public static final String COLUMN_KAOSHIFANGSHI = "kaoshifangshi";// 考试方式
-    public static final String COLUMN_XUEFEN = "xuefen";// 学分
-    public static final String COLUMN_JIDIAN = "jidian";// 绩点
-    public static final String COLUMN_ZHUANGTAI = "zhuangtai";// 状态
-
-
+public class SourceSingleCourse extends BaseSingleCourse {
     private String name;// 课程名
     private String xuefen;// 学分
     private String yuanshichengji;// 原始成绩
@@ -25,8 +14,8 @@ public class SourceSingleCourse {
     private String jidian;
     private String renkejiaoshi;// 任课老师
     private String kaoshileixing;// 考试类型
-    private String kaoshishijian;// 考试时间
     private String kaoshifangshi;// 考试方式
+    private String kaoshishijian;// 考试时间
     private String zhuangtai;// 状态
     private String caozuo;// 操作
     private String url; //评教url
@@ -71,6 +60,7 @@ public class SourceSingleCourse {
         this.caozuo = caozuo;
         this.url = url;
     }
+
 
     public String getName() {
         return name;
