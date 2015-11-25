@@ -27,4 +27,6 @@ dependencies {
     compile 'org.jsoup:jsoup:1.8.3'
     compile 'com.android.support:design:23.1.1'
     compile project(':coursetableview')
+    compile project(':linechartview')
+    compile 'com.android.support:support-v4:23.0.1'
 }
