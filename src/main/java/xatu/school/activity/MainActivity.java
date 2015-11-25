@@ -1,7 +1,9 @@
 package xatu.school.activity;
 
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -14,7 +16,7 @@ import java.util.List;
 import xatu.school.R;
 import xatu.school.view.ChangeColor_myView;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener,ViewPager.OnPageChangeListener{
+public class MainActivity extends AppCompatActivity implements View.OnClickListener{
     private ViewPager mViewPager;
     private List<Fragment> mTabs=new ArrayList<Fragment>();
     private FragmentPagerAdapter mAdapter;
@@ -26,30 +28,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         iniView();    //对ViewPager的初始化
         initDatas();
-        mViewPager.setAdapter(mAdapter);
 
-        initEvent(); //viewpager滑动事件
+        // 设置默认的Fragment
+        setDefaultFragment();
     }
 
-    private void initEvent() {
-        mViewPager.setOnPageChangeListener(this);
+    private void setDefaultFragment() {
+       FragmentManager fm=getSupportFragmentManager();
+        android.support.v4.app.FragmentTransaction transaction= fm.beginTransaction();
+        transaction.replace(R.id.id_viewpager,mTabs.get(0));
+        transaction.commit();
     }
+
 
     private void initDatas() {
-        theStudyFragment();   //学习页面
-        theCourseFragment();  //课程表
+        theStudyFragment();   //添加学习页面于mTab集合众
+        theCourseFragment();  //添加课程表
         theMineFragment();    //我的信息
-        mAdapter=new FragmentPagerAdapter(getSupportFragmentManager()) {
-            @Override
-            public Fragment getItem(int position)
-            {
-                return mTabs.get(position);
-            }
-            @Override
-            public int getCount() {
-                return mTabs.size();
-            }
-        };
     }
 
     private void theMineFragment() {
@@ -63,13 +58,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void theStudyFragment() {
-
         StudyFragment studyFragment=new StudyFragment();
         mTabs.add(studyFragment);
     }
 
     private void iniView() {
-        mViewPager= (ViewPager) findViewById(R.id.id_viewpager);
         //将四个view放入集合统一管理
         ChangeColor_myView one= (ChangeColor_myView) findViewById(R.id.id_study);
         mTabIndicators.add(one);
@@ -104,22 +97,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
     //若将clickTab()里面代码和普通的button按钮点击事件放一起，当点击其他按钮是也会触发resetOtherTabs()方法。重置了图标颜色
     private void clickTab(View v) {
+        FragmentManager fm=getSupportFragmentManager();
+        //开启事务
+        android.support.v4.app.FragmentTransaction transaction=fm.beginTransaction();
         resetOtherTabs();  //重置其他的tab图标的颜色
         switch (v.getId())
         {
             case R.id.id_study:
                 mTabIndicators.get(0).setIconAlpha(1.0f); //将单击的那个图标透明度设置为不透明，其他的仍然透明
-                mViewPager.setCurrentItem(0,false);//将viewpager切换到第一页，同时将smoothscroll取消
+                transaction.replace(R.id.id_viewpager,mTabs.get(0));
                 break;
             case R.id.id_course:
                 mTabIndicators.get(1).setIconAlpha(1.0f);
-                mViewPager.setCurrentItem(1,false);
+                transaction.replace(R.id.id_viewpager,mTabs.get(1));
                 break;
             case R.id.id_me:
                 mTabIndicators.get(2).setIconAlpha(1.0f);
-                mViewPager.setCurrentItem(2,false);
+                //mViewPager.setCurrentItem(2,false);
+
+                transaction.replace(R.id.id_viewpager,mTabs.get(2));
                 break;
         }
+        transaction.commit();
     }
     private void resetOtherTabs()
     {
@@ -128,27 +127,5 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             mTabIndicators.get(i).setIconAlpha(0);
         }
     }
-    @Override
-    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
-        if(positionOffset>0)  //也就是开始滑动时
-        {
-            //手指左滑动过程中,左边的图标是当前第一页，右边图标是第二页
-            ChangeColor_myView left=mTabIndicators.get(position);
-            ChangeColor_myView right=mTabIndicators.get(position+1);//手指有滑动时，
-            //从第一页到第二页时，左边图标需要渐变透明，
-            left.setIconAlpha(1-positionOffset);
-            right.setIconAlpha(positionOffset);
-        }
-    }
-
-    @Override
-    public void onPageSelected(int position) {
-
-    }
-
-    @Override
-    public void onPageScrollStateChanged(int state) {
-
-    }
 }

@@ -23,7 +23,7 @@
         android:background="#0093dd">
 
         <Button
-            android:id="@+id/id_menu"
+            android:id="@+id/id_reset"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_alignParentRight="true"

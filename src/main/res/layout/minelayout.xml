@@ -11,6 +11,7 @@
        android:background="@drawable/bodytitle"
        >
        <ImageButton
+           android:id="@+id/id_setting"
            android:layout_gravity="right"
            android:layout_width="40dp"
            android:layout_height="40dp"
@@ -18,11 +19,12 @@
            android:layout_marginTop="10dp"
            android:background="@mipmap/setting_icon"
            />
-       <ImageView
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
+       <ImageButton
+           android:id="@+id/id_header"
+           android:layout_width="70dp"
+           android:layout_height="70dp"
            android:layout_gravity="center"
-           android:background="@mipmap/ic_launcher"
+           android:background="@drawable/head_bg"
            />
        </FrameLayout>
     <LinearLayout
@@ -35,38 +37,41 @@
 
         >
         <TextView
+            android:id="@+id/id_college"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="20sp"
             android:singleLine="true"
             android:textColor="#000000"
             android:text="院系：计算机科学与工程学院"
-            android:layout_marginLeft="30dp"
+            android:layout_marginLeft="15dp"
             android:layout_marginTop="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginBottom="10dp"
 
             />
         <TextView
+            android:id="@+id/id_profession"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="20sp"
             android:text="专业：软件工程"
             android:singleLine="true"
             android:textColor="#000000"
-            android:layout_marginLeft="30dp"
+            android:layout_marginLeft="15dp"
             android:layout_marginTop="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginBottom="10dp"
             />
         <TextView
+            android:id="@+id/id_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="20sp"
             android:text="姓名：莫晨"
             android:singleLine="true"
             android:textColor="#000000"
-            android:layout_marginLeft="30dp"
+            android:layout_marginLeft="15dp"
             android:layout_marginTop="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginBottom="10dp"
@@ -85,37 +90,40 @@
                 android:showDividers="middle"
                 >
                 <TextView
+                    android:id="@+id/id_card"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="20sp"
                     android:singleLine="true"
                     android:textColor="#000000"
                     android:text="学号：1306085555"
-                    android:layout_marginLeft="30dp"
+                    android:layout_marginLeft="15dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginRight="10dp"
                     android:layout_marginBottom="10dp"
                     />
                 <TextView
+                    android:id="@+id/id_class"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="20sp"
                     android:singleLine="true"
                     android:textColor="#000000"
                     android:text="班级：13060811022"
-                    android:layout_marginLeft="30dp"
+                    android:layout_marginLeft="15dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginRight="10dp"
                     android:layout_marginBottom="10dp"
                     />
                 <TextView
+                    android:id="@+id/id_birth"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="20sp"
                     android:singleLine="true"
                     android:textColor="#000000"
                     android:text="生日：1995-12-12"
-                    android:layout_marginLeft="30dp"
+                    android:layout_marginLeft="15dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginRight="10dp"
                     android:layout_marginBottom="10dp"
