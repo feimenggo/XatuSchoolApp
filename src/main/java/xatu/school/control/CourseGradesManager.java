@@ -10,24 +10,23 @@ import xatu.school.bean.FileBean;
 import xatu.school.bean.ScoreItem;
 import xatu.school.bean.Semester;
 import xatu.school.bean.SingleCourse;
-import xatu.school.bean.SourceSingleCourse;
 import xatu.school.service.DBManager;
 
 /**
- * 所有课程界面 管理器
+ * 所有成绩界面 管理器
  * Created by penfi on 2015/11/10.
  */
-public class FindScoreManager {
-    private static FindScoreManager mInstance;// 单例模式
+public class CourseGradesManager {
+    private static CourseGradesManager mInstance;// 单例模式
 
-    private FindScoreManager() {
+    private CourseGradesManager() {
     }
 
-    public static FindScoreManager getInstance() {
+    public static CourseGradesManager getInstance() {
         if (mInstance == null) {
             synchronized (LoginManager.class) {
                 if (mInstance == null) {
-                    mInstance = new FindScoreManager();
+                    mInstance = new CourseGradesManager();
                 }
             }
         }

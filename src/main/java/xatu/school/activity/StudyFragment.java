@@ -17,7 +17,7 @@ import java.util.List;
 import feimeng.linechartview.LineChartView;
 import xatu.school.R;
 import xatu.school.bean.CoursePassRate;
-import xatu.school.control.MainManager;
+import xatu.school.control.StudyManager;
 
 /**
  * Created by mmcc on 2015/11/22.
@@ -56,7 +56,7 @@ public class StudyFragment extends Fragment implements View.OnClickListener{
     }
 
     private void displayCourseInfoSection() {
-        CoursePassRate courseInfo = MainManager.getInstance().getCourseInfo();
+        CoursePassRate courseInfo = StudyManager.getInstance().getCourseStatisticsInfo();
         mAllCourse.setText(String.valueOf(courseInfo.getTotal()));
         mTongCourse.setText(String.valueOf(courseInfo.getPass()));
         mTongguolv.setText(String.valueOf(courseInfo.getPassRate()) + "%");
