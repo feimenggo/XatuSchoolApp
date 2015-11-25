@@ -11,13 +11,10 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-<<<<<<< HEAD
-=======
 import java.util.ArrayList;
 import java.util.List;
 
 import feimeng.linechartview.LineChartView;
->>>>>>> fei
 import xatu.school.R;
 import xatu.school.bean.CoursePassRate;
 import xatu.school.control.MainManager;
