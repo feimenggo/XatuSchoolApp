@@ -18,14 +18,10 @@ import feimeng.linechartview.LineChartView;
 import xatu.school.R;
 import xatu.school.bean.CourseGrades;
 import xatu.school.bean.CoursePassRate;
-<<<<<<< HEAD
 import xatu.school.bean.SemesterAverageScore;
-import xatu.school.control.MainManager;
 import xatu.school.service.GetStudyStatisticsInfoImp;
 import xatu.school.service.IGetStudyStatisticsInfo;
-=======
 import xatu.school.control.StudyManager;
->>>>>>> fei
 
 /**
  * Created by mmcc on 2015/11/22.
@@ -53,11 +49,7 @@ public class StudyFragment extends Fragment implements View.OnClickListener{
 
     private void initData() {
         mDatas=new ArrayList<LineChartView.Coord>();
-        IGetStudyStatisticsInfo get=new GetStudyStatisticsInfoImp();
-        SemesterAverageScore savg=get.getAverageScore(new CourseGrades());
-
-        for(int i=0;i<savg.getDatas().size()-1;i++)
-            mDatas.add(new LineChartView.Coord(savg.getDatas().get(1).score,savg.getDatas().get(1).name));
+        mDatas = SemesterAverageScore.semesterAdapter(StudyManager.getInstance().getSemesterAveScore());
     }
 
     private void displayCourseInfoSection() {

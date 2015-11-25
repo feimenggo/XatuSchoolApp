@@ -91,7 +91,7 @@ public class GetStudyStatisticsInfoImp implements IGetStudyStatisticsInfo {
                 xuefen+=source.getXuefen();
             }
             int avgnum= (int) (sum/xuefen);
-            avg.addData(new SemesterAverageScore.SemesterPoint(name[i], avgnum));
+            avg.addData(new SemesterAverageScore.SemesterPoint(name[size-i-1], avgnum));
         }
         return avg;
     }
