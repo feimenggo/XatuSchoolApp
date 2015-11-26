@@ -58,7 +58,10 @@ public class StudyFragment extends Fragment implements View.OnClickListener{
     }
 
     private void initData() {
+<<<<<<< HEAD
         //获得曲线图的信息
+=======
+>>>>>>> tmp
         mDatas = SemesterAverageScore.semesterAdapter(StudyManager.getInstance().getSemesterAveScore());
         //获取所有课程信息的
         mCourse = StudyManager.getInstance().getAllCourseInfo();

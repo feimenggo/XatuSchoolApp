@@ -26,6 +26,7 @@ import xatu.school.bean.StudentInfo;
 import xatu.school.bean.CourseGrades;
 import xatu.school.bean.WebError;
 import xatu.school.control.LoginManager;
+import xatu.school.utils.CheckcodeOcr;
 import xatu.school.utils.Code;
 import xatu.school.utils.NetworkUtil;
 
@@ -57,6 +58,16 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                         mIvCheckcode.setImageBitmap(bitmap);
                         if (mIvCheckcode.isOpaque())
                             mIvCheckcode.setImageAlpha(255);
+
+                        // 识别验证码
+                        String text = null;
+                        try {
+                            text = CheckcodeOcr.getOcr(LoginActivity.this, bitmap);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                        mCheckcode.setText(text);
+
                         break;
                     case Code.CONTROL.LOGIN:// 登录
                         // 修改登录状态 (PersistentCookieStore 会自动保存Cookie信息)
