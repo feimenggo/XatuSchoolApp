@@ -1,6 +1,7 @@
 package xatu.school.bean;
 
 /**
+ * 单科课程类
  * Created by penfi on 2015/11/19.
  */
 public class SingleCourse extends BaseSingleCourse {
@@ -15,6 +16,7 @@ public class SingleCourse extends BaseSingleCourse {
     public static final String COLUMN_URL = "url";// 评价url
     public static final String COLUMN_STATUS = "status";// 状态
 
+    private int id;// 在数据库中的id
     private String name;// 课程名
     private float xuefen;// 学分
     private int chengji;// 成绩(原始成绩)
@@ -22,6 +24,7 @@ public class SingleCourse extends BaseSingleCourse {
     private String kaoshileixing;// 考试类型：考试, 考查
     private String url;// 评价url
     private int status;// 状态：1->没考试(无)， 2->归档中(提交)， 3->未评价(归档&未评价)， 4->已评价(归档&已评价)
+
 
     public SingleCourse() {
     }

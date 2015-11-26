@@ -33,4 +33,12 @@ public interface IStudentLogin {
      * 返回登出状态
      */
     void logout(InitMsg msg);
+
+    /**
+     * 学生登录，自动识别验证码
+     *
+     * @param username 学号
+     * @param password 密码
+     */
+    void loginWithOcr(InitMsg msg, String username, String password);
 }

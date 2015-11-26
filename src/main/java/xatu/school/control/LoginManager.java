@@ -108,9 +108,6 @@ public class LoginManager {
 
         // 更新状态
         BaseApplication.getEditor().putBoolean(BaseApplication.SP_HAS_STUDENT_INFO, true);
-        // 更新cookie时间
-        BaseApplication.getEditor().putLong(BaseApplication.SP_COOKIE_TIME, System.currentTimeMillis());
-
         BaseApplication.getEditor().apply();
     }
 
@@ -126,9 +123,6 @@ public class LoginManager {
 
         // 更新状态
         BaseApplication.getEditor().putBoolean(BaseApplication.SP_HAS_COURSEGRADES_INFO, true);
-        // 更新cookie时间
-        BaseApplication.getEditor().putLong(BaseApplication.SP_COOKIE_TIME, System.currentTimeMillis());
-
         BaseApplication.getEditor().apply();
     }
 
@@ -143,9 +137,6 @@ public class LoginManager {
 
         // 更新状态
         BaseApplication.getEditor().putBoolean(BaseApplication.SP_HAS_COURSETABLE_INFO, true);
-        // 更新cookie时间
-        BaseApplication.getEditor().putLong(BaseApplication.SP_COOKIE_TIME, System.currentTimeMillis());
-
         BaseApplication.getEditor().apply();
     }
 

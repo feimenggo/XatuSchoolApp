@@ -76,6 +76,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                         // 保存登录信息
                         BaseApplication.getEditor().putString(BaseApplication.SP_USERNAME, mUsernameValue);
                         BaseApplication.getEditor().putString(BaseApplication.SP_PASSWORD, mPasswordValue);
+                        // 更新cookie时间
+                        BaseApplication.getEditor().putLong(BaseApplication.SP_COOKIE_TIME, System.currentTimeMillis());
                         BaseApplication.getEditor().apply();
 
                         Toast.makeText(LoginActivity.this, "登录成功！", Toast.LENGTH_SHORT).show();
@@ -87,7 +89,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                         LoginManager.getInstance().getSemesterInfoFromWeb(LoginActivity.this, mHandler);
                         //从网络获取课程表信息
                         LoginManager.getInstance().getCourseTableFromWeb(LoginActivity.this, mHandler);
-
                         break;
                     case Code.CONTROL.STUDENTINFO:// 得到个人信息
                         // 将学生信息存入数据库
@@ -99,6 +100,26 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                         break;
                     case Code.CONTROL.COURSETABLE:// 得到课程表信息
                         binder.saveCourseTableInfo((CourseTable) msg.obj);
+                        break;
+                    case Code.CONTROL.LOGIN_WITH_OCR://登录，自动识别验证码
+                        // 修改登录状态 (PersistentCookieStore 会自动保存Cookie信息)
+                        BaseApplication.getEditor().putBoolean(BaseApplication.SP_IS_LOGIN, true);
+
+                        // 保存登录信息
+                        BaseApplication.getEditor().putString(BaseApplication.SP_USERNAME, mUsernameValue);
+                        BaseApplication.getEditor().putString(BaseApplication.SP_PASSWORD, mPasswordValue);
+                        // 更新cookie时间
+                        BaseApplication.getEditor().putLong(BaseApplication.SP_COOKIE_TIME, System.currentTimeMillis());
+                        BaseApplication.getEditor().apply();
+
+                        mProgressContent.setText("正在加载数据...");
+
+                        //从网络获取学生信息
+                        LoginManager.getInstance().getStudentInfoFromWeb(LoginActivity.this, mHandler);
+                        //从网络获取年级信息
+                        LoginManager.getInstance().getSemesterInfoFromWeb(LoginActivity.this, mHandler);
+                        //从网络获取课程表信息
+                        LoginManager.getInstance().getCourseTableFromWeb(LoginActivity.this, mHandler);
                         break;
                 }
             } else {
