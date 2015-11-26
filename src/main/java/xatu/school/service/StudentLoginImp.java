@@ -123,4 +123,9 @@ public class StudentLoginImp implements IStudentLogin {
     public void logout(InitMsg msg) {
 
     }
+
+    @Override
+    public void loginWithOcr(InitMsg msg, String username, String password) {
+
+    }
 }

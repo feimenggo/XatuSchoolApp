@@ -151,6 +151,29 @@ public class DBManager {
         return courseGrades;
     }
 
+    public List<SingleCourse> getSingleCourses() {
+        List<SingleCourse> singleCourses = new ArrayList<>();
+
+        String sql = "select * from " + SingleCourse.TABLE_NAME;
+        Cursor cursor = mDb.rawQuery(sql, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                singleCourses.add(new SingleCourse(
+                        cursor.getString(cursor.getColumnIndex(SingleCourse.COLUMN_NAME)),
+                        cursor.getFloat(cursor.getColumnIndex(SingleCourse.COLUMN_XUEFEN)),
+                        cursor.getInt(cursor.getColumnIndex(SingleCourse.COLUMN_CHENGJI)),
+                        cursor.getString(cursor.getColumnIndex(SingleCourse.COLUMN_RENKEJIAOSHI)),
+                        cursor.getString(cursor.getColumnIndex(SingleCourse.COLUMN_KAOSHILEIXING)),
+                        cursor.getString(cursor.getColumnIndex(SingleCourse.COLUMN_URL)),
+                        cursor.getInt(cursor.getColumnIndex(SingleCourse.COLUMN_STATUS))
+                ));
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        return singleCourses;
+    }
+
     public CourseTable getCourseTable() {
         CourseTable courseTable = new CourseTable();
         String sql = "select * from " + CourseTable.TABLE_NAME;
