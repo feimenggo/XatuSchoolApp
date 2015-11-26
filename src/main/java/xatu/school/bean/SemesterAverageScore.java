@@ -38,8 +38,8 @@ public class SemesterAverageScore {
      * 学期点
      */
     public static class SemesterPoint {
-        String name;// 学期名
-        int score;// 平均分
+        public String name;// 学期名
+        public int score;// 平均分
 
         public SemesterPoint(String name, int score) {
             this.name = name;

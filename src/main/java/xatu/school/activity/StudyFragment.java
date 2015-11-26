@@ -16,7 +16,11 @@ import java.util.List;
 
 import feimeng.linechartview.LineChartView;
 import xatu.school.R;
+import xatu.school.bean.CourseGrades;
 import xatu.school.bean.CoursePassRate;
+import xatu.school.bean.SemesterAverageScore;
+import xatu.school.service.GetStudyStatisticsInfoImp;
+import xatu.school.service.IGetStudyStatisticsInfo;
 import xatu.school.control.StudyManager;
 
 /**
@@ -45,14 +49,7 @@ public class StudyFragment extends Fragment implements View.OnClickListener{
 
     private void initData() {
         mDatas=new ArrayList<LineChartView.Coord>();
-        mDatas.add(new LineChartView.Coord(62, "大一上"));
-        mDatas.add(new LineChartView.Coord(77, "大一下"));
-        mDatas.add(new LineChartView.Coord(92, "大二上"));
-        mDatas.add(new LineChartView.Coord(76, "大二下"));
-        mDatas.add(new LineChartView.Coord(83, "大三上"));
-        mDatas.add(new LineChartView.Coord(61, "大三下"));
-        mDatas.add(new LineChartView.Coord(88, "大四上"));
-        mDatas.add(new LineChartView.Coord(81, "大四下"));
+        mDatas = SemesterAverageScore.semesterAdapter(StudyManager.getInstance().getSemesterAveScore());
     }
 
     private void displayCourseInfoSection() {
