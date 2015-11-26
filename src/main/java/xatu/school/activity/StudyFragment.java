@@ -48,7 +48,6 @@ public class StudyFragment extends Fragment implements View.OnClickListener{
     }
 
     private void initData() {
-        mDatas=new ArrayList<LineChartView.Coord>();
         mDatas = SemesterAverageScore.semesterAdapter(StudyManager.getInstance().getSemesterAveScore());
     }
 

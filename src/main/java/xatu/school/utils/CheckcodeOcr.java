@@ -96,8 +96,8 @@ public class CheckcodeOcr {
         for (Bitmap bi : map.keySet()) {
             int count = 0;
             Label1:
-            for (int x = 0; x < width; ++x) {
-                for (int y = 0; y < height; ++y) {
+            for (int x = 0; x < width; x++) {
+                for (int y = 0; y < height; y++) {
                     if (isWhite(img.getPixel(x, y)) != isWhite(bi.getPixel(x, y))) {
                         count++;
                         if (count >= min)
