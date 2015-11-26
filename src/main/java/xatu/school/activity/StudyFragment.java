@@ -4,9 +4,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,6 +25,7 @@ import xatu.school.bean.SemesterAverageScore;
 import xatu.school.service.GetStudyStatisticsInfoImp;
 import xatu.school.service.IGetStudyStatisticsInfo;
 import xatu.school.control.StudyManager;
+import xatu.school.service.SingleCourseInfoImp;
 
 /**
  * Created by mmcc on 2015/11/22.
@@ -34,8 +38,14 @@ public class StudyFragment extends Fragment implements View.OnClickListener{
     private Button find_all_course,find_course_btn;//进入所有科目，查找单个科目
     private Button mReset;
 
+    private AutoCompleteTextView find_course;
+    private ArrayList<String> mCourse; //存放所有用于查询的课程信息
+
     private LineChartView mLineChart; //曲线图
     private List<LineChartView.Coord> mDatas;
+
+
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -48,8 +58,10 @@ public class StudyFragment extends Fragment implements View.OnClickListener{
     }
 
     private void initData() {
-        mDatas=new ArrayList<LineChartView.Coord>();
+        //获得曲线图的信息
         mDatas = SemesterAverageScore.semesterAdapter(StudyManager.getInstance().getSemesterAveScore());
+        //获取所有课程信息的
+        mCourse = StudyManager.getInstance().getAllCourseInfo();
     }
 
     private void displayCourseInfoSection() {
@@ -70,7 +82,9 @@ public class StudyFragment extends Fragment implements View.OnClickListener{
         mLineChart.setCoords(mDatas);
         find_all_course= (Button) view.findViewById(R.id.find_all_course);
         find_all_course.setOnClickListener(this);
-
+        find_course= (AutoCompleteTextView) view.findViewById(R.id.find_course);
+        ArrayAdapter<String> adapter=new ArrayAdapter<String>(getActivity(),android.R.layout.simple_dropdown_item_1line,mCourse);
+        find_course.setAdapter(adapter);
     }
 
 

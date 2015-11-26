@@ -13,6 +13,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import xatu.school.R;
+import xatu.school.bean.StudentInfo;
+import xatu.school.control.MineManager;
 
 /**
  * Created by mmcc on 2015/11/7.
@@ -32,12 +34,13 @@ public class MineFragment extends Fragment{
     }
 
     private void initData() {
-        mCollege.setText("院系：计算机科学与工程学院");
-        mProfession.setText("专业：软件工程");
-        mName.setText("姓名：莫晨");
-        mCard.setText("学号：13060811011");
-        mClass.setText("班级：130608111");
-        mBirth.setText("生日：1995-12-12");
+        StudentInfo studentInfo=MineManager.getInstance().getStudentInfo();
+        mCollege.setText("院系："+studentInfo.getYuanxi());
+        mProfession.setText("专业："+studentInfo.getZhuanye());
+        mName.setText("姓名："+studentInfo.getName());
+        mCard.setText("学号："+studentInfo.getXuehao());
+        mClass.setText("班级："+studentInfo.getBanji());
+        mBirth.setText("生日："+studentInfo.getShengri());
 
     }
 

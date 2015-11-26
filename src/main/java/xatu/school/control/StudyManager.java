@@ -1,11 +1,16 @@
 package xatu.school.control;
 
+import java.util.ArrayList;
+
+import xatu.school.activity.StudyFragment;
 import xatu.school.bean.CoursePassRate;
 import xatu.school.bean.SemesterAverageScore;
 import xatu.school.bean.CourseGrades;
 import xatu.school.service.DBManager;
 import xatu.school.service.IGetStudyStatisticsInfo;
 import xatu.school.service.GetStudyStatisticsInfoImp;
+import xatu.school.service.ISingleCourseInfo;
+import xatu.school.service.SingleCourseInfoImp;
 
 /**
  * 学习界面 控制器
@@ -28,6 +33,7 @@ public class StudyManager {
         }
         return mInstance;
     }
+
 
 
     /**
@@ -76,4 +82,11 @@ public class StudyManager {
 //    }
 
 
+         /*
+          得到所有 学期名+课程名
+           */
+    public ArrayList<String> getAllCourseInfo(){
+        ISingleCourseInfo mCourseInfo=new SingleCourseInfoImp();
+        return mCourseInfo.getSingleCourseInfo();
+    }
 }
