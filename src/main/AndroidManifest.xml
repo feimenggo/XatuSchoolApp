@@ -23,7 +23,7 @@
         <activity android:name=".activity.BaseActivity" />
         <activity android:name=".activity.FindScore" />
         <activity android:name=".activity.AboutActivity" />
-
+        <activity android:name=".activity.SingleCourseActivity"/>
         <service android:name=".activity.SchoolLoginService" />
 
     </application>

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +21,7 @@ import feimeng.linechartview.LineChartView;
 import xatu.school.R;
 import xatu.school.bean.CoursePassRate;
 import xatu.school.bean.SemesterAverageScore;
+import xatu.school.bean.SingleCourse;
 import xatu.school.control.StudyManager;
 
 /**
@@ -27,6 +29,7 @@ import xatu.school.control.StudyManager;
  */
 public class StudyFragment extends Fragment implements View.OnClickListener {
 
+    public static final String SINGLE_COURSE = "single_course";
     private TextView mAllCourse;  //总课程数
     private TextView mTongCourse;  //通过课程数
     private TextView mTongguolv;  //通过率
@@ -34,7 +37,10 @@ public class StudyFragment extends Fragment implements View.OnClickListener {
     private Button mReset;
 
     private AutoCompleteTextView find_course;
-    private ArrayList<String> mCourse; //存放所有用于查询的课程信息
+    private List<SingleCourse> AllCourseInfo; //课程的所有信息
+    private SingleCourse singleCourse; //单个科目的信息
+
+    private List<String> mCourse; //存放所有用于查询的课程信息
 
     private LineChartView mLineChart; //曲线图
     private List<LineChartView.Coord> mDatas;
@@ -54,8 +60,14 @@ public class StudyFragment extends Fragment implements View.OnClickListener {
     private void initData() {
         //获得曲线图的信息
         mDatas = SemesterAverageScore.semesterAdapter(StudyManager.getInstance().getSemesterAveScore());
-        //获取所有课程信息的
-        mCourse = StudyManager.getInstance().getAllCourseInfo();
+        //获取课程的所有信息的
+        AllCourseInfo = StudyManager.getInstance().getAllCourseInfo();
+        mCourse = new ArrayList<String>();
+        int len = AllCourseInfo.size();
+        Log.i("Tag", "len=" + len);
+        for (int i = 0; i < len; i++) {
+            mCourse.add(AllCourseInfo.get(i).getName());
+        }
     }
 
     private void displayCourseInfoSection() {
@@ -90,7 +102,31 @@ public class StudyFragment extends Fragment implements View.OnClickListener {
                 Toast.makeText(getActivity(), "点击了刷新", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.find_course_btn:
-                Toast.makeText(getActivity(), "点击了搜索", Toast.LENGTH_SHORT).show();
+                if (find_course.getText() != null) {
+                    String course = find_course.getText().toString();
+                    for (int i = 0; i < AllCourseInfo.size(); i++)
+                    {
+                        if (AllCourseInfo.get(i).getName().equals(course))
+                        {
+                            singleCourse=AllCourseInfo.get(i);
+                        }
+                    }
+                    if(singleCourse!=null)
+                    {
+                        Intent intent = new Intent(getActivity(), SingleCourseActivity.class);
+                        Bundle bundle = new Bundle();
+                        bundle.putSerializable(SINGLE_COURSE,singleCourse);
+                        intent.putExtras(bundle);
+                        singleCourse=null;
+                        startActivity(intent);
+                    }else{
+                        Toast.makeText(getActivity(),"请输入正确的课程名!",Toast.LENGTH_SHORT).show();
+                    }
+                }else{
+                    Toast.makeText(getActivity(),"请输入要查询的科目",Toast.LENGTH_SHORT).show();
+                }
+
+
                 break;
             case R.id.find_all_course:
                 //进入成绩页面

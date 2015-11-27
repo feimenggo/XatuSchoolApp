@@ -1,10 +1,13 @@
 package xatu.school.bean;
 
+import java.io.Serializable;
+
 /**
  * 单科课程类
  * Created by penfi on 2015/11/19.
+ * 莫晨：序列化该类
  */
-public class SingleCourse extends BaseSingleCourse {
+public class SingleCourse extends BaseSingleCourse implements Serializable{
     public static final String TABLE_NAME = "tb_course";// 课程表名
 
     public static final String COLUMN_SEMESTER_ID = "semester_id";// 学期号
