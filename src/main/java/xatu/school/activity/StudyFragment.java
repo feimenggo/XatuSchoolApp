@@ -64,7 +64,7 @@ public class StudyFragment extends Fragment implements View.OnClickListener {
         AllCourseInfo = StudyManager.getInstance().getAllCourseInfo();
         mCourse = new ArrayList<String>();
         int len = AllCourseInfo.size();
-        Log.i("Tag", "len=" + len);
+
         for (int i = 0; i < len; i++) {
             mCourse.add(AllCourseInfo.get(i).getName());
         }

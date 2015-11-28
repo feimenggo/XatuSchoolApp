@@ -26,7 +26,7 @@ dependencies {
     compile 'com.loopj.android:android-async-http:1.4.9'
     compile 'org.jsoup:jsoup:1.8.3'
     compile 'com.android.support:design:23.1.1'
-    compile project(':coursetableview')
-    compile project(':linechartview')
     compile 'com.android.support:support-v4:23.0.1'
+    compile project(':CourseTableView')
+    compile project(':LineChartView')
 }

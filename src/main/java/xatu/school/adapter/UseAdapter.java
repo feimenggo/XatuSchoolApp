@@ -13,12 +13,21 @@ import java.util.List;
 
 import xatu.school.R;
 import xatu.school.bean.Node;
+import xatu.school.bean.SingleCourse;
 
 /**
  * Created by mmcc on 2015/11/3.
  */
 public class UseAdapter<T> extends TreeListViewAdapter<T> {
 
+    private OnLongClick onLongClick;
+
+    public void setOnLongClick(OnLongClick onLongClick){
+        this.onLongClick=onLongClick;
+    }
+    public interface OnLongClick{
+        void onlongClick(String courseName);
+    }
 
     public UseAdapter(ListView tree, Context context, List<T> datas, int defaultExpandLevel) throws IllegalAccessException {
         super(tree, context, datas, defaultExpandLevel);
@@ -40,6 +49,16 @@ public class UseAdapter<T> extends TreeListViewAdapter<T> {
                 holder.courseScore.setText("点击评价");
                 //DOTO 设置需要点击评价的页面
             }
+            convertView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    if(onLongClick!=null)
+                    {
+                        onLongClick.onlongClick(holder.courseName.getText().toString());
+                    }
+                    return false;
+                }
+            });
 
         } else {         //设置父节点内容
             //当没有第三个参数时。list_item里的最外层的布局无效，若为true会返回parent，将list_item加在parent布局里
