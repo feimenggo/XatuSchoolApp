@@ -2,6 +2,7 @@ package xatu.school.activity;
 
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ListView;
@@ -42,6 +43,11 @@ public class FindScore extends BaseActivity implements View.OnClickListener {
 
     private void initData() {
         mDatas = CourseGradesManager.getInstance().getCourseGradesInfo();
+        for(int i=0;i<mDatas.size();i++)
+        {
+            Log.i("Tag","mDatas="+mDatas.get(i).getLabel().getCouresScore());
+        }
+
     }
 
     private void initViews() {
