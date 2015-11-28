@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:quxian="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
 
     >
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
@@ -26,220 +26,219 @@
             android:layout_centerInParent="true"
             android:text="掌上西工"
             android:textColor="#ffffff"
-            android:textSize="25sp" />
+            android:textSize="21sp" />
     </RelativeLayout>
-<ScrollView
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:scrollbars="none"
-    >
-   <LinearLayout
-       android:layout_width="match_parent"
-       android:layout_height="match_parent"
-       android:orientation="vertical"
-       >
 
-
-
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="#0093dd"
-        android:gravity="center">
+        android:layout_height="match_parent"
+        android:overScrollMode="never"
+        android:scrollbars="none">
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="35dp"
-            android:layout_margin="30dp"
-            android:layout_weight="1"
-            android:background="#ffffff">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-            <AutoCompleteTextView
-                android:id="@+id/find_course"
-                android:singleLine="true"
-                android:layout_toLeftOf="@+id/find_course_btn"
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="#0093dd"
+                android:gravity="center">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:layout_margin="30dp"
+                    android:layout_weight="1"
+                    android:background="#ffffff">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/find_course"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toLeftOf="@+id/find_course_btn"
+                        android:background="@null"
+                        android:completionThreshold="1"
+                        android:hint="搜索(高等数学:大一第一学期)"
+                        android:paddingLeft="10dp"
+                        android:singleLine="true" />
+
+                    <Button
+                        android:id="@+id/find_course_btn"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:background="@mipmap/find_icon" />
+                </RelativeLayout>
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:src="@drawable/body_icon"/>
+
+<!--            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:background="@null"
-                android:completionThreshold="1"
-                android:hint="搜索(高等数学:大一第一学期)"
-                android:paddingLeft="10dp" />
+                android:gravity="center"
+                android:text="这学期你学的怎么样呢？"
+                android:textColor="#7A7E85"
+                android:textSize="20sp" />-->
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:gravity="center"
+                android:text="下面的数据显示的是你的学习情况哦"
+                android:textColor="#000000"
+                android:textSize="20sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="数学，英语什么的都太简单了!"
+                android:textColor="#7A7E85"
+                android:textSize="15sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="1dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center">
+
+                    <FrameLayout
+                        android:layout_width="90dp"
+                        android:layout_height="90dp"
+                        android:layout_gravity="center"
+                        android:background="@drawable/text_bg">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginBottom="15dp"
+                            android:text="总课程数"
+                            android:textColor="#7A7E85"
+                            android:textSize="15sp" />
+
+                        <TextView
+                            android:id="@+id/id_allkemu"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="15dp"
+                            android:text="50"
+
+                            android:textColor="#0093DD"
+                            android:textSize="20sp" />
+                    </FrameLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="1dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+
+                    android:gravity="center">
+
+                    <FrameLayout
+                        android:layout_width="90dp"
+                        android:layout_height="90dp"
+                        android:layout_gravity="center"
+                        android:background="@drawable/text_bg">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginBottom="15dp"
+                            android:text="通过课程数"
+                            android:textColor="#7A7E85"
+                            android:textSize="15sp" />
+
+                        <TextView
+                            android:id="@+id/id_tgkms"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="15dp"
+                            android:text="50"
+
+                            android:textColor="#0093DD"
+                            android:textSize="20sp" />
+                    </FrameLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="1dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center">
+
+                    <FrameLayout
+                        android:layout_width="90dp"
+                        android:layout_height="90dp"
+                        android:layout_gravity="center"
+                        android:background="@drawable/text_bg">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginBottom="15dp"
+                            android:text="通过率"
+                            android:textColor="#7A7E85"
+                            android:textSize="15sp" />
+
+                        <TextView
+                            android:id="@+id/id_tgl"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="15dp"
+                            android:text="100%"
+
+                            android:textColor="#0093DD"
+                            android:textSize="20sp" />
+                    </FrameLayout>
+
+                </LinearLayout>
+            </LinearLayout>
 
             <Button
-                android:id="@+id/find_course_btn"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:background="@mipmap/find_icon" />
-        </RelativeLayout>
-    </LinearLayout>
-
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:src="@drawable/body_icon" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="这学期你学的怎么样呢？"
-        android:textColor="#7A7E85"
-        android:textSize="20sp" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:gravity="center"
-        android:text="下面的数据显示的是你的学习情况哦"
-        android:textColor="#000000"
-        android:textSize="20sp" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="数学，英语什么的都太简单了!"
-        android:textColor="#7A7E85"
-        android:textSize="15sp" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
-        >
-
-        <LinearLayout
-            android:layout_width="1dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center">
-
-            <FrameLayout
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:id="@+id/find_all_course"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:background="@drawable/text_bg">
+                android:layout_marginBottom="5dp"
+                android:background="@null"
+                android:text="查看所有课程"
+                android:textSize="20dp" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginBottom="15dp"
-                    android:text="总课程数"
-                    android:textColor="#7A7E85"
-                    android:textSize="15sp" />
-
-                <TextView
-                    android:id="@+id/id_allkemu"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="15dp"
-                    android:text="50"
-
-                    android:textColor="#0093DD"
-                    android:textSize="20sp" />
-            </FrameLayout>
-
+            <feimeng.linechartview.LineChartView
+                android:id="@+id/linechart"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                quxian:bgColor="#fafafa"
+                quxian:linColorOnCoord="#0093dd"
+                quxian:lineColorOnAxis="#7a7e85" />
         </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="1dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-
-            android:gravity="center">
-
-            <FrameLayout
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_gravity="center"
-                android:background="@drawable/text_bg">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginBottom="15dp"
-                    android:text="通过课程数"
-                    android:textColor="#7A7E85"
-                    android:textSize="15sp" />
-
-                <TextView
-                    android:id="@+id/id_tgkms"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="15dp"
-                    android:text="50"
-
-                    android:textColor="#0093DD"
-                    android:textSize="20sp" />
-            </FrameLayout>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="1dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center">
-
-            <FrameLayout
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_gravity="center"
-                android:background="@drawable/text_bg">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginBottom="15dp"
-                    android:text="通过率"
-                    android:textColor="#7A7E85"
-                    android:textSize="15sp" />
-
-                <TextView
-                    android:id="@+id/id_tgl"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="15dp"
-                    android:text="100%"
-
-                    android:textColor="#0093DD"
-                    android:textSize="20sp" />
-            </FrameLayout>
-
-        </LinearLayout>
-    </LinearLayout>
-
-    <Button
-        android:id="@+id/find_all_course"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginBottom="5dp"
-        android:background="@null"
-        android:text="查看所有课程"
-        android:textSize="20dp" />
-       <feimeng.linechartview.LineChartView
-           android:id="@+id/linechart"
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-           quxian:linColorOnCoord="#0093dd"
-           quxian:lineColorOnAxis="#7a7e85"
-           android:layout_marginBottom="10dp"
-           quxian:bgColor="#fafafa"
-           />
-       </LinearLayout>
     </ScrollView>
 </LinearLayout>
