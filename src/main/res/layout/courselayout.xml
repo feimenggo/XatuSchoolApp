@@ -11,5 +11,6 @@
         android:id="@+id/coursetable"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        fm:borderColor="@color/colorPrimary"/>
+        fm:borderColor="@color/colorPrimary"
+        fm:drawBorder="false" />
 </LinearLayout>
