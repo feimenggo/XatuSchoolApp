@@ -1,5 +1,6 @@
 package xatu.school.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -57,6 +58,7 @@ public class MineFragment extends Fragment{
             @Override
             public void onClick(View v) {
                 Toast.makeText(getActivity(),"点击了设置",Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(getActivity(),SettingAction.class));
             }
         });
         //头像
@@ -64,7 +66,7 @@ public class MineFragment extends Fragment{
         mHeader.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getActivity(),"点击了头像",Toast.LENGTH_SHORT).show();
+                //DOTO Toast.makeText(getActivity(),"点击了头像",Toast.LENGTH_SHORT).show();
             }
         });
     }
