@@ -34,17 +34,18 @@ public class SingleCourseActivity extends BaseActivity {
         initData(); //设置数据
     }
 
-    private void initData() {
-        course_name.setText(singleCourse.getName());
-        course_teacher.setText(singleCourse.getRenkejiaoshi());
-        course_type.setText(singleCourse.getKaoshileixing());
+    private void initData()
+    {
+         course_name.setText(singleCourse.getName());
+         course_teacher.setText(singleCourse.getRenkejiaoshi());
+         course_type.setText(singleCourse.getKaoshileixing());
          course_status.setText(singleCourse.getStatus()+"");
-        course_xuefen.setText(singleCourse.getXuefen()+"");
+         course_xuefen.setText(singleCourse.getXuefen()+"");
          course_chengji.setText(singleCourse.getChengji()+"");
          course_pingjia.setText(singleCourse.getUrl());
     }
-
-    private void initView() {
+    private void initView()
+    {
         course_name= (TextView) findViewById(R.id.course_name);
         course_teacher= (TextView) findViewById(R.id.course_teacher);
         course_type= (TextView) findViewById(R.id.course_type);
