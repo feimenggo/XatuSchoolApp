@@ -42,7 +42,7 @@ public class FindScore extends BaseActivity implements View.OnClickListener {
             mAdapter = new UseAdapter<>(mTree, this, mDatas, 0);
             mTree.setAdapter(mAdapter);
 
-            mAdapter.setOnLongClick(new UseAdapter.OnLongClick() {
+            mAdapter.setOnClick(new UseAdapter.OnLongClick() {
                 @Override
                 public void onlongClick(String courseName) {
                    if(AllCourseInfo!=null)

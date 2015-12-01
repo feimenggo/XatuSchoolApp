@@ -14,8 +14,9 @@
 
         <TextView
             android:id="@+id/item_course_name"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_toLeftOf="@+id/item_course_score"
             android:singleLine="true"
             android:text="课程名"
             android:textColor="#aa000000"

@@ -3,7 +3,9 @@ package xatu.school.view;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
@@ -17,6 +19,9 @@ import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.View;
 
+import java.io.InputStream;
+
+import cz.msebera.android.httpclient.client.cache.Resource;
 import xatu.school.R;
 
 public class ChangeColor_myView extends View {
@@ -107,21 +112,21 @@ public class ChangeColor_myView extends View {
         //得到属性的alpha是0~255,Math.ceil()是向上取整
         int alpha = (int) Math.ceil(255 * mAlpha);
         //内存中准备bitmap，先在bitmap中绘制一个(纯色之前设置setAlpah)纯色再绘制(图标之前设置xfermode)图标
-        setupTargeBitmap(alpha);  //通过改变alpha就可以实现渐变效果
+      //  setupTargeBitmap(alpha);  //通过改变alpha就可以实现渐变效果
 
         //绘制图标的文本，绘制变色文本
         drawSourcetText(canvas, alpha);
         drawTargetText(canvas, alpha); //绘制变色文本
 
 
-        canvas.drawBitmap(mBitmap, 0, 0, null);//将纯色图标绘制出来
+      //  canvas.drawBitmap(mBitmap, 0, 0, null);//将纯色图标绘制出来
 
     }
 
     //绘制变色文本
     private void drawTargetText(Canvas canvas, int alpha) {
         mTextPaint.setColor(mColor);
-        mTextPaint.setAlpha(alpha);
+       mTextPaint.setAlpha(alpha);
 
         int x = getMeasuredWidth() / 2 - mTextBound.width() / 2;
         int y = mIconRect.bottom + mTextBound.height();
@@ -185,6 +190,13 @@ public class ChangeColor_myView extends View {
             return;
         }
         super.onRestoreInstanceState(state);
+    }
+    //设置变换图片
+    public void setIconBitmap(int iconId){
+        InputStream is=getResources().openRawResource(iconId);
+        Bitmap bitmap= BitmapFactory.decodeStream(is);
+        this.mIconBitmap=bitmap;
+        invalidate();
     }
 
     public void setIconAlpha(float alpha) {

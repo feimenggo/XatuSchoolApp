@@ -4,13 +4,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-
+    android:background="#fafafa"
     >
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="#0093dd">
+        android:background="@color/colorPrimary">
 
         <Button
             android:id="@+id/id_reset"
@@ -44,7 +44,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:background="#0093dd"
+                android:background="@color/colorPrimary"
                 android:gravity="center">
 
                 <RelativeLayout
@@ -52,7 +52,7 @@
                     android:layout_height="35dp"
                     android:layout_margin="30dp"
                     android:layout_weight="1"
-                    android:background="#ffffff">
+                    android:background="#fafafa">
 
                     <AutoCompleteTextView
                         android:id="@+id/find_course"
@@ -62,7 +62,7 @@
                         android:layout_toLeftOf="@+id/find_course_btn"
                         android:background="@null"
                         android:completionThreshold="1"
-                        android:hint="搜索(高等数学:大一第一学期)"
+                        android:hint="搜索 例：(高等数学)"
                         android:paddingLeft="10dp"
                         android:singleLine="true" />
 
@@ -89,7 +89,13 @@
                 android:text="这学期你学的怎么样呢？"
                 android:textColor="#7A7E85"
                 android:textSize="20sp" />-->
-
+            <View
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:background="#ccc"
+                />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -220,17 +226,28 @@
 
                 </LinearLayout>
             </LinearLayout>
-
+            <View
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:background="#ccc"
+                />
             <Button
                 android:id="@+id/find_all_course"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginBottom="5dp"
                 android:background="@null"
                 android:text="查看所有课程"
                 android:textSize="20dp" />
-
+            <View
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:background="#ccc"
+                />
             <feimeng.linechartview.LineChartView
                 android:id="@+id/linechart"
                 android:layout_width="match_parent"

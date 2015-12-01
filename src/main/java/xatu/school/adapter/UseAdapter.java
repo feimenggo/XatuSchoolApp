@@ -1,6 +1,7 @@
 package xatu.school.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -22,7 +23,7 @@ public class UseAdapter<T> extends TreeListViewAdapter<T> {
 
     private OnLongClick onLongClick;
 
-    public void setOnLongClick(OnLongClick onLongClick){
+    public void setOnClick(OnLongClick onLongClick){
         this.onLongClick=onLongClick;
     }
     public interface OnLongClick{
@@ -47,19 +48,24 @@ public class UseAdapter<T> extends TreeListViewAdapter<T> {
             if("未评价".equals(holder.courseScore.getText()))
             {
                 holder.courseScore.setText("点击评价");
-                //DOTO 设置需要点击评价的页面
+                int color=mContext.getResources().getColor(R.color.colorPrimary);
+                holder.courseScore.setTextColor(color);
+                holder.courseScore.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Toast.makeText(mContext, "点击了评价按钮", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
             }
-            convertView.setOnLongClickListener(new View.OnLongClickListener() {
+            convertView.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public boolean onLongClick(View v) {
-                    if(onLongClick!=null)
-                    {
+                public void onClick(View v) {
+                    if (onLongClick != null) {
                         onLongClick.onlongClick(holder.courseName.getText().toString());
                     }
-                    return false;
                 }
             });
-
         } else {         //设置父节点内容
             //当没有第三个参数时。list_item里的最外层的布局无效，若为true会返回parent，将list_item加在parent布局里
             convertView = mInflater.inflate(R.layout.score_item, parent, false);

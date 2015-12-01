@@ -46,6 +46,6 @@ public class MineManager {
         BaseApplication.getEditor().putBoolean(BaseApplication.SP_HAS_STUDENT_INFO, false);
         BaseApplication.getEditor().putBoolean(BaseApplication.SP_HAS_COURSEGRADES_INFO, false);
         BaseApplication.getEditor().putBoolean(BaseApplication.SP_HAS_COURSETABLE_INFO, false);
-        BaseApplication.getEditor().apply();
+        BaseApplication.getEditor().commit();
     }
 }

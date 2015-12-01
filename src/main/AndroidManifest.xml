@@ -15,17 +15,21 @@
         <activity android:name=".activity.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.MainActivity"/>
+        <activity android:name=".activity.MainActivity" />
         <activity android:name=".activity.LoginActivity" />
         <activity android:name=".activity.BaseActivity" />
         <activity android:name=".activity.FindScore" />
         <activity android:name=".activity.AboutActivity" />
-        <activity android:name=".activity.SingleCourseActivity"/>
+        <activity android:name=".activity.SingleCourseActivity" />
+
         <service android:name=".activity.SchoolLoginService" />
 
+        <activity android:name=".activity.SettingAction"
+            ></activity>
     </application>
 
 </manifest>

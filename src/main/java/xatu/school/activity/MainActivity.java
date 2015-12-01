@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        BaseApplication.getInstance().addActivity(this);
         iniView();    //对ViewPager的初始化
         initDatas();
 
@@ -74,6 +75,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         two.setOnClickListener(this);
         three.setOnClickListener(this);
         one.setIconAlpha(1.0f);
+        one.setIconBitmap(R.mipmap.study_icon_press);
     }
 
     @Override
@@ -104,15 +106,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (v.getId())
         {
             case R.id.id_study:
-                mTabIndicators.get(0).setIconAlpha(1.0f); //将单击的那个图标透明度设置为不透明，其他的仍然透明
+                mTabIndicators.get(0).setIconAlpha(1.0f); //将文字颜色改变
+                mTabIndicators.get(0).setIconBitmap(R.mipmap.study_icon_press); //替换点击时图片
                 transaction.replace(R.id.id_viewpager,mTabs.get(0));
                 break;
             case R.id.id_course:
-                mTabIndicators.get(1).setIconAlpha(1.0f);
+                mTabIndicators.get(1).setIconAlpha(1.0f); //将文字颜色改变
+                mTabIndicators.get(1).setIconBitmap(R.mipmap.course_icon_press);
                 transaction.replace(R.id.id_viewpager,mTabs.get(1));
                 break;
             case R.id.id_me:
-                mTabIndicators.get(2).setIconAlpha(1.0f);
+                mTabIndicators.get(2).setIconAlpha(1.0f); //将文字颜色改变
+                mTabIndicators.get(2).setIconBitmap(R.mipmap.mine_icon_press);
                 //mViewPager.setCurrentItem(2,false);
 
                 transaction.replace(R.id.id_viewpager,mTabs.get(2));
@@ -122,10 +127,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
     private void resetOtherTabs()
     {
-        for(int i =0;i<mTabIndicators.size();i++)
+        for(int i=0;i<mTabIndicators.size();i++)
         {
-            mTabIndicators.get(i).setIconAlpha(0);
+            mTabIndicators.get(i).setIconAlpha(0);  //重置文字颜色
         }
+
+        mTabIndicators.get(0).setIconBitmap(R.mipmap.study_icon);
+        mTabIndicators.get(1).setIconBitmap(R.mipmap.course_icon);
+        mTabIndicators.get(2).setIconBitmap(R.mipmap.mine_icon);
     }
 
 }

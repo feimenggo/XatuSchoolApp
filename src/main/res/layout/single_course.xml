@@ -24,7 +24,8 @@
         android:id="@+id/course_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
         android:gravity="center"
         android:text="概率论与数理统计"
         android:textColor="#000000"
@@ -33,7 +34,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
         android:orientation="horizontal"
 
         >
@@ -43,20 +45,24 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
             android:text="任课教师："
-            android:textSize="20sp" />
+            android:textColor="#333333"
+            android:textSize="17sp" />
 
         <TextView
             android:id="@+id/course_teacher"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="xxxx"
-            android:textSize="20sp" />
+            android:textColor="#333333"
+            android:singleLine="true"
+            android:textSize="17sp" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
         android:orientation="horizontal"
 
         >
@@ -66,20 +72,24 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
             android:text="考试类型："
-            android:textSize="20sp" />
+            android:textColor="#333333"
+            android:textSize="17sp" />
 
         <TextView
             android:id="@+id/course_type"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="xxxx"
-            android:textSize="20sp" />
+            android:textColor="#333333"
+            android:singleLine="true"
+            android:textSize="17sp" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
         android:orientation="horizontal"
 
         >
@@ -88,21 +98,25 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
-            android:text="状态："
-            android:textSize="20sp" />
+            android:text="状        态："
+            android:textColor="#333333"
+            android:textSize="17sp" />
 
         <TextView
             android:id="@+id/course_status"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="xxxx"
-            android:textSize="20sp" />
+            android:textColor="#333333"
+            android:singleLine="true"
+            android:textSize="17sp" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
         android:orientation="horizontal"
 
         >
@@ -111,21 +125,25 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
-            android:text="学分："
-            android:textSize="20sp" />
+            android:text="学        分："
+            android:textColor="#333333"
+            android:textSize="17sp" />
 
         <TextView
             android:id="@+id/course_xuefen"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="xxxx"
-            android:textSize="20sp" />
+            android:singleLine="true"
+            android:textColor="#333333"
+            android:textSize="17sp" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
         android:orientation="horizontal"
 
         >
@@ -134,21 +152,25 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
-            android:text="成绩："
-            android:textSize="20sp" />
+            android:text="成        绩："
+            android:textColor="#333333"
+            android:textSize="17sp" />
 
         <TextView
             android:id="@+id/course_chengji"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="xxxx"
-            android:textSize="20sp" />
+            android:textColor="#333333"
+            android:singleLine="true"
+            android:textSize="17sp" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
         android:orientation="horizontal"
 
         >
@@ -157,14 +179,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
-            android:text="评价："
-            android:textSize="20sp" />
+            android:text="评        价："
+            android:textColor="#333333"
+            android:textSize="17sp" />
 
         <TextView
             android:id="@+id/course_pingjia"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="xxxx"
-            android:textSize="20sp" />
+            android:singleLine="true"
+            android:textColor="#333333"
+            android:textSize="17sp" />
     </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+         android:layout_height="1dp"
+        />
 </LinearLayout>

@@ -1,7 +1,11 @@
 package xatu.school.activity;
 
+import android.app.Activity;
 import android.app.Application;
 import android.content.SharedPreferences;
+
+import java.util.LinkedList;
+import java.util.List;
 
 import xatu.school.db.UniversityDbOpenHelper;
 
@@ -29,6 +33,42 @@ public class BaseApplication extends Application {
 
     private static UniversityDbOpenHelper mDbHelper;// 数据库操作
 
+    private static BaseApplication instance;
+    private List<Activity> activitys=null;
+
+    public BaseApplication() {
+        this.activitys = new LinkedList<Activity>();
+    }
+    public static BaseApplication getInstance(){
+        if(null==instance)
+        {
+            instance=new BaseApplication();
+        }
+        return instance;
+    }
+    //将activity加入集合统一管理
+    public void addActivity(Activity activity){
+         if(activitys!=null&&activitys.size()>0)
+        {
+            if(!activitys.contains(activity))
+            {
+                activitys.add(activity);
+            }
+        }else{
+             activitys.add(activity);
+         }
+    }
+    //销毁所有activity
+    public void exit(){
+        if(activitys!= null && activitys.size()>0)
+        {
+            for(Activity activity:activitys)
+            {
+                activity.finish();
+            }
+        }
+        System.exit(0);
+    }
     @Override
     public void onCreate() {
         super.onCreate();
