@@ -65,6 +65,20 @@ public class LoginManager {
     }
 
     /**
+     * 登录 不需验证码
+     *
+     * @param context  上下文
+     * @param handler  handler
+     * @param username 用户名
+     * @param password 密码
+     */
+    public void login(Context context, Handler handler, String username, String password) {
+        StudentLoginImp studentLogin = new StudentLoginImp();
+        studentLogin.loginWithOcr(CreateInitMsg.msg(context, handler, Code.CONTROL.LOGIN_WITH_OCR),
+                username, password);
+    }
+
+    /**
      * 从网络获取个人信息
      *
      * @param context 上下文

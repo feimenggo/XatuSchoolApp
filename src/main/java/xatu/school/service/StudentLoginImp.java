@@ -3,6 +3,7 @@ package xatu.school.service;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Message;
+import android.util.Log;
 
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -14,6 +15,7 @@ import java.io.UnsupportedEncodingException;
 import cz.msebera.android.httpclient.Header;
 import xatu.school.bean.InitMsg;
 import xatu.school.bean.WebError;
+import xatu.school.utils.CheckcodeOcr;
 import xatu.school.utils.Code;
 
 /**
@@ -125,7 +127,28 @@ public class StudentLoginImp implements IStudentLogin {
     }
 
     @Override
-    public void loginWithOcr(InitMsg msg, String username, String password) {
+    public void loginWithOcr(final InitMsg m, final String username, final String password) {
+        AsyncHttpClient client = new AsyncHttpClient();
+        PersistentCookieStore myCookieStore=new PersistentCookieStore(m.getContext());
+        client.setCookieStore(myCookieStore);
+        client.get("http://222.25.1.101/js/checkcode.asp", new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                BitmapFactory factory = new BitmapFactory();
+                Bitmap bitmap = factory.decodeByteArray(responseBody, 0, responseBody.length);
+                String text = null;
+                try {
+                    text = CheckcodeOcr.getOcr(m.getContext(), bitmap);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                login(m,username,password,text);
+            }
 
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable errorr) {
+                //Log.i("TAG", "get picture  onFailure");
+            }
+        });
     }
 }

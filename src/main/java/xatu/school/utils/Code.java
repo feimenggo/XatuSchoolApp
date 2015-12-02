@@ -15,6 +15,8 @@ public class Code {
         public static final int STUDENTINFO = 4;//学生个人信息
         public static final int COURSETABLE = 5;// 课程表信息
         public static final int LOGIN_WITH_OCR = 6;//登录，自动识别验证码
+
+        public static final int COURSE_EVALUATE = 6;//单科课程评教
     }
 
     /**

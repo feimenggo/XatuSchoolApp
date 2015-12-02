@@ -196,7 +196,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         super.onCreate(savedInstanceState);
         initViews();// 视图初始化
         initEvent();// 事件初始化
-        initCheckcode();// 获取验证码
+//        initCheckcode();// 获取验证码
         initReceiver();// 初始化服务
     }
 
@@ -296,11 +296,11 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
             Toast.makeText(LoginActivity.this, "密码不能为空！", Toast.LENGTH_SHORT).show();
             return;
         }
-        String checkcode = mCheckcode.getText().toString();
-        if (TextUtils.isEmpty(checkcode)) {
-            Toast.makeText(LoginActivity.this, "验证码不能为空！", Toast.LENGTH_SHORT).show();
-            return;
-        }
+//        String checkcode = mCheckcode.getText().toString();
+//        if (TextUtils.isEmpty(checkcode)) {
+//            Toast.makeText(LoginActivity.this, "验证码不能为空！", Toast.LENGTH_SHORT).show();
+//            return;
+//        }
         mProgressContent.setText("正在登录...");
         //显示进度条
         mProgress.setVisibility(View.VISIBLE);
@@ -308,8 +308,10 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         mUsernameValue = username;
         mPasswordValue = password;
         //学生登录操作
-        LoginManager.getInstance().login(this, mHandler, username,
-                password, checkcode);
+//        LoginManager.getInstance().login(this, mHandler, username,
+//                password, checkcode);
+        //使用登录自动识别验证码
+        LoginManager.getInstance().login(this, mHandler, username, password);
     }
 
     /**

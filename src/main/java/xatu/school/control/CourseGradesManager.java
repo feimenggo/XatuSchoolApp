@@ -1,16 +1,23 @@
 package xatu.school.control;
 
 
+import android.content.Context;
+import android.os.Handler;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import xatu.school.bean.BaseSingleCourse;
 import xatu.school.bean.CourseGrades;
+import xatu.school.bean.EvaluateInfo;
 import xatu.school.bean.FileBean;
 import xatu.school.bean.ScoreItem;
 import xatu.school.bean.Semester;
 import xatu.school.bean.SingleCourse;
 import xatu.school.service.DBManager;
+import xatu.school.service.ICourseEvaluate;
+import xatu.school.utils.Code;
+import xatu.school.utils.CreateInitMsg;
 
 /**
  * 所有成绩界面 管理器
@@ -83,5 +90,11 @@ public class CourseGradesManager {
             FileBean fileBean = new FileBean(maxSemester, semester, scoreItem);
             data.add(fileBean);
         }
+    }
+
+    public void evaluate(Context context, Handler handler, SingleCourse singleCourse, int[] form) {
+        EvaluateInfo info = new EvaluateInfo(singleCourse, form);
+        ICourseEvaluate courseEvaluate = null;
+        courseEvaluate.evaluate(CreateInitMsg.msg(context, handler, Code.CONTROL.COURSE_EVALUATE), info);
     }
 }
