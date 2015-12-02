@@ -16,11 +16,12 @@ import xatu.school.bean.Semester;
 import xatu.school.bean.SingleCourse;
 import xatu.school.service.DBManager;
 import xatu.school.service.ICourseEvaluate;
+import xatu.school.utils.CookieUtil;
 import xatu.school.utils.Code;
 import xatu.school.utils.CreateInitMsg;
 
 /**
- * 所有成绩界面 管理器
+ * 所有成绩界面 控制器
  * Created by penfi on 2015/11/10.
  */
 public class CourseGradesManager {
@@ -92,8 +93,20 @@ public class CourseGradesManager {
         }
     }
 
-    public void evaluate(Context context, Handler handler, SingleCourse singleCourse, int[] form) {
-        EvaluateInfo info = new EvaluateInfo(singleCourse, form);
+    /**
+     * 课程评教
+     *
+     * @param context      上下文
+     * @param handler      handler
+     * @param singleCourse 要评教的单科课程对象
+     * @param radios       单选 整形数组 值：1->A,2->B,3->C,4->D,5->E
+     */
+    public void evaluate(Context context, Handler handler, SingleCourse singleCourse, int[] radios) {
+        // 检测cookie是否过期
+        if (!CookieUtil.check()) {//过期
+
+        }
+        EvaluateInfo info = new EvaluateInfo(singleCourse, radios);
         ICourseEvaluate courseEvaluate = null;
         courseEvaluate.evaluate(CreateInitMsg.msg(context, handler, Code.CONTROL.COURSE_EVALUATE), info);
     }

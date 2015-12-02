@@ -20,6 +20,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import cz.msebera.android.httpclient.cookie.Cookie;
 import xatu.school.R;
 import xatu.school.bean.CourseTable;
 import xatu.school.bean.StudentInfo;
@@ -28,6 +29,7 @@ import xatu.school.bean.WebError;
 import xatu.school.control.LoginManager;
 import xatu.school.utils.CheckcodeOcr;
 import xatu.school.utils.Code;
+import xatu.school.utils.CookieUtil;
 import xatu.school.utils.NetworkUtil;
 
 /**
@@ -77,7 +79,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                         BaseApplication.getEditor().putString(BaseApplication.SP_USERNAME, mUsernameValue);
                         BaseApplication.getEditor().putString(BaseApplication.SP_PASSWORD, mPasswordValue);
                         // 更新cookie时间
-                        BaseApplication.getEditor().putLong(BaseApplication.SP_COOKIE_TIME, System.currentTimeMillis());
+//                        BaseApplication.getEditor().putLong(BaseApplication.SP_COOKIE_TIME, System.currentTimeMillis());
+                        CookieUtil.updateCookieTime(false);
                         BaseApplication.getEditor().apply();
 
                         Toast.makeText(LoginActivity.this, "登录成功！", Toast.LENGTH_SHORT).show();
@@ -109,7 +112,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                         BaseApplication.getEditor().putString(BaseApplication.SP_USERNAME, mUsernameValue);
                         BaseApplication.getEditor().putString(BaseApplication.SP_PASSWORD, mPasswordValue);
                         // 更新cookie时间
-                        BaseApplication.getEditor().putLong(BaseApplication.SP_COOKIE_TIME, System.currentTimeMillis());
+                        CookieUtil.updateCookieTime(false);
                         BaseApplication.getEditor().apply();
 
                         mProgressContent.setText("正在加载数据...");
