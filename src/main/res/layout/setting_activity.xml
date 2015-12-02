@@ -8,30 +8,28 @@
 
     <include layout="@layout/titlebar" />
 
-   <ImageView
-       android:layout_width="wrap_content"
-       android:layout_height="wrap_content"
-       android:src="@drawable/xatu_logo"
-       android:layout_gravity="center"
-       />
-
-    <Button
+    <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="关于我们"
-        android:background="@null"
         android:layout_gravity="center"
+        android:src="@mipmap/xatu_logo" />
+
+    <Button
         android:id="@+id/about_btn"
-
-     />
-
-    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="退出账号"
-        android:background="@null"
         android:layout_gravity="center"
+        android:background="@null"
+        android:text="关于我们"
+
+        />
+
+    <Button
         android:id="@+id/exit_number"
-     />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@null"
+        android:text="退出账号" />
 
 </LinearLayout>

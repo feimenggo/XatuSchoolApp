@@ -152,9 +152,9 @@ public class TreeHelper {
     {
         if(n.getChildren().size()>0 && n.isExpand())  //说明有子节点,且展开，需要设置图标
         {
-            n.setIcon(R.drawable.tree_ex);
+            n.setIcon(R.mipmap.tree_ex);
         }else if(n.getChildren().size()>0 && !n.isExpand()){ //有子节点，但没展开
-            n.setIcon(R.drawable.tree_ec);
+            n.setIcon(R.mipmap.tree_ec);
         }else{      //为子节点时不需要设置图标
             n.setIcon(-1);
         }

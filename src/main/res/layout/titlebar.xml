@@ -13,7 +13,7 @@
         android:background="#00000000"
         android:contentDescription="左按钮"
         android:scaleType="centerInside"
-        android:src="@drawable/return_btn" />
+        android:src="@mipmap/return_btn" />
 
     <TextView
         android:id="@+id/title"

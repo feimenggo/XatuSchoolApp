@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/login_bg"
+    android:background="@mipmap/login_bg"
     tools:context=".LoginActivity">
 
     <LinearLayout
@@ -15,7 +15,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="10dp"
-            android:src="@drawable/xatu_logo" />
+            android:src="@mipmap/xatu_logo" />
 
 
         <LinearLayout
@@ -30,14 +30,14 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
 
-                android:background="@drawable/edit_bg"
+                android:background="@mipmap/edit_bg"
                 android:orientation="horizontal">
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:background="@drawable/id_log"
+                    android:background="@mipmap/id_log"
                     android:focusable="true"
                     android:focusableInTouchMode="true" />
 
@@ -64,14 +64,14 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="5dp"
-                android:background="@drawable/edit_bg"
+                android:background="@mipmap/edit_bg"
                 android:orientation="horizontal">
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:background="@drawable/pass_log" />
+                    android:background="@mipmap/pass_log" />
 
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
@@ -103,13 +103,13 @@
                     android:layout_height="match_parent"
                     android:layout_marginRight="10dp"
                     android:layout_weight="1"
-                    android:background="@drawable/identify_bg">
+                    android:background="@mipmap/identify_bg">
 
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:background="@drawable/identity_icon" />
+                        android:background="@mipmap/identity_icon" />
 
                     <android.support.design.widget.TextInputLayout
                         android:layout_width="match_parent"

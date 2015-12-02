@@ -11,9 +11,9 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:layout_marginEnd="5dp"
-        android:layout_marginRight="5dp"
         android:layout_marginLeft="10dp"
-        android:src="@drawable/tree_ec" />
+        android:layout_marginRight="5dp"
+        android:src="@mipmap/tree_ec" />
 
     <TextView
         android:id="@+id/item_text"

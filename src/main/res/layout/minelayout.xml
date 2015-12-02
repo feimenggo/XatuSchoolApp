@@ -8,7 +8,7 @@
    <FrameLayout
        android:layout_width="match_parent"
        android:layout_height="wrap_content"
-       android:background="@drawable/bodytitle"
+       android:background="@mipmap/bodytitle"
        >
        <ImageButton
            android:id="@+id/id_setting"
@@ -24,7 +24,7 @@
            android:layout_width="70dp"
            android:layout_height="70dp"
            android:layout_gravity="center"
-           android:background="@drawable/head_bg"
+           android:background="@mipmap/head_bg"
            />
        </FrameLayout>
     <LinearLayout
@@ -136,7 +136,7 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/girl_icon"
+                android:background="@mipmap/girl_icon"
                 />
             </LinearLayout>
         </LinearLayout>

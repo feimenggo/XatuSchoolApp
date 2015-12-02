@@ -15,7 +15,7 @@
         android:layout_below="@id/title_bar"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="50dp"
-        android:src="@drawable/xatuapp" />
+        android:src="@mipmap/xatuapp" />
 
     <TextView
         android:id="@+id/version"

@@ -55,9 +55,9 @@ public class CourseTableFragment extends Fragment implements View.OnClickListene
                 mSwitchBtnLeft.setTextColor(Color.parseColor("#0093dd"));
                 mSwitchBtnRight.setTextColor(Color.WHITE);
                 mSwitchBtnLeft
-                        .setBackgroundResource(R.drawable.switch_btn_pink_left_96);
+                        .setBackgroundResource(R.mipmap.switch_btn_pink_left_96);
                 mSwitchBtnRight
-                        .setBackgroundResource(R.drawable.switch_btn_trans_right_96);
+                        .setBackgroundResource(R.mipmap.switch_btn_trans_right_96);
 
                 mCourseTable.updateSimpleSections(mALlSimpleSections);
                 break;
@@ -65,9 +65,9 @@ public class CourseTableFragment extends Fragment implements View.OnClickListene
                 mSwitchBtnLeft.setTextColor(Color.WHITE);
                 mSwitchBtnRight.setTextColor(Color.parseColor("#0093dd"));
                 mSwitchBtnLeft
-                        .setBackgroundResource(R.drawable.switch_btn_trans_left_96);
+                        .setBackgroundResource(R.mipmap.switch_btn_trans_left_96);
                 mSwitchBtnRight
-                        .setBackgroundResource(R.drawable.switch_btn_pink_right_96);
+                        .setBackgroundResource(R.mipmap.switch_btn_pink_right_96);
 
                 mCourseTable.updateSimpleSections(mPresentSections);
                 break;
