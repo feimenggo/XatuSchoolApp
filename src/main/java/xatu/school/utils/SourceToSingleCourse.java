@@ -17,10 +17,10 @@ public class SourceToSingleCourse {
     public static SingleCourse toSingleCourse(SourceSingleCourse source) {
         SingleCourse sc = new SingleCourse();
         sc.setName(source.getName());
-        sc.setXuefen(Float.valueOf(replace(source.getXuefen())));
+        sc.setXuefen(Float.valueOf(StringUtil.replace(source.getXuefen())));
         sc.setChengji(Integer.valueOf(source.getYuanshichengji()));
-        sc.setRenkejiaoshi(replace(source.getRenkejiaoshi()));
-        sc.setKaoshileixing(replace(source.getKaoshileixing()));
+        sc.setRenkejiaoshi(StringUtil.replace(source.getRenkejiaoshi()));
+        sc.setKaoshileixing(StringUtil.replace(source.getKaoshileixing()));
         sc.setUrl(source.getUrl());
         sc.setStatus(judgeStatus(source));
         return sc;
@@ -49,8 +49,5 @@ public class SourceToSingleCourse {
         return result;
     }
 
-    public static String replace(String str) {
-        return str.replace("  ", "").replace(" ", "").replace(" ", "");
-    }
 
 }

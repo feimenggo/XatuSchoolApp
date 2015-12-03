@@ -1,7 +1,5 @@
 package xatu.school.bean;
 
-import android.text.TextUtils;
-
 /**
  * 原始单科课程类
  * Created by Administrator on 2015-10-18.
@@ -24,21 +22,6 @@ public class SourceSingleCourse extends BaseSingleCourse {
     private String jieci;// 节次
     private String jiaoshi;// 教室
 
-    /**
-     * 用于数据库
-     */
-    public SourceSingleCourse(String name, String yuanshichengji, String renkejiaoshi,
-                              String kaoshileixing, String zhuangtai, String kaoshifangshi,
-                              String jidian, String xuefen) {
-        this.name = name;
-        this.yuanshichengji = yuanshichengji;
-        this.renkejiaoshi = renkejiaoshi;
-        this.kaoshileixing = kaoshileixing;
-        this.zhuangtai = zhuangtai;
-        this.kaoshifangshi = kaoshifangshi;
-        this.jidian = jidian;
-        this.xuefen = xuefen;
-    }
 
     /**
      * 用于网络

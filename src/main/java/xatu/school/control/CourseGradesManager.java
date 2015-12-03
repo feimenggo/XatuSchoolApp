@@ -102,10 +102,6 @@ public class CourseGradesManager {
      * @param radios       单选 整形数组 值：1->A,2->B,3->C,4->D,5->E
      */
     public void evaluate(Context context, Handler handler, SingleCourse singleCourse, int[] radios) {
-        // 检测cookie是否过期
-        if (!CookieUtil.check()) {//过期
-
-        }
         EvaluateInfo info = new EvaluateInfo(singleCourse, radios);
         ICourseEvaluate courseEvaluate = null;
         courseEvaluate.evaluate(CreateInitMsg.msg(context, handler, Code.CONTROL.COURSE_EVALUATE), info);
