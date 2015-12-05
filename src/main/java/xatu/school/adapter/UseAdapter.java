@@ -1,6 +1,7 @@
 package xatu.school.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import android.widget.Toast;
 import java.util.List;
 
 import xatu.school.R;
+import xatu.school.activity.EvaluateActivity;
 import xatu.school.bean.Node;
 import xatu.school.bean.SingleCourse;
 
@@ -21,8 +23,15 @@ import xatu.school.bean.SingleCourse;
  */
 public class UseAdapter<T> extends TreeListViewAdapter<T> {
 
-    private OnLongClick onLongClick;
+    private OnEvaluateClick onEvaluateClick;
+    public interface OnEvaluateClick{
+        void onEvaluateClick(String courseName);
+    }
+    public void setEvaluateClick(OnEvaluateClick onclick){
+        this.onEvaluateClick=onclick;
+    }
 
+    private OnLongClick onLongClick;
     public void setOnClick(OnLongClick onLongClick){
         this.onLongClick=onLongClick;
     }
@@ -45,7 +54,7 @@ public class UseAdapter<T> extends TreeListViewAdapter<T> {
             holder.courseScore = (TextView) convertView.findViewById(R.id.item_course_score);
             holder.courseName.setText(node.getName().getCourseName()); //设置课程名称
             holder.courseScore.setText(node.getName().getCouresScore());//设置课程分数
-            if("未评价".equals(holder.courseScore.getText()))
+            if("75".equals(holder.courseScore.getText()))
             {
                 holder.courseScore.setText("点击评价");
                 int color=mContext.getResources().getColor(R.color.colorPrimary);
@@ -53,7 +62,10 @@ public class UseAdapter<T> extends TreeListViewAdapter<T> {
                 holder.courseScore.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Toast.makeText(mContext, "点击了评价按钮", Toast.LENGTH_SHORT).show();
+                        if(onEvaluateClick!=null)
+                        {
+                            onEvaluateClick.onEvaluateClick(holder.courseName.getText().toString());
+                        }
                     }
                 });
 

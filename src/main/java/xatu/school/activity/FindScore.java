@@ -32,6 +32,17 @@ public class FindScore extends BaseActivity implements View.OnClickListener {
     private SingleCourse singleCourse;
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        if(mAdapter!=null)
+        {
+            Log.i("Tag","已经提交了dialog");
+            mAdapter.notifyDataSetChanged();
+        }
+
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_score);
@@ -41,6 +52,32 @@ public class FindScore extends BaseActivity implements View.OnClickListener {
         try {
             mAdapter = new UseAdapter<>(mTree, this, mDatas, 0);
             mTree.setAdapter(mAdapter);
+
+            mAdapter.setEvaluateClick(new UseAdapter.OnEvaluateClick() {
+                @Override
+                public void onEvaluateClick(String courseName) {
+                    if(AllCourseInfo!=null)
+                    {
+                        int len=AllCourseInfo.size();
+                        for(int i =0;i<len;i++)
+                        {
+                            if(courseName.equals(AllCourseInfo.get(i).getName()))
+                            {
+                                singleCourse=AllCourseInfo.get(i);
+                            }
+                        }
+                        if(singleCourse!=null)
+                        {
+                            Intent intent = new Intent(FindScore.this, EvaluateActivity.class);
+                            Bundle bundle = new Bundle();
+                            bundle.putSerializable(StudyFragment.SINGLE_COURSE,singleCourse);
+                            intent.putExtras(bundle);
+                            singleCourse=null;
+                            startActivity(intent);
+                        }
+                    }
+                }
+            });
 
             mAdapter.setOnClick(new UseAdapter.OnLongClick() {
                 @Override
@@ -94,4 +131,5 @@ public class FindScore extends BaseActivity implements View.OnClickListener {
                 break;
         }
     }
+
 }
