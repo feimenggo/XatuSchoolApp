@@ -206,18 +206,18 @@ public class DBManager {
     public void clearAllTable() {
         mDb.execSQL("delete from " + Semester.TABLE_NAME);  //清空学期表数据
         mDb.execSQL("update sqlite_sequence SET seq = 0 where name ='" +
-                Semester.TABLE_NAME + "'");//自增长ID为0
+                Semester.TABLE_NAME + "'");//设置自增长ID为0
 
         mDb.execSQL("delete from " + SingleCourse.TABLE_NAME);  //清空课程信息表数据
         mDb.execSQL("update sqlite_sequence SET seq = 0 where name ='" +
-                SingleCourse.TABLE_NAME + "'");//自增长ID为0
+                SingleCourse.TABLE_NAME + "'");//设置自增长ID为0
 
         mDb.execSQL("delete from " + StudentInfo.TABLE_NAME);  //清空学生个人信息表数据
         mDb.execSQL("update sqlite_sequence SET seq = 0 where name ='" +
-                StudentInfo.TABLE_NAME + "'");//自增长ID为0
+                StudentInfo.TABLE_NAME + "'");//设置自增长ID为0
 
         mDb.execSQL("delete from " + CourseTable.TABLE_NAME);  //清空课程表信息表数据
         mDb.execSQL("update sqlite_sequence SET seq = 0 where name ='" +
-                CourseTable.TABLE_NAME + "'");//自增长ID为0
+                CourseTable.TABLE_NAME + "'");//设置自增长ID为0
     }
 }

@@ -25,6 +25,8 @@ public class BaseApplication extends Application {
     public static final String SP_PASSWORD = "passwrod";// 密码
     public static final String SP_COOKIE_TIME = "cookie_time";// 获取或更新cookie的时间戳
 
+    public static final int COOKIE_OUT_TIME = 360;// cookie过期时间，秒
+
     private static final String SP_NAME = "school_sp";
     public static final int VERSION = 1;
 
@@ -34,41 +36,40 @@ public class BaseApplication extends Application {
     private static UniversityDbOpenHelper mDbHelper;// 数据库操作
 
     private static BaseApplication instance;
-    private List<Activity> activitys=null;
+    private List<Activity> activitys = null;
 
     public BaseApplication() {
         this.activitys = new LinkedList<Activity>();
     }
-    public static BaseApplication getInstance(){
-        if(null==instance)
-        {
-            instance=new BaseApplication();
+
+    public static BaseApplication getInstance() {
+        if (null == instance) {
+            instance = new BaseApplication();
         }
         return instance;
     }
+
     //将activity加入集合统一管理
-    public void addActivity(Activity activity){
-         if(activitys!=null&&activitys.size()>0)
-        {
-            if(!activitys.contains(activity))
-            {
+    public void addActivity(Activity activity) {
+        if (activitys != null && activitys.size() > 0) {
+            if (!activitys.contains(activity)) {
                 activitys.add(activity);
             }
-        }else{
-             activitys.add(activity);
-         }
+        } else {
+            activitys.add(activity);
+        }
     }
+
     //销毁所有activity
-    public void exit(){
-        if(activitys!= null && activitys.size()>0)
-        {
-            for(Activity activity:activitys)
-            {
+    public void exit() {
+        if (activitys != null && activitys.size() > 0) {
+            for (Activity activity : activitys) {
                 activity.finish();
             }
         }
         System.exit(0);
     }
+
     @Override
     public void onCreate() {
         super.onCreate();

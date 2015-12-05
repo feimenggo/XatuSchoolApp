@@ -7,7 +7,7 @@ import java.io.Serializable;
  * Created by penfi on 2015/11/19.
  * 莫晨：序列化该类
  */
-public class SingleCourse extends BaseSingleCourse implements Serializable{
+public class SingleCourse extends BaseSingleCourse implements Serializable {
     public static final String TABLE_NAME = "tb_course";// 课程表名
 
     public static final String COLUMN_SEMESTER_ID = "semester_id";// 学期号
@@ -27,7 +27,6 @@ public class SingleCourse extends BaseSingleCourse implements Serializable{
     private String kaoshileixing;// 考试类型：考试, 考查
     private String url;// 评价url
     private int status;// 状态：1->没考试(无)， 2->归档中(提交)， 3->未评价(归档&未评价)， 4->已评价(归档&已评价)
-
 
     public SingleCourse() {
     }
@@ -63,7 +62,6 @@ public class SingleCourse extends BaseSingleCourse implements Serializable{
         return kaoshileixing;
     }
 
-
     public String getUrl() {
         return url;
     }
@@ -91,7 +89,6 @@ public class SingleCourse extends BaseSingleCourse implements Serializable{
     public void setKaoshileixing(String kaoshileixing) {
         this.kaoshileixing = kaoshileixing;
     }
-
 
     public void setUrl(String url) {
         this.url = url;

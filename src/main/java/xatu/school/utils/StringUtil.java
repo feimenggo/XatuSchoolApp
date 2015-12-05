@@ -9,4 +9,11 @@ public class StringUtil {
         String a = str.trim();
         return str;
     }
+
+    /**
+     * 去掉字符串中来自数据库的空白
+     */
+    public static String replace(String str) {
+        return str.replace("  ", "").replace(" ", "").replace(" ", "");
+    }
 }
