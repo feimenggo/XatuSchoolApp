@@ -20,6 +20,7 @@ import xatu.school.bean.EvaluateBean;
 import xatu.school.bean.EvaluateInfo;
 import xatu.school.bean.RadioCheck;
 import xatu.school.bean.SingleCourse;
+import xatu.school.bean.WebError;
 import xatu.school.control.CourseGradesManager;
 import xatu.school.utils.Code;
 
@@ -47,7 +48,7 @@ public class EvaluateActivity extends Activity implements View.OnClickListener {
                         finish();
                     } else {
                         // 得到失败提示信息
-                        String error = (String) msg.obj;
+                        String error = ((WebError)msg.obj).toString();
                         Log.i("Tag", "评价失败：" + error);
                     }
                     break;
