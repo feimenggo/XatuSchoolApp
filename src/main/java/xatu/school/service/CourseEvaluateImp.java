@@ -43,7 +43,7 @@ public class CourseEvaluateImp implements ICourseEvaluate{
 
             @Override
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                if(statusCode==200)
+                if(statusCode==302)
                 {
                     Message msg = Message.obtain();
                     msg.obj=new String("正确");

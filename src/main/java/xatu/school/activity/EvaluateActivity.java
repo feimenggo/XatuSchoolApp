@@ -45,6 +45,8 @@ public class EvaluateActivity extends Activity implements View.OnClickListener {
                         Log.i("Tag", "评价成功");
                         isSucceed = true;
                         finish();
+                    } else {
+                        Log.i("Tag", "评价失败：" + msg.obj);
                     }
                     break;
             }

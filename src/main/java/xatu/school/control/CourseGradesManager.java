@@ -17,6 +17,8 @@ import xatu.school.bean.InitMsg;
 import xatu.school.bean.ScoreItem;
 import xatu.school.bean.Semester;
 import xatu.school.bean.SingleCourse;
+import xatu.school.exception.EvaluateException;
+import xatu.school.service.CourseEvaluateImp;
 import xatu.school.service.DBManager;
 import xatu.school.service.ICourseEvaluate;
 import xatu.school.utils.CookieUtil;
@@ -105,17 +107,23 @@ public class CourseGradesManager {
      * @param radios       单选 整形数组 值：1->A,2->B,3->C,4->D,5->E
      */
     public void evaluate(Context context, Handler handler, SingleCourse singleCourse, int[] radios) {
-        EvaluateInfo info = new EvaluateInfo(singleCourse, radios);
-//        ICourseEvaluate courseEvaluate = null;
-//        courseEvaluate.evaluate(CreateInitMsg.msg(context, handler, Code.CONTROL.COURSE_EVALUATE), info);
-        InitMsg m = CreateInitMsg.msg(context, handler, Code.CONTROL.COURSE_EVALUATE);
-        Log.i("evaluate", "课程评教 " + singleCourse.getName());
-        for (int radio : radios) {
-            Log.i("evaluate", "内容：" + radio);
+        EvaluateInfo info = null;
+        try {
+            info = new EvaluateInfo(singleCourse, radios);
+
+            ICourseEvaluate courseEvaluate = new CourseEvaluateImp();
+            courseEvaluate.evaluate(CreateInitMsg.msg(context, handler, Code.CONTROL.COURSE_EVALUATE), info);
+        } catch (EvaluateException e) {
+            Message msg = Message.obtain();
+            msg.what = Code.CONTROL.COURSE_EVALUATE;
+            msg.arg1 = Code.RESULT.FALSE;
+            msg.obj = e.getMessage();
+            handler.sendMessage(msg);
+        } finally {
+            Log.i("evaluate", "课程评教 " + singleCourse.getName());
+            for (int radio : radios) {
+                Log.i("evaluate", "内容：" + radio);
+            }
         }
-        Message msg = Message.obtain();
-        msg.what = m.getControlCode();
-        msg.arg1 = Code.RESULT.TRUE;
-        m.getHandler().sendMessageDelayed(msg, 2000);// 2秒后返回结果
     }
 }
