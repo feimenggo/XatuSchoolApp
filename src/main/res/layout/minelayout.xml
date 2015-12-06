@@ -139,5 +139,14 @@
                 android:background="@mipmap/girl_icon"
                 />
             </LinearLayout>
+        <Button
+            android:id="@+id/exit_number"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:text="退出登陆"
+            android:textSize="22sp"
+            android:layout_gravity="center"
+            android:background="@drawable/exit_bg"
+            />
         </LinearLayout>
 </LinearLayout>

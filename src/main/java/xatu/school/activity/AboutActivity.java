@@ -27,9 +27,8 @@ public class AboutActivity extends BaseActivity implements View.OnClickListener 
 
     private void initViews() {
         setContentView(R.layout.activity_about);
-        mReturn = (ImageButton) findViewById(R.id.btn_left);
+        mReturn = (ImageButton) findViewById(R.id.left_return);
         TextView title = (TextView) findViewById(R.id.title);
-
         title.setText("关于我们");
         mReturn.setOnClickListener(this);
     }
@@ -37,7 +36,7 @@ public class AboutActivity extends BaseActivity implements View.OnClickListener 
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.btn_left:
+            case R.id.left_return:
                 finish();
                 break;
         }

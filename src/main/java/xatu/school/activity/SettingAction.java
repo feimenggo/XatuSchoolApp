@@ -11,7 +11,7 @@ import xatu.school.control.MineManager;
 
 public class SettingAction extends BaseActivity implements View.OnClickListener {
 
-    private Button about_btn, exit_number;
+    private Button about_btn;
     private ImageButton btn_left;
 
     @Override
@@ -25,11 +25,9 @@ public class SettingAction extends BaseActivity implements View.OnClickListener 
     private void initView() {
         about_btn = (Button) findViewById(R.id.about_btn);
         btn_left= (ImageButton) findViewById(R.id.btn_left);
-        exit_number = (Button) findViewById(R.id.exit_number);
         btn_left.setOnClickListener(this);
         about_btn.setOnClickListener(this);
-        //exit.setOnClickListener(this);
-        exit_number.setOnClickListener(this);
+
     }
 
     @Override
@@ -42,13 +40,7 @@ public class SettingAction extends BaseActivity implements View.OnClickListener 
              case R.id.btn_left:
                  finish();
                  break;
-            case R.id.exit_number:
 
-                MineManager.getInstance().logout();
-                Intent intent2 = new Intent(SettingAction.this, LoginActivity.class);
-                startActivity(intent2);
-                BaseApplication.getInstance().exit();
-                break;
         }
     }
 }

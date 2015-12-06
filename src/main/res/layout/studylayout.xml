@@ -52,7 +52,8 @@
                     android:layout_height="35dp"
                     android:layout_margin="30dp"
                     android:layout_weight="1"
-                    android:background="#fafafa">
+                    android:background="#fafafa"
+                    >
 
                     <AutoCompleteTextView
                         android:id="@+id/find_course"

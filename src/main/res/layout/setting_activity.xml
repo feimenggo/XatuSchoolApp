@@ -24,12 +24,5 @@
 
         />
 
-    <Button
-        android:id="@+id/exit_number"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:background="@null"
-        android:text="退出账号" />
 
 </LinearLayout>
