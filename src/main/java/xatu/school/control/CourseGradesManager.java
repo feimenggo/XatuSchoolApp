@@ -3,6 +3,8 @@ package xatu.school.control;
 
 import android.content.Context;
 import android.os.Handler;
+import android.os.Message;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +13,7 @@ import xatu.school.bean.BaseSingleCourse;
 import xatu.school.bean.CourseGrades;
 import xatu.school.bean.EvaluateInfo;
 import xatu.school.bean.FileBean;
+import xatu.school.bean.InitMsg;
 import xatu.school.bean.ScoreItem;
 import xatu.school.bean.Semester;
 import xatu.school.bean.SingleCourse;
@@ -69,7 +72,7 @@ public class CourseGradesManager {
             String grade;
             switch (singleCourse.getStatus()) {
                 case 1:
-                    grade = "没考试";
+                    grade = "未考试";
                     break;
                 case 2:
                     grade = "归档中";
@@ -103,7 +106,17 @@ public class CourseGradesManager {
      */
     public void evaluate(Context context, Handler handler, SingleCourse singleCourse, int[] radios) {
         EvaluateInfo info = new EvaluateInfo(singleCourse, radios);
-        ICourseEvaluate courseEvaluate = null;
-        courseEvaluate.evaluate(CreateInitMsg.msg(context, handler, Code.CONTROL.COURSE_EVALUATE), info);
+//        ICourseEvaluate courseEvaluate = null;
+//        courseEvaluate.evaluate(CreateInitMsg.msg(context, handler, Code.CONTROL.COURSE_EVALUATE), info);
+        InitMsg m = CreateInitMsg.msg(context, handler, Code.CONTROL.COURSE_EVALUATE);
+        Log.i("evaluate", "课程评教 " + singleCourse.getName());
+        for (int radio : radios) {
+            Log.i("evaluate", "内容：" + radio);
+        }
+        Message msg = Message.obtain();
+        msg.what = m.getControlCode();
+        msg.arg1 = Code.RESULT.TRUE;
+        m.getHandler().sendMessage(msg);
+        m.getHandler().sendMessageDelayed(msg, 2000);// 2秒后返回结果
     }
 }
