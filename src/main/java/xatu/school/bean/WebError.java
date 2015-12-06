@@ -9,4 +9,5 @@ public enum WebError {
     checkcodeError,// 验证码错误
     noResponse,// 服务器无响应
     other,// 未知错误
+    renzhenpingjiao, //随便起的名字 ，你改下  请认真评教
 }
