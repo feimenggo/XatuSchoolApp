@@ -3,6 +3,7 @@ package xatu.school.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -15,17 +16,22 @@ import java.util.List;
 
 import xatu.school.R;
 import xatu.school.activity.EvaluateActivity;
+import xatu.school.activity.SingleCourseActivity;
+import xatu.school.activity.StudyFragment;
 import xatu.school.bean.Node;
 import xatu.school.bean.SingleCourse;
+import xatu.school.control.StudyManager;
 
 /**
  * Created by mmcc on 2015/11/3.
  */
 public class UseAdapter<T> extends TreeListViewAdapter<T> {
 
+    private List<SingleCourse> AllCourseObj; //课程的所有信息
+
     private OnEvaluateClick onEvaluateClick;
     public interface OnEvaluateClick{
-        void onEvaluateClick(String courseName);
+        void onEvaluateClick(SingleCourse singleCourse);
     }
     public void setEvaluateClick(OnEvaluateClick onclick){
         this.onEvaluateClick=onclick;
@@ -36,7 +42,7 @@ public class UseAdapter<T> extends TreeListViewAdapter<T> {
         this.onLongClick=onLongClick;
     }
     public interface OnLongClick{
-        void onlongClick(String courseName);
+        void onlongClick(SingleCourse singleCourse);
     }
 
     public UseAdapter(ListView tree, Context context, List<T> datas, int defaultExpandLevel) throws IllegalAccessException {
@@ -54,7 +60,8 @@ public class UseAdapter<T> extends TreeListViewAdapter<T> {
             holder.courseScore = (TextView) convertView.findViewById(R.id.item_course_score);
             holder.courseName.setText(node.getName().getCourseName()); //设置课程名称
             holder.courseScore.setText(node.getName().getCouresScore());//设置课程分数
-            if("归档中".equals(holder.courseScore.getText()))
+            final SingleCourse singleCourse=getSingleCourse(holder.courseName.getText().toString());
+            if(singleCourse.getStatus()==2)
             {
                 holder.courseScore.setText("点击评价");
                 int color=mContext.getResources().getColor(R.color.colorPrimary);
@@ -64,7 +71,7 @@ public class UseAdapter<T> extends TreeListViewAdapter<T> {
                     public void onClick(View v) {
                         if(onEvaluateClick!=null)
                         {
-                            onEvaluateClick.onEvaluateClick(holder.courseName.getText().toString());
+                            onEvaluateClick.onEvaluateClick(singleCourse);
                         }
                     }
                 });
@@ -74,7 +81,7 @@ public class UseAdapter<T> extends TreeListViewAdapter<T> {
                 @Override
                 public void onClick(View v) {
                     if (onLongClick != null) {
-                        onLongClick.onlongClick(holder.courseName.getText().toString());
+                        onLongClick.onlongClick(singleCourse);
                     }
                 }
             });
@@ -93,6 +100,24 @@ public class UseAdapter<T> extends TreeListViewAdapter<T> {
             }
         }
         return convertView;
+    }
+  //得到当前的科目对象
+    private SingleCourse getSingleCourse(String courseName) {
+        SingleCourse singleCourse=null;
+        //得到所有的课程信息
+        AllCourseObj= StudyManager.getInstance().getAllCourseInfo();
+        if(AllCourseObj!=null)
+        {
+            int len=AllCourseObj.size();
+            for(int i =0;i<len;i++)
+            {
+                if(courseName.equals(AllCourseObj.get(i).getName()))
+                {
+                    singleCourse=AllCourseObj.get(i);
+                }
+            }
+        }
+        return singleCourse;
     }
 
     static class ViewHolder {

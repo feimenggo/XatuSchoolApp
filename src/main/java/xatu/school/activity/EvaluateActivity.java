@@ -33,8 +33,8 @@ public class EvaluateActivity extends Activity implements View.OnClickListener {
     private ArrayList<RadioCheck> mData;
 
     private Button btn_submit;
-    private int selectRadio[] = new int[10];
-    private boolean isSucceed = false;
+    private int selectRadio[];
+    public static  boolean isSucceed = false;
 
 
     private Handler handler = new Handler() {
@@ -48,8 +48,10 @@ public class EvaluateActivity extends Activity implements View.OnClickListener {
                         finish();
                     } else {
                         // 得到失败提示信息
-                        String error = ((WebError)msg.obj).toString();
-                        Log.i("Tag", "评价失败：" + error);
+                        if(msg.obj==WebError.renzhenpingjiao)
+                        {
+                        }
+                        Log.i("Tag", "请认真评教!");
                     }
                     break;
             }
@@ -65,6 +67,7 @@ public class EvaluateActivity extends Activity implements View.OnClickListener {
         singleCourse = (SingleCourse) bundle.getSerializable(StudyFragment.SINGLE_COURSE);
         initData();
         initView();
+        Log.i("Tag","isSucceed="+isSucceed);
     }
 
     private void initData() {
@@ -74,9 +77,10 @@ public class EvaluateActivity extends Activity implements View.OnClickListener {
 //                ,"教师态度是否"};
         // 得到表单所有单选标题
         String formRadiosTitles[] = EvaluateInfo.formRadioTitles;
-
+        int radiosTitlesLength=formRadiosTitles.length;
+        selectRadio=new int[radiosTitlesLength];
         mData = new ArrayList<RadioCheck>();
-        for (int j = 0; j < 10; j++) {
+        for (int j = 0; j < radiosTitlesLength; j++) {
             mData.add(new RadioCheck(formRadiosTitles[j]));
         }
     }
@@ -96,10 +100,23 @@ public class EvaluateActivity extends Activity implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.evaluate_btn_submit: //提交选项
-                Toast.makeText(this, "点击了提交" + singleCourse.getName(), Toast.LENGTH_SHORT).show();
-                for (int i = 0; i < 10; i++)
-                    Log.i("Tag", "content=" + selectRadio[i]);
-                CourseGradesManager.getInstance().evaluate(this, handler, singleCourse, selectRadio);
+                boolean isSubmit=true;
+                int len=selectRadio.length;
+                for (int i = 0; i < len; i++)
+                {
+                    if(selectRadio[i]==0)
+                    {
+                        isSubmit=false;
+                    }
+                }
+
+                if(isSubmit)
+                {
+                    CourseGradesManager.getInstance().evaluate(this, handler, singleCourse, selectRadio);
+                }else{
+                    Toast.makeText(this,"请输入填写完整!",Toast.LENGTH_SHORT).show();
+                }
+
                 break;
         }
     }

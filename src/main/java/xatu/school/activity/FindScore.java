@@ -27,17 +27,16 @@ public class FindScore extends BaseActivity implements View.OnClickListener {
     private ListView mTree;
     private UseAdapter<FileBean> mAdapter;
     private List<FileBean> mDatas;
-
-    private List<SingleCourse> AllCourseInfo; //课程的所有信息
-    private SingleCourse singleCourse;
-
     @Override
     protected void onResume() {
         super.onResume();
-        if(mAdapter!=null)
+        if(EvaluateActivity.isSucceed)
         {
-            Log.i("Tag","已经提交了dialog");
+            EvaluateActivity.isSucceed=false;
+            Log.i("Tag","已经提交了dialog,可以刷新页面");
             mAdapter.notifyDataSetChanged();
+        }else{
+            Log.i("Tag","未提交dialog,不需要刷新页面");
         }
 
     }
@@ -55,53 +54,30 @@ public class FindScore extends BaseActivity implements View.OnClickListener {
 
             mAdapter.setEvaluateClick(new UseAdapter.OnEvaluateClick() {
                 @Override
-                public void onEvaluateClick(String courseName) {
-                    if(AllCourseInfo!=null)
-                    {
-                        int len=AllCourseInfo.size();
-                        for(int i =0;i<len;i++)
-                        {
-                            if(courseName.equals(AllCourseInfo.get(i).getName()))
-                            {
-                                singleCourse=AllCourseInfo.get(i);
-                            }
-                        }
+                public void onEvaluateClick(SingleCourse singleCourse) {
                         if(singleCourse!=null)
                         {
                             Intent intent = new Intent(FindScore.this, EvaluateActivity.class);
                             Bundle bundle = new Bundle();
-                            bundle.putSerializable(StudyFragment.SINGLE_COURSE,singleCourse);
+                            bundle.putSerializable(StudyFragment.SINGLE_COURSE, singleCourse);
                             intent.putExtras(bundle);
-                            singleCourse=null;
                             startActivity(intent);
                         }
-                    }
+
                 }
             });
 
             mAdapter.setOnClick(new UseAdapter.OnLongClick() {
                 @Override
-                public void onlongClick(String courseName) {
-                   if(AllCourseInfo!=null)
-                   {
-                       int len=AllCourseInfo.size();
-                       for(int i =0;i<len;i++)
-                       {
-                           if(courseName.equals(AllCourseInfo.get(i).getName()))
-                           {
-                               singleCourse=AllCourseInfo.get(i);
-                           }
-                       }
+                public void onlongClick(SingleCourse singleCourse) {
                        if(singleCourse!=null)
                        {
                            Intent intent = new Intent(FindScore.this, SingleCourseActivity.class);
                            Bundle bundle = new Bundle();
                            bundle.putSerializable(StudyFragment.SINGLE_COURSE,singleCourse);
                            intent.putExtras(bundle);
-                           singleCourse=null;
                            startActivity(intent);
                        }
-                   }
                 }
             });
         } catch (Exception e) {
@@ -111,8 +87,6 @@ public class FindScore extends BaseActivity implements View.OnClickListener {
 
     private void initData() {
         mDatas = CourseGradesManager.getInstance().getCourseGradesInfo();
-        //得到所有的课程信息
-        AllCourseInfo= StudyManager.getInstance().getAllCourseInfo();
     }
 
     private void initViews() {
