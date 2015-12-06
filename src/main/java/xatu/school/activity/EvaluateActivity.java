@@ -3,6 +3,8 @@ package xatu.school.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -11,12 +13,15 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+
 import xatu.school.R;
 import xatu.school.adapter.ProblemAdapter;
 import xatu.school.bean.EvaluateBean;
 import xatu.school.bean.EvaluateInfo;
 import xatu.school.bean.RadioCheck;
 import xatu.school.bean.SingleCourse;
+import xatu.school.control.CourseGradesManager;
+import xatu.school.utils.Code;
 
 public class EvaluateActivity extends Activity implements View.OnClickListener {
     private SingleCourse singleCourse;
@@ -29,6 +34,23 @@ public class EvaluateActivity extends Activity implements View.OnClickListener {
     private Button btn_submit;
     private int selectRadio[] = new int[10];
 
+    private boolean isSucceed = false;
+
+
+    private Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case Code.CONTROL.COURSE_EVALUATE:
+                    if (msg.arg1 == Code.RESULT.TRUE) {
+                        Log.i("Tag", "评价成功");
+                        isSucceed = true;
+                        finish();
+                    }
+                    break;
+            }
+        }
+    };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,7 +94,9 @@ public class EvaluateActivity extends Activity implements View.OnClickListener {
                 Toast.makeText(this, "点击了提交" + singleCourse.getName(), Toast.LENGTH_SHORT).show();
                 for (int i = 0; i < 10; i++)
                     Log.i("Tag", "content=" + selectRadio[i]);
-                finish();
+
+                CourseGradesManager.getInstance().evaluate(this,handler,singleCourse,selectRadio);
+
                 break;
         }
     }
