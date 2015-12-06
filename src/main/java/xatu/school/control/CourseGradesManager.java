@@ -116,7 +116,6 @@ public class CourseGradesManager {
         Message msg = Message.obtain();
         msg.what = m.getControlCode();
         msg.arg1 = Code.RESULT.TRUE;
-        m.getHandler().sendMessage(msg);
         m.getHandler().sendMessageDelayed(msg, 2000);// 2秒后返回结果
     }
 }

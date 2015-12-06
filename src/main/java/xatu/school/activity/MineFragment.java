@@ -22,6 +22,7 @@ import xatu.school.control.MineManager;
  */
 public class MineFragment extends Fragment{
 
+    private Button mExit; //退出登陆
     private ImageButton mSetting; //设置
     private ImageButton mHeader; //头像
     private TextView mCollege,mProfession,mName,mCard,mClass,mBirth;
@@ -52,13 +53,25 @@ public class MineFragment extends Fragment{
         mCard= (TextView) view.findViewById(R.id.id_card);
         mClass= (TextView) view.findViewById(R.id.id_class);
         mBirth= (TextView) view.findViewById(R.id.id_birth);
+        //退出按钮
+        mExit= (Button) view.findViewById(R.id.exit_number);
+        mExit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MineManager.getInstance().logout();
+                Intent intent2 = new Intent(getActivity(), LoginActivity.class);
+                startActivity(intent2);
+                getActivity().finish();
+            }
+        });
         //设置按钮
         mSetting= (ImageButton) view.findViewById(R.id.id_setting);
         mSetting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getActivity(),"点击了设置",Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(getActivity(),SettingAction.class));
+                Intent intent = new Intent(getActivity(), AboutActivity.class);
+                startActivity(intent);
             }
         });
         //头像
