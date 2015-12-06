@@ -53,7 +53,6 @@ public class ProblemAdapter extends BaseAdapter {
             convertView = inflater.inflate(R.layout.evaluate_list, null);
             holder = new ViewHolder();
             holder.content = (TextView) convertView.findViewById(R.id.evaluate_content);
-            holder.id= (TextView) convertView.findViewById(R.id.evaluate_id);
             holder.result_a = (RadioButton) convertView
                     .findViewById(R.id.id_A);
             holder.result_b = (RadioButton) convertView
@@ -71,7 +70,7 @@ public class ProblemAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
         holder.content.setText(check.getContent());
-        holder.id.setText((position+1)+"");
+
         holder.radioGroup.setTag(position);
         holder.radioGroup.setOnCheckedChangeListener(null);
         if (RadioCheck.answers[0].equals(check.getAnswer())) {
@@ -125,7 +124,7 @@ public class ProblemAdapter extends BaseAdapter {
     }
 
     class ViewHolder {
-        TextView content,id;
+        TextView content;
 
         RadioButton result_a;
         RadioButton result_b;
