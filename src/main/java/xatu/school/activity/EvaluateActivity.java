@@ -36,7 +36,7 @@ public class EvaluateActivity extends Activity implements View.OnClickListener {
     private boolean isSucceed = false;
 
 
-    private Handler handler = new Handler() {
+    private  Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             switch (msg.what) {
