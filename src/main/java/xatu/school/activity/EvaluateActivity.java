@@ -36,7 +36,7 @@ public class EvaluateActivity extends Activity implements View.OnClickListener {
     private boolean isSucceed = false;
 
 
-    private  Handler handler = new Handler() {
+    private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             switch (msg.what) {
@@ -46,7 +46,9 @@ public class EvaluateActivity extends Activity implements View.OnClickListener {
                         isSucceed = true;
                         finish();
                     } else {
-                        Log.i("Tag", "评价失败：" + msg.obj);
+                        // 得到失败提示信息
+                        String error = (String) msg.obj;
+                        Log.i("Tag", "评价失败：" + error);
                     }
                     break;
             }
