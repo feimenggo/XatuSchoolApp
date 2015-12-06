@@ -28,7 +28,9 @@
 
         <service android:name=".activity.SchoolLoginService" />
 
-        <activity android:name=".activity.SettingAction"
+        <activity android:name=".activity.SettingAction" />
+        <activity android:name=".activity.EvaluateActivity"
+                  android:theme="@style/MyDialogOfEvaluate"
             ></activity>
     </application>
 

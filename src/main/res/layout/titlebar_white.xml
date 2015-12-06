@@ -7,7 +7,7 @@
     android:orientation="horizontal" >
 
     <ImageButton
-        android:id="@+id/btn_left"
+        android:id="@+id/left_return"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:background="#00000000"
