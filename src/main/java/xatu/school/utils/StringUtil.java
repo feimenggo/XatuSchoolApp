@@ -14,6 +14,6 @@ public class StringUtil {
      * 去掉字符串中来自数据库的空白
      */
     public static String replace(String str) {
-        return str.replace("  ", "").replace(" ", "").replace(" ", "");
+        return str.replace("  ", "").replace(" ", "").replace(" ", "").replace("　","");
     }
 }

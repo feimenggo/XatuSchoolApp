@@ -2,6 +2,7 @@ package xatu.school.bean;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 
 import xatu.school.R;
 import xatu.school.utils.StringUtil;
@@ -10,7 +11,7 @@ public class StudentInfo {
     public static final String TABLE_NAME = "tb_student_info";// 学生信息 表名
 
     public static final String COLUMN_NAME = "name";// 名字
-    public static final String COLUMN_XIBU = "yuanxi";// 系别
+    public static final String COLUMN_YUANXI = "yuanxi";// 系别
     public static final String COLUMN_ZHUANYE = "zhuanye";// 专业
     public static final String COLUMN_XINGBIE = "xingbie";// 性别
     public static final String COLUMN_BANJI = "banji";// 班级
@@ -29,10 +30,10 @@ public class StudentInfo {
         this.name = name;
         this.yuanxi = yuanxi;
         this.zhuanye = zhuanye;
-        this.xingbie = StringUtil.replace(xingbie);
-        this.banji = StringUtil.replace(banji);
-        this.xuehao = StringUtil.replace(xuehao);
-        this.shengri = StringUtil.replace(shengri);
+        this.xingbie = xingbie;
+        this.banji = banji;
+        this.xuehao = xuehao;
+        this.shengri = shengri;
     }
 
     public String getName() {
@@ -70,8 +71,8 @@ public class StudentInfo {
      * @return drawable对象
      */
     public Drawable getHeadIcon(Context context) {
-        if (xingbie.contains("男"))// 要解决空白符问题
+        if (xingbie.equals("男"))
             return context.getResources().getDrawable(R.mipmap.head_boy);
-        return context.getResources().getDrawable(R.mipmap.head_boy);
+        return context.getResources().getDrawable(R.mipmap.head_girl);
     }
 }
