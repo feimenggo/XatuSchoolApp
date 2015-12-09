@@ -30,6 +30,7 @@
     </RelativeLayout>
 
     <ScrollView
+        android:id="@+id/id_ScrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:overScrollMode="never"
@@ -90,13 +91,7 @@
                 android:text="这学期你学的怎么样呢？"
                 android:textColor="#7A7E85"
                 android:textSize="20sp" />-->
-            <View
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"
-                android:layout_width="match_parent"
-                android:layout_height="10dp"
-                android:background="#ccc"
-                />
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -227,13 +222,7 @@
 
                 </LinearLayout>
             </LinearLayout>
-            <View
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"
-                android:layout_width="match_parent"
-                android:layout_height="10dp"
-                android:background="#ccc"
-                />
+
             <Button
                 android:id="@+id/find_all_course"
                 android:layout_width="wrap_content"

@@ -6,19 +6,7 @@
     android:orientation="vertical"
     android:showDividers="middle">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="#0093dd">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="详细信息"
-            android:textColor="#ffffff"
-            android:textSize="21sp" />
-    </RelativeLayout>
+    <include layout="@layout/titlebar" />
 
     <TextView
         android:id="@+id/course_name"
@@ -155,7 +143,6 @@
             android:text="成        绩："
             android:textColor="#333333"
             android:textSize="17sp" />
-
         <TextView
             android:id="@+id/course_chengji"
             android:layout_width="match_parent"
@@ -163,33 +150,6 @@
             android:text="xxxx"
             android:textColor="#333333"
             android:singleLine="true"
-            android:textSize="17sp" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        android:orientation="horizontal"
-
-        >
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
-            android:text="评        价："
-            android:textColor="#333333"
-            android:textSize="17sp" />
-
-        <TextView
-            android:id="@+id/course_pingjia"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="xxxx"
-            android:singleLine="true"
-            android:textColor="#333333"
             android:textSize="17sp" />
     </LinearLayout>
     <View

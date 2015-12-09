@@ -30,7 +30,7 @@ public class FindScore extends BaseActivity implements View.OnClickListener {
     @Override
     protected void onResume() {
         super.onResume();
-        if(EvaluateActivity.isSucceed)
+        if(EvaluateActivity.isSucceed)   //判断是否已经在服务器提交成功
         {
             EvaluateActivity.isSucceed=false;
             Log.i("Tag","已经提交了dialog,可以刷新页面");
@@ -54,7 +54,7 @@ public class FindScore extends BaseActivity implements View.OnClickListener {
 
             mAdapter.setEvaluateClick(new UseAdapter.OnEvaluateClick() {
                 @Override
-                public void onEvaluateClick(SingleCourse singleCourse) {
+                public void onEvaluateClick(SingleCourse singleCourse) {   //需要评价时的点击事件
                         if(singleCourse!=null)
                         {
                             Intent intent = new Intent(FindScore.this, EvaluateActivity.class);
@@ -91,7 +91,7 @@ public class FindScore extends BaseActivity implements View.OnClickListener {
 
     private void initViews() {
         mReturn = (ImageButton) findViewById(R.id.btn_left);
-        TextView title = (TextView) findViewById(R.id.title);
+        TextView title = (TextView) findViewById(R.id.id_title);
 
         mReturn.setOnClickListener(this);
         title.setText("所有成绩");

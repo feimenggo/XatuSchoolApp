@@ -1,6 +1,7 @@
 package xatu.school.service;
 
 import android.os.Message;
+import android.util.Log;
 
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -138,7 +139,10 @@ public class SemesterInfoImp implements ISemesterInfo {
                             case 11: {
 //                                Log.e("mmm", e.toString());
                                 String reg[] = e.toString().split("\"");
-                                url = reg[3];
+                                url = reg[3].replaceAll("appraise","apppost").replaceAll("amp;","");
+                               // Log.e("test url",url);
+                                //http://222.25.1.101/student/
+                                // apppost.asp?SRID=5675428&amp;tcid=94750&amp;atyid=30&amp;ccid=5116
                                 caozuo = str.split(" ")[1];
                             }
                             break;

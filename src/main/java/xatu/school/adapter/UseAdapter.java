@@ -30,18 +30,22 @@ public class UseAdapter<T> extends TreeListViewAdapter<T> {
     private List<SingleCourse> AllCourseObj; //课程的所有信息
 
     private OnEvaluateClick onEvaluateClick;
-    public interface OnEvaluateClick{
+
+    public interface OnEvaluateClick {
         void onEvaluateClick(SingleCourse singleCourse);
     }
-    public void setEvaluateClick(OnEvaluateClick onclick){
-        this.onEvaluateClick=onclick;
+
+    public void setEvaluateClick(OnEvaluateClick onclick) {
+        this.onEvaluateClick = onclick;
     }
 
     private OnLongClick onLongClick;
-    public void setOnClick(OnLongClick onLongClick){
-        this.onLongClick=onLongClick;
+
+    public void setOnClick(OnLongClick onLongClick) {
+        this.onLongClick = onLongClick;
     }
-    public interface OnLongClick{
+
+    public interface OnLongClick {
         void onlongClick(SingleCourse singleCourse);
     }
 
@@ -60,17 +64,17 @@ public class UseAdapter<T> extends TreeListViewAdapter<T> {
             holder.courseScore = (TextView) convertView.findViewById(R.id.item_course_score);
             holder.courseName.setText(node.getName().getCourseName()); //设置课程名称
             holder.courseScore.setText(node.getName().getCouresScore());//设置课程分数
-            final SingleCourse singleCourse=getSingleCourse(holder.courseName.getText().toString());
-            if(singleCourse.getStatus()==2)
+
+            final SingleCourse singleCourse = getSingleCourse(holder.courseName.getText().toString());
+            if (singleCourse.getStatus() == 3)
             {
                 holder.courseScore.setText("点击评价");
-                int color=mContext.getResources().getColor(R.color.colorPrimary);
+                int color = mContext.getResources().getColor(R.color.colorPrimary);
                 holder.courseScore.setTextColor(color);
                 holder.courseScore.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        if(onEvaluateClick!=null)
-                        {
+                        if (onEvaluateClick != null) {
                             onEvaluateClick.onEvaluateClick(singleCourse);
                         }
                     }
@@ -101,19 +105,17 @@ public class UseAdapter<T> extends TreeListViewAdapter<T> {
         }
         return convertView;
     }
-  //得到当前的科目对象
+
+    //得到当前的科目对象
     private SingleCourse getSingleCourse(String courseName) {
-        SingleCourse singleCourse=null;
+        SingleCourse singleCourse = null;
         //得到所有的课程信息
-        AllCourseObj= StudyManager.getInstance().getAllCourseInfo();
-        if(AllCourseObj!=null)
-        {
-            int len=AllCourseObj.size();
-            for(int i =0;i<len;i++)
-            {
-                if(courseName.equals(AllCourseObj.get(i).getName()))
-                {
-                    singleCourse=AllCourseObj.get(i);
+        AllCourseObj = StudyManager.getInstance().getAllCourseInfo();
+        if (AllCourseObj != null) {
+            int len = AllCourseObj.size();
+            for (int i = 0; i < len; i++) {
+                if (courseName.equals(AllCourseObj.get(i).getName())) {
+                    singleCourse = AllCourseObj.get(i);
                 }
             }
         }

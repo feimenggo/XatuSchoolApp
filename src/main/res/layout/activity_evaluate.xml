@@ -1,17 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+
     tools:context="xatu.school.activity.EvaluateActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="30dp"
-
-
         android:layout_marginTop="30dp"
         android:background="@color/colorPrimary"
         android:gravity="center_horizontal"
@@ -29,9 +27,10 @@
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:gravity="center"
-            android:text="A:很满意 B:满意 C:一般 D:不满意 E:极不满意"
+            android:text="  A:很满意 B:满意 C:一般 D:不满意 E:极不满意  "
             android:textColor="#ffffff"
-            android:textSize="17sp" />
+            android:textSize="15sp" />
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -39,7 +38,7 @@
             android:layout_marginBottom="10dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:layout_marginTop="10dp"
+
             android:background="#ffffff"
             android:orientation="vertical">
 
@@ -87,4 +86,15 @@
         </LinearLayout>
 
     </LinearLayout>
-</LinearLayout>
+    <FrameLayout
+        android:id="@+id/submit_progress"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#66000000"
+        android:clickable="true"
+        android:visibility="gone">
+
+        <include layout="@layout/progressbar" />
+    </FrameLayout>
+
+</FrameLayout>

@@ -6,11 +6,14 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,6 +38,7 @@ public class StudyFragment extends Fragment implements View.OnClickListener {
     private TextView mTongguolv;  //通过率
     private Button find_all_course, find_course_btn;//进入所有科目，查找单个科目
     private Button mReset;
+    private ScrollView mScrollView;
 
     private AutoCompleteTextView find_course;
     private List<SingleCourse> AllCourseInfo; //课程的所有信息
@@ -78,6 +82,25 @@ public class StudyFragment extends Fragment implements View.OnClickListener {
     }
 
     private void initView(View view) {
+        //滑动监听
+
+        mScrollView= (ScrollView) view.findViewById(R.id.id_ScrollView);
+        mScrollView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if(event.getAction()==MotionEvent.ACTION_DOWN)
+                {
+                    View inputView = getActivity().getWindow().peekDecorView();
+                    if (inputView != null) {
+                        //滑动时隐藏软键盘
+                        InputMethodManager inputmanger = (InputMethodManager) getActivity().getSystemService(getActivity().INPUT_METHOD_SERVICE);
+                        inputmanger.hideSoftInputFromWindow(inputView.getWindowToken(), 0);
+                    }
+                }
+                return false;
+            }
+        });
+
         mAllCourse = (TextView) view.findViewById(R.id.id_allkemu);
         mTongCourse = (TextView) view.findViewById(R.id.id_tgkms);
         mTongguolv = (TextView) view.findViewById(R.id.id_tgl);

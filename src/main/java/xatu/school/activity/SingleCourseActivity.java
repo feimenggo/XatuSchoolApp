@@ -3,6 +3,9 @@ package xatu.school.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import java.util.List;
@@ -21,7 +24,10 @@ public class SingleCourseActivity extends BaseActivity {
     private TextView course_status;
     private TextView course_xuefen;
     private TextView course_chengji;
-    private TextView course_pingjia;
+
+    //actionbar
+    private ImageButton btn_left;
+    private TextView mTitle;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,7 +48,6 @@ public class SingleCourseActivity extends BaseActivity {
          course_status.setText(singleCourse.getStatus()+"");
          course_xuefen.setText(singleCourse.getXuefen()+"");
          course_chengji.setText(singleCourse.getChengji()+"");
-         course_pingjia.setText(singleCourse.getUrl());
     }
     private void initView()
     {
@@ -52,6 +57,15 @@ public class SingleCourseActivity extends BaseActivity {
         course_status= (TextView) findViewById(R.id.course_status);
         course_xuefen= (TextView) findViewById(R.id.course_xuefen);
         course_chengji= (TextView) findViewById(R.id.course_chengji);
-        course_pingjia= (TextView) findViewById(R.id.course_pingjia);
+        //actionbar
+        btn_left= (ImageButton) findViewById(R.id.btn_left);
+        mTitle= (TextView) findViewById(R.id.id_title);
+        mTitle.setText("详细信息");
+        btn_left.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 }
