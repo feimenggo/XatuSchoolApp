@@ -26,7 +26,7 @@ public class SingleCourse extends BaseSingleCourse implements Serializable {
     private String renkejiaoshi;// 任课教师
     private String kaoshileixing;// 考试类型：考试, 考查
     private String url;// 评价url
-    private int status;// 状态：1->没考试(无)， 2->归档中(提交)， 3->未评价(归档&未评价)， 4->已评价(归档&已评价)
+    private int status;// 状态：1->未考试(无)， 2->归档中(提交)， 3->未评价(归档&未评价)， 4->已评价(归档&已评价)
 
     public SingleCourse() {
     }
