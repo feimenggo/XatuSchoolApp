@@ -48,8 +48,11 @@ public class EvaluateActivity extends Activity implements View.OnClickListener {
                         finish();
                     } else {
                         // 得到失败提示信息
-                        String error = ((WebError)msg.obj).toString();
-                        Log.i("Tag", "评价失败：" + error);
+                        if(msg.obj == WebError.renzhenpingjiao){
+                            Log.i("Tag", "两次评价间隔太短");
+                        }else{
+                            Log.i("Tag", "评价失败，未知原因");
+                        }
                     }
                     break;
             }

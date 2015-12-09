@@ -1,6 +1,7 @@
 package xatu.school.bean;
 
 import xatu.school.exception.EvaluateException;
+import xatu.school.utils.EvaluateCheckForm;
 
 /**
  * 单科课程评教信息类
@@ -15,7 +16,10 @@ public class EvaluateInfo {
 
     public EvaluateInfo(SingleCourse singleCourse, int[] form) throws EvaluateException {
         this.singleCourse = singleCourse;
-        checkForm(form);
+        String check;
+        if ((check = EvaluateCheckForm.checkForm(form)) != null) {
+            throw new EvaluateException(check);
+        }
         this.radios = form;
     }
 
@@ -26,42 +30,5 @@ public class EvaluateInfo {
 
     public int[] getForm() {
         return radios;
-    }
-
-    private void checkForm(int[] form) throws EvaluateException {
-        int na = 0, nb = 0, nc = 0, nd = 0, ne = 0;// 每个选项的数目
-        // 遍历表单
-        for (int radio : form) {
-            switch (radio) {
-                case 1:
-                    na++;
-                    break;
-                case 2:
-                    nb++;
-                    break;
-                case 3:
-                    nc++;
-                    break;
-                case 4:
-                    nd++;
-                    break;
-                case 5:
-                    ne++;
-                    break;
-            }
-        }
-        // 判断数量
-        int size = form.length - 3;
-        if (na >= size) {
-            throw new EvaluateException("A选的太多了");
-        } else if (nb >= size) {
-            throw new EvaluateException("B选的太多了");
-        } else if (nc >= size) {
-            throw new EvaluateException("C选的太多了");
-        } else if (nd >= size) {
-            throw new EvaluateException("D选的太多了");
-        } else if (ne >= size) {
-            throw new EvaluateException("E选的太多了");
-        }
     }
 }

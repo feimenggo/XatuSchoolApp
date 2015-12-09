@@ -119,11 +119,12 @@ public class CourseGradesManager {
             msg.arg1 = Code.RESULT.FALSE;
             msg.obj = e.getMessage();
             handler.sendMessage(msg);
-        } finally {
+        }
+/*        finally {
             Log.i("evaluate", "课程评教 " + singleCourse.getName());
             for (int radio : radios) {
                 Log.i("evaluate", "内容：" + radio);
             }
-        }
+        }*/
     }
 }
