@@ -127,4 +127,25 @@ public class CourseGradesManager {
             }
         }*/
     }
+
+    /**
+     * 根据课程名获得课程信息
+     * 异步返回 原始单科课程 对象
+     *
+     * @param courseName 课程名
+     */
+    public void getSingleCourse(Context context, Handler handler, String courseName) {
+        ICourseEvaluate courseEvaluate = new CourseEvaluateImp();
+        courseEvaluate.getSingleCourse(CreateInitMsg.msg(context, handler, Code.CONTROL.GET_SINGLECOURSE), courseName);
+    }
+
+    /**
+     * 将新的单科课程更新到数据库
+     *
+     * @param newSingleCourse 新的单科课程
+     */
+    public void updateSingleCourseToDB(SingleCourse newSingleCourse) {
+        DBManager dbManager = new DBManager();
+        dbManager.updateSingleCourse(newSingleCourse);
+    }
 }

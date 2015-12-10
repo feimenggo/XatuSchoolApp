@@ -6,7 +6,6 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import xatu.school.bean.CourseTable;
 import xatu.school.bean.SingleCourse;
-import xatu.school.bean.SourceSingleCourse;
 import xatu.school.bean.Semester;
 import xatu.school.bean.StudentInfo;
 
@@ -63,7 +62,7 @@ public class UniversityDbOpenHelper extends SQLiteOpenHelper {
                 StudentInfo.COLUMN_NAME + " text ," +
                 StudentInfo.COLUMN_BANJI + " text , " +
                 StudentInfo.COLUMN_SHENGRI + " text , " +
-                StudentInfo.COLUMN_XIBU + " text , " +
+                StudentInfo.COLUMN_YUANXI + " text , " +
                 StudentInfo.COLUMN_XINGBIE + " text , " +
                 StudentInfo.COLUMN_XUEHAO + " text , " +
                 StudentInfo.COLUMN_ZHUANYE + " text" +

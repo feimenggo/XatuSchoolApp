@@ -17,6 +17,7 @@ import xatu.school.bean.StudentInfo;
 import xatu.school.bean.CourseGrades;
 import xatu.school.db.UniversityDbOpenHelper;
 import xatu.school.utils.SourceToSingleCourse;
+import xatu.school.utils.StringUtil;
 
 /**
  * 数据库管理器
@@ -33,12 +34,12 @@ public class DBManager {
     public long saveStudentInfo(StudentInfo info) {
         ContentValues values = new ContentValues();
         values.put(StudentInfo.COLUMN_NAME, info.getName());
-        values.put(StudentInfo.COLUMN_BANJI, info.getBanji());
-        values.put(StudentInfo.COLUMN_SHENGRI, info.getShengri());
-        values.put(StudentInfo.COLUMN_XIBU, info.getYuanxi());
-        values.put(StudentInfo.COLUMN_XINGBIE, info.getXingbie());
-        values.put(StudentInfo.COLUMN_XUEHAO, info.getXuehao());
-        values.put(StudentInfo.COLUMN_ZHUANYE, info.getZhuanye());
+        values.put(StudentInfo.COLUMN_BANJI, StringUtil.replace(info.getBanji()));
+        values.put(StudentInfo.COLUMN_SHENGRI, StringUtil.replace(info.getShengri()));
+        values.put(StudentInfo.COLUMN_YUANXI, StringUtil.replace(info.getYuanxi()));
+        values.put(StudentInfo.COLUMN_XINGBIE, StringUtil.replace(info.getXingbie()));
+        values.put(StudentInfo.COLUMN_XUEHAO, StringUtil.replace(info.getXuehao()));
+        values.put(StudentInfo.COLUMN_ZHUANYE, StringUtil.replace(info.getZhuanye()));
         //        Log.i("test_semester", "学生ID：" + id);
         return mDb.insert(StudentInfo.TABLE_NAME, null, values);
     }
@@ -61,7 +62,7 @@ public class DBManager {
     }
 
     /**
-     * 将课程信息存入数据库
+     * 将单科课程存入数据库
      */
     private void saveCourse(ContentValues values, long semesterId, List<BaseSingleCourse> sourceSingleCourses) {
         for (BaseSingleCourse sourceSingleCourse : sourceSingleCourses) {
@@ -106,7 +107,7 @@ public class DBManager {
         cursor.moveToFirst();
         info = new StudentInfo(
                 cursor.getString(cursor.getColumnIndex(StudentInfo.COLUMN_NAME)),
-                cursor.getString(cursor.getColumnIndex(StudentInfo.COLUMN_XIBU)),
+                cursor.getString(cursor.getColumnIndex(StudentInfo.COLUMN_YUANXI)),
                 cursor.getString(cursor.getColumnIndex(StudentInfo.COLUMN_ZHUANYE)),
                 cursor.getString(cursor.getColumnIndex(StudentInfo.COLUMN_XINGBIE)),
                 cursor.getString(cursor.getColumnIndex(StudentInfo.COLUMN_BANJI)),
@@ -198,6 +199,17 @@ public class DBManager {
         }
         cursor.close();
         return courseTable;
+    }
+
+    /**
+     * 更新单科课程
+     */
+    public void updateSingleCourse(SingleCourse newSingleCourse) {
+        String sql = "update " + SingleCourse.TABLE_NAME + " set " +
+                SingleCourse.COLUMN_CHENGJI + " = " + newSingleCourse.getChengji() + ", " +
+                SingleCourse.COLUMN_STATUS + " = 4 where " +
+                SingleCourse.COLUMN_NAME + " = " + newSingleCourse.getName();
+        mDb.execSQL(sql);
     }
 
     /**

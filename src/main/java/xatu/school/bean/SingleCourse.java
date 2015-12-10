@@ -97,4 +97,30 @@ public class SingleCourse extends BaseSingleCourse implements Serializable {
     public void setStatus(int status) {
         this.status = status;
     }
+
+    /**
+     * 获得状态信息
+     *
+     * @return 描述信息
+     */
+    public String getStatusContent() {
+        String result;
+        switch (status) {
+            case 1:
+                result = "未考试";
+                break;
+            case 2:
+                result = "归档中";
+                break;
+            case 3:
+                result = "未评价";
+                break;
+            case 4:
+                result = "已评价";
+                break;
+            default:
+                result = "未知状态";
+        }
+        return result;
+    }
 }
