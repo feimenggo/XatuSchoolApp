@@ -4,7 +4,6 @@ package xatu.school.control;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +12,6 @@ import xatu.school.bean.BaseSingleCourse;
 import xatu.school.bean.CourseGrades;
 import xatu.school.bean.EvaluateInfo;
 import xatu.school.bean.FileBean;
-import xatu.school.bean.InitMsg;
 import xatu.school.bean.ScoreItem;
 import xatu.school.bean.Semester;
 import xatu.school.bean.SingleCourse;
@@ -21,12 +19,11 @@ import xatu.school.exception.EvaluateException;
 import xatu.school.service.CourseEvaluateImp;
 import xatu.school.service.DBManager;
 import xatu.school.service.ICourseEvaluate;
-import xatu.school.utils.CookieUtil;
 import xatu.school.utils.Code;
 import xatu.school.utils.CreateInitMsg;
 
 /**
- * 所有成绩界面 控制器
+ * 课程成绩界面 控制器
  * Created by penfi on 2015/11/10.
  */
 public class CourseGradesManager {
@@ -107,7 +104,7 @@ public class CourseGradesManager {
      * @param radios       单选 整形数组 值：1->A,2->B,3->C,4->D,5->E
      */
     public void evaluate(Context context, Handler handler, SingleCourse singleCourse, int[] radios) {
-        EvaluateInfo info = null;
+        EvaluateInfo info;
         try {
             info = new EvaluateInfo(singleCourse, radios);
 
