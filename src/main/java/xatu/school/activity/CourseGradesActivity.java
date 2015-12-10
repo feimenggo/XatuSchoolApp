@@ -16,13 +16,12 @@ import xatu.school.adapter.UseAdapter;
 import xatu.school.bean.FileBean;
 import xatu.school.bean.SingleCourse;
 import xatu.school.control.CourseGradesManager;
-import xatu.school.control.StudyManager;
 
 /**
- * 所有成绩界面
+ * 课程成绩界面
  * Created by mmcc on 2015/11/10.
  */
-public class FindScore extends BaseActivity implements View.OnClickListener {
+public class CourseGradesActivity extends BaseActivity implements View.OnClickListener {
     private ImageButton mReturn;// 标题栏 返回按钮
     private ListView mTree;
     private UseAdapter<FileBean> mAdapter;
@@ -57,7 +56,7 @@ public class FindScore extends BaseActivity implements View.OnClickListener {
                 public void onEvaluateClick(SingleCourse singleCourse) {   //需要评价时的点击事件
                         if(singleCourse!=null)
                         {
-                            Intent intent = new Intent(FindScore.this, EvaluateActivity.class);
+                            Intent intent = new Intent(CourseGradesActivity.this, EvaluateActivity.class);
                             Bundle bundle = new Bundle();
                             bundle.putSerializable(StudyFragment.SINGLE_COURSE, singleCourse);
                             intent.putExtras(bundle);
@@ -72,7 +71,7 @@ public class FindScore extends BaseActivity implements View.OnClickListener {
                 public void onlongClick(SingleCourse singleCourse) {
                        if(singleCourse!=null)
                        {
-                           Intent intent = new Intent(FindScore.this, SingleCourseActivity.class);
+                           Intent intent = new Intent(CourseGradesActivity.this, SingleCourseActivity.class);
                            Bundle bundle = new Bundle();
                            bundle.putSerializable(StudyFragment.SINGLE_COURSE,singleCourse);
                            intent.putExtras(bundle);

@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -153,7 +152,7 @@ public class StudyFragment extends Fragment implements View.OnClickListener {
                 break;
             case R.id.find_all_course:
                 //进入成绩页面
-                startActivity(new Intent(getActivity(), FindScore.class));
+                startActivity(new Intent(getActivity(), CourseGradesActivity.class));
                 break;
         }
     }
