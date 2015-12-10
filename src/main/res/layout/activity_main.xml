@@ -19,7 +19,7 @@
         android:layout_height="60dp"
         android:orientation="horizontal"
         >
-        <xatu.school.view.ChangeColor_myView
+        <xatu.school.view.ChangeColorMyView
             android:id="@+id/id_study"
             android:layout_width="0dp"
             android:layout_weight="1"
@@ -31,7 +31,7 @@
             app:mytext_size="15sp"
             />
 
-        <xatu.school.view.ChangeColor_myView
+        <xatu.school.view.ChangeColorMyView
             android:id="@+id/id_course"
             android:layout_width="0dp"
             android:layout_weight="1"
@@ -42,7 +42,7 @@
             app:myicon="@mipmap/course_icon"
             app:mytext_size="15sp"
             />
-        <xatu.school.view.ChangeColor_myView
+        <xatu.school.view.ChangeColorMyView
             android:id="@+id/id_me"
             android:layout_width="0dp"
             android:layout_weight="1"

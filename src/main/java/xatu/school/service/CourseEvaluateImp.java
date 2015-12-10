@@ -14,6 +14,7 @@ import java.io.UnsupportedEncodingException;
 import cz.msebera.android.httpclient.Header;
 import xatu.school.bean.EvaluateInfo;
 import xatu.school.bean.InitMsg;
+import xatu.school.bean.SourceSingleCourse;
 import xatu.school.bean.WebError;
 import xatu.school.utils.Code;
 
@@ -72,6 +73,12 @@ public class CourseEvaluateImp implements ICourseEvaluate{
             }
         });
     }
+
+    @Override
+    public SourceSingleCourse getSingleCourse(InitMsg msg, String CourseName) {
+        return null;
+    }
+
     private RequestParams getparams(EvaluateInfo evaluateInfo)
     {
         char value[]={'A','B','C','D','E'};

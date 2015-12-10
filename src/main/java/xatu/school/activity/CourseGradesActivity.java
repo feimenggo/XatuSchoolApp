@@ -31,6 +31,8 @@ public class CourseGradesActivity extends BaseActivity implements View.OnClickLi
         super.onResume();
         if(EvaluateActivity.isSucceed)   //判断是否已经在服务器提交成功
         {
+            //重新获取最新数据
+            //mDatas = CourseGradesManager.getInstance().getCourseGradesInfo();
             EvaluateActivity.isSucceed=false;
             Log.i("Tag","已经提交了dialog,可以刷新页面");
             mAdapter.notifyDataSetChanged();

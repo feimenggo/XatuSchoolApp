@@ -1,6 +1,5 @@
 package xatu.school.activity;
 
-import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -14,14 +13,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import xatu.school.R;
-import xatu.school.view.ChangeColor_myView;
+import xatu.school.view.ChangeColorMyView;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
     private ViewPager mViewPager;
     private List<Fragment> mTabs=new ArrayList<Fragment>();
     private FragmentPagerAdapter mAdapter;
     //存放所有的指示器
-    private List<ChangeColor_myView> mTabIndicators=new ArrayList<ChangeColor_myView>();
+    private List<ChangeColorMyView> mTabIndicators=new ArrayList<ChangeColorMyView>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,11 +64,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void iniView() {
         //将四个view放入集合统一管理
-        ChangeColor_myView one= (ChangeColor_myView) findViewById(R.id.id_study);
+        ChangeColorMyView one= (ChangeColorMyView) findViewById(R.id.id_study);
         mTabIndicators.add(one);
-        ChangeColor_myView two= (ChangeColor_myView) findViewById(R.id.id_course);
+        ChangeColorMyView two= (ChangeColorMyView) findViewById(R.id.id_course);
         mTabIndicators.add(two);
-        ChangeColor_myView three= (ChangeColor_myView) findViewById(R.id.id_me);
+        ChangeColorMyView three= (ChangeColorMyView) findViewById(R.id.id_me);
         mTabIndicators.add(three);
         one.setOnClickListener(this);
         two.setOnClickListener(this);
