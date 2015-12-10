@@ -62,7 +62,7 @@ public class DBManager {
     }
 
     /**
-     * 将课程信息存入数据库
+     * 将单科课程存入数据库
      */
     private void saveCourse(ContentValues values, long semesterId, List<BaseSingleCourse> sourceSingleCourses) {
         for (BaseSingleCourse sourceSingleCourse : sourceSingleCourses) {
@@ -199,6 +199,17 @@ public class DBManager {
         }
         cursor.close();
         return courseTable;
+    }
+
+    /**
+     * 更新单科课程
+     */
+    public void updateSingleCourse(SingleCourse newSingleCourse) {
+        String sql = "update " + SingleCourse.TABLE_NAME + " set " +
+                SingleCourse.COLUMN_CHENGJI + " = " + newSingleCourse.getChengji() + ", " +
+                SingleCourse.COLUMN_STATUS + " = 4 where " +
+                SingleCourse.COLUMN_NAME + " = " + newSingleCourse.getName();
+        mDb.execSQL(sql);
     }
 
     /**

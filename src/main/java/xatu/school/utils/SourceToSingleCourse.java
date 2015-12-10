@@ -4,12 +4,13 @@ import xatu.school.bean.SingleCourse;
 import xatu.school.bean.SourceSingleCourse;
 
 /**
+ * 原始单科课程 转换类
  * Created by penfi on 2015/11/24.
  */
 public class SourceToSingleCourse {
 
     /**
-     * 将原始单科成绩对象转换成单科成绩对象
+     * 将原始单科课程对象转换成单科课程对象
      *
      * @param source SourceSingleCourse 对象
      * @return SingleCourse 对象
@@ -26,6 +27,12 @@ public class SourceToSingleCourse {
         return sc;
     }
 
+    /**
+     * 判断当前课程的状态
+     *
+     * @param source 原始单科课程对象
+     * @return 状态码
+     */
     private static int judgeStatus(SourceSingleCourse source) {
 //        状态：1->没考试(无)， 2->未归档(提交)， 3->未评价(归档&未评价)， 4->已评价(归档&已评价)
         int result;
