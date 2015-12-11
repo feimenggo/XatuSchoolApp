@@ -10,6 +10,7 @@ import xatu.school.bean.CoursePassRate;
 import xatu.school.bean.Semester;
 import xatu.school.bean.SemesterAverageScore;
 import xatu.school.bean.SingleCourse;
+import xatu.school.utils.GetNowSemester;
 
 /**
  * Created by Administrator on 2015-11-5.
@@ -67,7 +68,6 @@ public class GetStudyStatisticsInfoImp implements IGetStudyStatisticsInfo {
         * int score = 82;// 平均分
         * ave.addData(new SemesterAverageScore.SemesterPoint("大一上", 82));
         */
-
         SemesterAverageScore avg=new SemesterAverageScore();
         List<Semester> semester=courseGrades.getSemester();
         List<BaseSingleCourse> bc;
@@ -75,8 +75,8 @@ public class GetStudyStatisticsInfoImp implements IGetStudyStatisticsInfo {
         int size=semester.size();
         int i,l;
         String name[]={"大一上","大一下","大二上","大二下","大三上","大三下","大四上","大四下"};
-
-        for(i=size-1;i>=0;--i)
+        int semCount=new GetNowSemester().Get(courseGrades);
+        for(i=size-1;i>=size-semCount;--i)
         {
             double sum = 0;
             double xuefen =0;

@@ -24,7 +24,7 @@ public class MineFragment extends Fragment{
 
     private Button mExit; //退出登陆
     private ImageButton mSetting; //设置
-    private ImageButton mHeader; //头像
+    private ImageView mHeader; //头像
     private TextView mCollege,mProfession,mName,mCard,mClass,mBirth;
     @Nullable
     @Override
@@ -43,7 +43,8 @@ public class MineFragment extends Fragment{
         mCard.setText("学号："+studentInfo.getXuehao());
         mClass.setText("班级："+studentInfo.getBanji());
         mBirth.setText("生日："+studentInfo.getShengri());
-
+        //设置头像
+        mHeader.setImageDrawable(studentInfo.getHeadIcon(getActivity()));
     }
 
     private void initView(View view) {
@@ -69,19 +70,12 @@ public class MineFragment extends Fragment{
         mSetting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getActivity(),"点击了设置",Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(getActivity(), AboutActivity.class);
                 startActivity(intent);
             }
         });
         //头像
-        mHeader= (ImageButton) view.findViewById(R.id.id_header);
-        mHeader.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //DOTO Toast.makeText(getActivity(),"点击了头像",Toast.LENGTH_SHORT).show();
-            }
-        });
+        mHeader= (ImageView) view.findViewById(R.id.id_header);
     }
 
 

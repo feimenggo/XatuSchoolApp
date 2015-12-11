@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <declare-styleable name="ChangeColor_myView">
+    <declare-styleable name="ChangeColorMyView">
         <attr name="myicon" format="reference"></attr>
         <attr name="mycolor" format="color"></attr>
         <attr name="mytext" format="string"></attr>

@@ -22,10 +22,12 @@ import xatu.school.bean.EvaluateBean;
 import xatu.school.bean.EvaluateInfo;
 import xatu.school.bean.RadioCheck;
 import xatu.school.bean.SingleCourse;
+import xatu.school.bean.SourceSingleCourse;
 import xatu.school.bean.WebError;
 import xatu.school.control.CourseGradesManager;
 import xatu.school.utils.Code;
 import xatu.school.utils.EvaluateCheckForm;
+import xatu.school.utils.SourceToSingleCourse;
 
 public class EvaluateActivity extends Activity implements View.OnClickListener {
     private SingleCourse singleCourse;
@@ -49,9 +51,8 @@ public class EvaluateActivity extends Activity implements View.OnClickListener {
             switch (msg.what) {
                 case Code.CONTROL.COURSE_EVALUATE:
                     if (msg.arg1 == Code.RESULT.TRUE) {
-                        Log.i("Tag", "评价成功");
-                        isSucceed = true;
-                        finish();
+                      //  CourseGradesManager.getInstance().getSingleCourse(EvaluateActivity.this, handler, singleCourse.getName());
+                        mProgressContent.setText("正在更新课程...");
                     } else {
                         // 得到失败提示信息
                         if(msg.obj == WebError.renzhenpingjiao){
@@ -59,6 +60,18 @@ public class EvaluateActivity extends Activity implements View.OnClickListener {
                         }else{
                             Log.i("Tag", "评价失败，未知原因");
                         }
+                    }
+                    break;
+                case Code.CONTROL.GET_SINGLECOURSE:
+                    if(msg.arg1 == Code.RESULT.TRUE)
+                    {
+                        SingleCourse newSingleCourse= SourceToSingleCourse.toSingleCourse((SourceSingleCourse) msg.obj);
+                        CourseGradesManager.getInstance().updateSingleCourseToDB(newSingleCourse);
+                        Log.i("Tag", "评价成功");
+                        isSucceed = true;
+                        finish();
+                    }else{
+                        Toast.makeText(EvaluateActivity.this,"更新失败",Toast.LENGTH_SHORT).show();
                     }
                     break;
             }

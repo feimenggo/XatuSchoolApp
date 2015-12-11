@@ -45,7 +45,7 @@ public class SingleCourseActivity extends BaseActivity {
          course_name.setText(singleCourse.getName());
          course_teacher.setText(singleCourse.getRenkejiaoshi());
          course_type.setText(singleCourse.getKaoshileixing());
-         course_status.setText(singleCourse.getStatus()+"");
+         course_status.setText(singleCourse.getStatusContent());
          course_xuefen.setText(singleCourse.getXuefen()+"");
          course_chengji.setText(singleCourse.getChengji()+"");
     }

@@ -5,13 +5,11 @@ import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Looper;
 import android.os.Parcelable;
@@ -21,10 +19,9 @@ import android.view.View;
 
 import java.io.InputStream;
 
-import cz.msebera.android.httpclient.client.cache.Resource;
 import xatu.school.R;
 
-public class ChangeColor_myView extends View {
+public class ChangeColorMyView extends View {
     private int mColor = 0xFF45C01A;  //默认值 绿色
     private Bitmap mIconBitmap;
     private String mText = "微信";
@@ -43,38 +40,38 @@ public class ChangeColor_myView extends View {
 
     private Paint mTextPaint;
 
-    public ChangeColor_myView(Context context) {
+    public ChangeColorMyView(Context context) {
         this(context, null);
     }
 
-    public ChangeColor_myView(Context context, AttributeSet attrs) {
+    public ChangeColorMyView(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public ChangeColor_myView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public ChangeColorMyView(Context context, AttributeSet attrs, int defStyleAttr) {
 
         super(context, attrs, defStyleAttr);
         //获得自定义属性存入a数组中
-        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.ChangeColor_myView);
+        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.ChangeColorMyView);
         //遍历TypeArray中的所有属性值，得到我们在xml文件中自定义属性的值，再赋值给成员变量，再赋给控件
         int n = a.getIndexCount();
         for (int i = 0; i < n; i++) {
             int attr = a.getIndex(i);
             switch (attr) {
-                case R.styleable.ChangeColor_myView_myicon:  //得到自定义图标的值
+                case R.styleable.ChangeColorMyView_myicon:  //得到自定义图标的值
                     //得到一个自定义属性的值，得到的drawable类型
                     BitmapDrawable drawable = (BitmapDrawable) a.getDrawable(attr);
                     mIconBitmap = drawable.getBitmap();//将的到的drawable转换为bitmap类型
                     break;
-                case R.styleable.ChangeColor_myView_mycolor:
+                case R.styleable.ChangeColorMyView_mycolor:
                     //得到attr中也就是我们布局文件中赋给自定义属性的值
                     mColor = a.getColor(attr, 0xFF45C01A);
                     break;
-                case R.styleable.ChangeColor_myView_mytext:
+                case R.styleable.ChangeColorMyView_mytext:
                     //得到attr中也就是我们布局文件中赋给自定义属性的值
                     mText = a.getString(attr);
                     break;
-                case R.styleable.ChangeColor_myView_mytext_size:
+                case R.styleable.ChangeColorMyView_mytext_size:
                     //得到attr中也就是我们布局文件中赋给自定义属性的值
                     mTextSize = (int) a.getDimension(attr, TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 12,
                             getResources().getDisplayMetrics()));
