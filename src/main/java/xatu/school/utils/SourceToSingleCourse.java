@@ -1,5 +1,10 @@
 package xatu.school.utils;
 
+import android.util.Log;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import xatu.school.bean.SingleCourse;
 import xatu.school.bean.SourceSingleCourse;
 
@@ -22,6 +27,7 @@ public class SourceToSingleCourse {
         sc.setChengji(Integer.valueOf(source.getYuanshichengji()));
         sc.setRenkejiaoshi(StringUtil.replace(source.getRenkejiaoshi()));
         sc.setKaoshileixing(StringUtil.replace(source.getKaoshileixing()));
+        sc.setEvaluateScore(getEvaluateScore(source.getCaozuo()));
         sc.setUrl(source.getUrl());
         sc.setStatus(judgeStatus(source));
         return sc;
@@ -34,7 +40,7 @@ public class SourceToSingleCourse {
      * @return 状态码
      */
     private static int judgeStatus(SourceSingleCourse source) {
-//        状态：1->没考试(无)， 2->未归档(提交)， 3->未评价(归档&未评价)， 4->已评价(归档&已评价)
+//        状态：1->无(无)， 2->未归档(提交)， 3->未评价(归档&未评价)， 4->已评价(归档&已评价)
         int result;
         if (source.getZhuangtai().contains("无")) {
             result = 1;
@@ -56,5 +62,15 @@ public class SourceToSingleCourse {
         return result;
     }
 
+    private static float getEvaluateScore(String caozuo) {
+        float score = 0;
+        Pattern pattern = Pattern.compile("\\d+(.\\d)?");
+        Matcher matcher = pattern.matcher(caozuo);
+
+        if (matcher.find()) {
+            score = Float.parseFloat(matcher.group());
+        }
+        return score;
+    }
 
 }

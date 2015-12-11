@@ -16,6 +16,7 @@ public class SingleCourse extends BaseSingleCourse implements Serializable {
     public static final String COLUMN_CHENGJI = "chengji";// 成绩
     public static final String COLUMN_RENKEJIAOSHI = "renkejiaoshi";// 任课老师
     public static final String COLUMN_KAOSHILEIXING = "kaoshileixing";// 考试类型
+    public static final String COLUMN_EVALUATE_SCORE = "evaluate_score";// 评教分数
     public static final String COLUMN_URL = "url";// 评价url
     public static final String COLUMN_STATUS = "status";// 状态
 
@@ -25,19 +26,21 @@ public class SingleCourse extends BaseSingleCourse implements Serializable {
     private int chengji;// 成绩(原始成绩)
     private String renkejiaoshi;// 任课教师
     private String kaoshileixing;// 考试类型：考试, 考查
+    private float evaluateScore;// 评教分数
     private String url;// 评价url
     private int status;// 状态：1->未考试(无)， 2->归档中(提交)， 3->未评价(归档&未评价)， 4->已评价(归档&已评价)
 
     public SingleCourse() {
     }
 
-    public SingleCourse(String name, float xuefen, int chengji,
-                        String renkejiaoshi, String kaoshileixing, String url, int status) {
+    public SingleCourse(String name, float xuefen, int chengji, String renkejiaoshi,
+                        String kaoshileixing, float evaluateScore, String url, int status) {
         this.name = name;
         this.xuefen = xuefen;
         this.chengji = chengji;
         this.renkejiaoshi = renkejiaoshi;
         this.kaoshileixing = kaoshileixing;
+        this.evaluateScore = evaluateScore;
         this.url = url;
         this.status = status;
     }
@@ -60,6 +63,10 @@ public class SingleCourse extends BaseSingleCourse implements Serializable {
 
     public String getKaoshileixing() {
         return kaoshileixing;
+    }
+
+    public float getEvaluateScore() {
+        return evaluateScore;
     }
 
     public String getUrl() {
@@ -90,6 +97,10 @@ public class SingleCourse extends BaseSingleCourse implements Serializable {
         this.kaoshileixing = kaoshileixing;
     }
 
+    public void setEvaluateScore(float evaluateScore) {
+        this.evaluateScore = evaluateScore;
+    }
+
     public void setUrl(String url) {
         this.url = url;
     }
@@ -107,7 +118,7 @@ public class SingleCourse extends BaseSingleCourse implements Serializable {
         String result;
         switch (status) {
             case 1:
-                result = "未考试";
+                result = "无";
                 break;
             case 2:
                 result = "归档中";

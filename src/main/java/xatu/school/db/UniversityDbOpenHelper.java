@@ -46,6 +46,7 @@ public class UniversityDbOpenHelper extends SQLiteOpenHelper {
                 SingleCourse.COLUMN_CHENGJI + " text , " +
                 SingleCourse.COLUMN_RENKEJIAOSHI + " text , " +
                 SingleCourse.COLUMN_KAOSHILEIXING + " text , " +
+                SingleCourse.COLUMN_EVALUATE_SCORE + " text , " +
                 SingleCourse.COLUMN_URL + " text , " +
                 SingleCourse.COLUMN_STATUS + " text" +
                 ")";

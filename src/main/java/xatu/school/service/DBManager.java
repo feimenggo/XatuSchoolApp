@@ -73,6 +73,7 @@ public class DBManager {
             values.put(SingleCourse.COLUMN_CHENGJI, singleCourse.getChengji());
             values.put(SingleCourse.COLUMN_RENKEJIAOSHI, singleCourse.getRenkejiaoshi());
             values.put(SingleCourse.COLUMN_KAOSHILEIXING, singleCourse.getKaoshileixing());
+            values.put(SingleCourse.COLUMN_EVALUATE_SCORE, singleCourse.getEvaluateScore());
             values.put(SingleCourse.COLUMN_URL, singleCourse.getUrl());
             values.put(SingleCourse.COLUMN_STATUS, singleCourse.getStatus());
             mDb.insert(SingleCourse.TABLE_NAME, null, values);
@@ -138,6 +139,7 @@ public class DBManager {
                                 cursorCourse.getInt(cursorCourse.getColumnIndex(SingleCourse.COLUMN_CHENGJI)),
                                 cursorCourse.getString(cursorCourse.getColumnIndex(SingleCourse.COLUMN_RENKEJIAOSHI)),
                                 cursorCourse.getString(cursorCourse.getColumnIndex(SingleCourse.COLUMN_KAOSHILEIXING)),
+                                cursorCourse.getFloat(cursorCourse.getColumnIndex(SingleCourse.COLUMN_EVALUATE_SCORE)),
                                 cursorCourse.getString(cursorCourse.getColumnIndex(SingleCourse.COLUMN_URL)),
                                 cursorCourse.getInt(cursorCourse.getColumnIndex(SingleCourse.COLUMN_STATUS))
                         ));
@@ -166,6 +168,7 @@ public class DBManager {
                         cursor.getInt(cursor.getColumnIndex(SingleCourse.COLUMN_CHENGJI)),
                         cursor.getString(cursor.getColumnIndex(SingleCourse.COLUMN_RENKEJIAOSHI)),
                         cursor.getString(cursor.getColumnIndex(SingleCourse.COLUMN_KAOSHILEIXING)),
+                        cursor.getFloat(cursor.getColumnIndex(SingleCourse.COLUMN_EVALUATE_SCORE)),
                         cursor.getString(cursor.getColumnIndex(SingleCourse.COLUMN_URL)),
                         cursor.getInt(cursor.getColumnIndex(SingleCourse.COLUMN_STATUS))
                 ));
@@ -207,8 +210,9 @@ public class DBManager {
     public void updateSingleCourse(SingleCourse newSingleCourse) {
         String sql = "update " + SingleCourse.TABLE_NAME + " set " +
                 SingleCourse.COLUMN_CHENGJI + " = " + newSingleCourse.getChengji() + ", " +
+                SingleCourse.COLUMN_EVALUATE_SCORE + " = " + newSingleCourse.getEvaluateScore() + ", " +
                 SingleCourse.COLUMN_STATUS + " = 4 where " +
-                SingleCourse.COLUMN_NAME + " = " + newSingleCourse.getName();
+                SingleCourse.COLUMN_NAME + " = '" + newSingleCourse.getName() + "'";
         mDb.execSQL(sql);
     }
 

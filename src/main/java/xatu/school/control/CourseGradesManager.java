@@ -4,6 +4,7 @@ package xatu.school.control;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +16,7 @@ import xatu.school.bean.FileBean;
 import xatu.school.bean.ScoreItem;
 import xatu.school.bean.Semester;
 import xatu.school.bean.SingleCourse;
+import xatu.school.bean.SourceSingleCourse;
 import xatu.school.exception.EvaluateException;
 import xatu.school.service.CourseEvaluateImp;
 import xatu.school.service.DBManager;
@@ -23,6 +25,7 @@ import xatu.school.service.ICourseEvaluate;
 import xatu.school.service.IGetCourseGradesFromNet;
 import xatu.school.utils.Code;
 import xatu.school.utils.CreateInitMsg;
+import xatu.school.utils.SourceToSingleCourse;
 
 /**
  * 课程成绩界面 控制器
@@ -127,32 +130,37 @@ public class CourseGradesManager {
         }*/
     }
 
-    /**
-     * 根据课程名获得课程信息
-     * 异步返回 原始单科课程 对象
-     *
-     * @param courseName 课程名
-     */
-    public void getSingleCourse(Context context, Handler handler, String courseName) {
-        ICourseEvaluate courseEvaluate = new CourseEvaluateImp();
-        courseEvaluate.getSingleCourse(CreateInitMsg.msg(context, handler, Code.CONTROL.GET_SINGLECOURSE), courseName);
-    }
 
     /**
      * 获取全年级课程成绩
+     * 异步返回 课程成绩对象
      */
-    public void getCourseGrades(Context context, Handler handler) {
+    public void getNewCourseGradesFromNet(Context context, Handler handler) {
         IGetCourseGradesFromNet courseGrades = new GetCourseGradesFromNetImp();
         courseGrades.getCourseGrades(CreateInitMsg.msg(context, handler, Code.CONTROL.COURSEGRADES));
     }
 
     /**
-     * 将新的单科课程更新到数据库
+     * 将评教后的单科课程更新到数据库
      *
-     * @param newSingleCourse 新的单科课程
+     * @param courseGrades 课程成绩 对象
+     * @param courseName   评教的课程名
      */
-    public void updateSingleCourseToDB(SingleCourse newSingleCourse) {
-        DBManager dbManager = new DBManager();
-        dbManager.updateSingleCourse(newSingleCourse);
+    public SingleCourse updateSingleCourseToDB(CourseGrades courseGrades, String courseName) {
+        // 得到评教的单科课程
+        SingleCourse singleCourse;
+        for (Semester semester : courseGrades.getSemester()) {
+            for (BaseSingleCourse baseSingleCourse : semester.getSourceSingleCourses()) {
+                if (((SourceSingleCourse) baseSingleCourse).getName().equals(courseName)) {
+                    // 找到单科课程
+                    singleCourse = SourceToSingleCourse.toSingleCourse((SourceSingleCourse) baseSingleCourse);
+
+                    DBManager dbManager = new DBManager();
+                    dbManager.updateSingleCourse(singleCourse);
+                    return singleCourse;
+                }
+            }
+        }
+        return null;
     }
 }
