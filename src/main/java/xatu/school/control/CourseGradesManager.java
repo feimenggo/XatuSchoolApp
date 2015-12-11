@@ -18,7 +18,9 @@ import xatu.school.bean.SingleCourse;
 import xatu.school.exception.EvaluateException;
 import xatu.school.service.CourseEvaluateImp;
 import xatu.school.service.DBManager;
+import xatu.school.service.GetCourseGradesFromNetImp;
 import xatu.school.service.ICourseEvaluate;
+import xatu.school.service.IGetCourseGradesFromNet;
 import xatu.school.utils.Code;
 import xatu.school.utils.CreateInitMsg;
 
@@ -134,6 +136,14 @@ public class CourseGradesManager {
     public void getSingleCourse(Context context, Handler handler, String courseName) {
         ICourseEvaluate courseEvaluate = new CourseEvaluateImp();
         courseEvaluate.getSingleCourse(CreateInitMsg.msg(context, handler, Code.CONTROL.GET_SINGLECOURSE), courseName);
+    }
+
+    /**
+     * 获取全年级课程成绩
+     */
+    public void getCourseGrades(Context context, Handler handler) {
+        IGetCourseGradesFromNet courseGrades = new GetCourseGradesFromNetImp();
+        courseGrades.getCourseGrades(CreateInitMsg.msg(context, handler, Code.CONTROL.COURSEGRADES));
     }
 
     /**

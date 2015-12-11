@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 课程成绩类
+ * 全年级 课程成绩类
  * Created by Administrator on 2015-10-18.
  */
 public class CourseGrades {
-    List<Semester> mSemester = new ArrayList<>();
+    List<Semester> mSemester = new ArrayList<>();// 学期集合
 
     /**
      * 得到学期集合

@@ -20,7 +20,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import cz.msebera.android.httpclient.cookie.Cookie;
 import xatu.school.R;
 import xatu.school.bean.CourseTable;
 import xatu.school.bean.StudentInfo;
@@ -88,8 +87,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
                         //从网络获取学生信息
                         LoginManager.getInstance().getStudentInfoFromWeb(LoginActivity.this, mHandler);
-                        //从网络获取年级信息
-                        LoginManager.getInstance().getSemesterInfoFromWeb(LoginActivity.this, mHandler);
+                        //从网络获取全年级课程成绩
+                        LoginManager.getInstance().getCourseGradesFromWeb(LoginActivity.this, mHandler);
                         //从网络获取课程表信息
                         LoginManager.getInstance().getCourseTableFromWeb(LoginActivity.this, mHandler);
                         break;
@@ -119,8 +118,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
                         //从网络获取学生信息
                         LoginManager.getInstance().getStudentInfoFromWeb(LoginActivity.this, mHandler);
-                        //从网络获取年级信息
-                        LoginManager.getInstance().getSemesterInfoFromWeb(LoginActivity.this, mHandler);
+                        //从网络获取全年级课程成绩
+                        LoginManager.getInstance().getCourseGradesFromWeb(LoginActivity.this, mHandler);
                         //从网络获取课程表信息
                         LoginManager.getInstance().getCourseTableFromWeb(LoginActivity.this, mHandler);
                         break;

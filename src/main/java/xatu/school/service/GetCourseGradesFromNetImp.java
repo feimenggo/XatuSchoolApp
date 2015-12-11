@@ -1,7 +1,6 @@
 package xatu.school.service;
 
 import android.os.Message;
-import android.util.Log;
 
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -28,10 +27,10 @@ import xatu.school.utils.Code;
 /**
  * Created by Administrator on 2015-10-25.
  */
-public class SemesterInfoImp implements ISemesterInfo {
+public class GetCourseGradesFromNetImp implements IGetCourseGradesFromNet {
 
     @Override
-    public void getSemesters(final InitMsg m) {
+    public void getCourseGrades(final InitMsg m) {
 
         AsyncHttpClient clientget = new AsyncHttpClient();
         PersistentCookieStore myCookieStore = new PersistentCookieStore(m.getContext());
@@ -198,7 +197,7 @@ public class SemesterInfoImp implements ISemesterInfo {
     private void margeSC(CourseGrades sc, InitMsg m) {
         for (int i = 0; i < sc.getSemester().size(); i++) {
             for (int l = i + 1; l < sc.getSemester().size(); l++) {
-                if (sc.getSemester().get(i).getName().equals(sc.getSemester().get(l).getName()) == true) {
+                if (sc.getSemester().get(i).getName().equals(sc.getSemester().get(l).getName())) {
                     for (BaseSingleCourse c : sc.getSemester().get(l).getSourceSingleCourses()) {
                         sc.getSemester().get(i).addCourse((SourceSingleCourse) c);
                     }

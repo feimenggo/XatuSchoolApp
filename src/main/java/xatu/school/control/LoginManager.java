@@ -10,9 +10,9 @@ import xatu.school.bean.CourseGrades;
 import xatu.school.service.CourseTableImp;
 import xatu.school.service.DBManager;
 import xatu.school.service.ICourseTable;
-import xatu.school.service.ISemesterInfo;
+import xatu.school.service.IGetCourseGradesFromNet;
 import xatu.school.service.IStudentInfo;
-import xatu.school.service.SemesterInfoImp;
+import xatu.school.service.GetCourseGradesFromNetImp;
 import xatu.school.service.StudentInfoImp;
 import xatu.school.service.StudentLoginImp;
 import xatu.school.utils.Code;
@@ -100,14 +100,14 @@ public class LoginManager {
     }
 
     /**
-     * 从网络获取年级信息
+     * 从网络获取全年级课程成绩
      *
      * @param context 上下文
      * @param handler handler
      */
-    public void getSemesterInfoFromWeb(Context context, Handler handler) {
-        ISemesterInfo semesterInfo = new SemesterInfoImp();
-        semesterInfo.getSemesters(CreateInitMsg.msg(context, handler, Code.CONTROL.COURSEGRADES));
+    public void getCourseGradesFromWeb(Context context, Handler handler) {
+        IGetCourseGradesFromNet courseGrades = new GetCourseGradesFromNetImp();
+        courseGrades.getCourseGrades(CreateInitMsg.msg(context, handler, Code.CONTROL.COURSEGRADES));
     }
 
     /**
@@ -178,6 +178,4 @@ public class LoginManager {
         result = BaseApplication.getSp().getBoolean(BaseApplication.SP_HAS_STUDENT_INFO, false);
         return result;
     }
-
-
 }
