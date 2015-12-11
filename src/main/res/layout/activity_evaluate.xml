@@ -79,6 +79,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:text="提交"
+                android:background="@drawable/submit_bg"
                 android:textSize="22sp"
 
                 />
