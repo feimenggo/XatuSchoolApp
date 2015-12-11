@@ -1,5 +1,6 @@
 package xatu.school.service;
 
+import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 import android.util.StringBuilderPrinter;
@@ -17,6 +18,7 @@ import xatu.school.bean.InitMsg;
 import xatu.school.bean.SourceSingleCourse;
 import xatu.school.bean.WebError;
 import xatu.school.utils.Code;
+import xatu.school.utils.CookieUtil;
 
 /**
  * Created by Administrator on 2015-12-6.
@@ -24,7 +26,7 @@ import xatu.school.utils.Code;
 public class CourseEvaluateImp implements ICourseEvaluate{
     @Override
     public void evaluate(final InitMsg m, EvaluateInfo evaluateInfo) {
-
+        Checkcookie(m);
         String url="http://222.25.1.101/student/"+evaluateInfo.getSingleCourse().getUrl();
         Log.e("test url",url);
         AsyncHttpClient clientget = new AsyncHttpClient();
@@ -37,13 +39,13 @@ public class CourseEvaluateImp implements ICourseEvaluate{
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 if(statusCode==200)
                 {
-                    try {
-                        String str = new String(responseBody,"GBK");
-                        Log.e("ret  code", String.valueOf(statusCode));
-                        Log.e("ret  url", str);
-                    } catch (UnsupportedEncodingException e) {
-                        e.printStackTrace();
-                    }
+                    //try {
+                    //    String str = new String(responseBody,"GBK");
+                    //    Log.e("ret  code", String.valueOf(statusCode));
+                    //    Log.e("ret  url", str);
+                   // } catch (UnsupportedEncodingException e) {
+                    //    e.printStackTrace();
+                   // }
                     Message msg = Message.obtain();
                     msg.obj= WebError.renzhenpingjiao;
                     msg.what = m.getControlCode();
@@ -56,14 +58,6 @@ public class CourseEvaluateImp implements ICourseEvaluate{
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
                 if(statusCode==302)
                 {
-
-                    try {
-                        String str = new String(responseBody,"GBK");
-                        Log.e("ret  code", String.valueOf(statusCode));
-                        Log.e("ret  url", str);
-                    } catch (UnsupportedEncodingException e) {
-                        e.printStackTrace();
-                    }
                     Message msg = Message.obtain();
                     msg.obj=new String("正确");
                     msg.what = m.getControlCode();
@@ -74,6 +68,17 @@ public class CourseEvaluateImp implements ICourseEvaluate{
         });
     }
 
+    private void Checkcookie(InitMsg m)
+    {
+        Handler handler=new Handler();
+        InitMsg msg=new InitMsg(m.getContext(),handler,999);
+        CookieUtil cu=new CookieUtil();
+        if(!cu.check())
+        {
+            new StudentLoginImp().loginWithOcr(msg,cu.getUsername(),cu.getPassword());
+        }
+        cu.updateCookieTime(true);
+    }
     @Override
     public SourceSingleCourse getSingleCourse(InitMsg msg, String CourseName) {
         return null;
