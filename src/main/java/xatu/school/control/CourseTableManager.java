@@ -31,6 +31,7 @@ public class CourseTableManager {
 
     public CourseTable getPresentCuCourseTable() {
         CourseTable courseTable = this.getAllCourseTable();
+        // 判断学期类型 上学期还是下学期
         String startDate = "2015-9-07";// 第一周起始日期
         String endDate = WeekNumber.getNowDate();// 当前日期
 

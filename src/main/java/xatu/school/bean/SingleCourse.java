@@ -10,6 +10,7 @@ import java.io.Serializable;
 public class SingleCourse extends BaseSingleCourse implements Serializable {
     public static final String TABLE_NAME = "tb_course";// 课程表名
 
+    public static final String COLUMN_ID = "_id";// 单科课程id
     public static final String COLUMN_SEMESTER_ID = "semester_id";// 学期号
     public static final String COLUMN_NAME = "name";// 课程名
     public static final String COLUMN_XUEFEN = "xuefen";// 学分
@@ -28,7 +29,7 @@ public class SingleCourse extends BaseSingleCourse implements Serializable {
     private String kaoshileixing;// 考试类型：考试, 考查
     private float evaluateScore;// 评教分数
     private boolean isEvaluated;// 是否评教
-    private String url;// 评价url
+    private String url;// 评价url_id
     private int status;// 状态：1->未考试(无)， 2->归档中(提交)， 3->未评价(归档&未评价)， 4->已评价(归档&已评价)
 
     public SingleCourse() {
@@ -44,6 +45,23 @@ public class SingleCourse extends BaseSingleCourse implements Serializable {
         this.evaluateScore = evaluateScore;
         this.url = url;
         this.status = status;
+    }
+
+    public SingleCourse(int id, String name, float xuefen, int chengji, String renkejiaoshi,
+                        String kaoshileixing, float evaluateScore, String url, int status) {
+        this.id = id;
+        this.name = name;
+        this.xuefen = xuefen;
+        this.chengji = chengji;
+        this.renkejiaoshi = renkejiaoshi;
+        this.kaoshileixing = kaoshileixing;
+        this.evaluateScore = evaluateScore;
+        this.url = url;
+        this.status = status;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getName() {

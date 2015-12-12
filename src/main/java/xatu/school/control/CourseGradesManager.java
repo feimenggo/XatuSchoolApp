@@ -81,6 +81,7 @@ public class CourseGradesManager {
             }
 
             ScoreItem scoreItem = new ScoreItem();
+            scoreItem.setCourseId(singleCourse.getId());
             scoreItem.setCourseName(singleCourse.getName());
             scoreItem.setCouresScore(grade);
             FileBean fileBean = new FileBean(maxSemester, semester, scoreItem);

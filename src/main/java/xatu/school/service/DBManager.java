@@ -134,6 +134,7 @@ public class DBManager {
                 if (cursorCourse.moveToFirst()) {
                     do {
                         singleCourses.add(new SingleCourse(
+                                cursorCourse.getInt(cursorCourse.getColumnIndex(SingleCourse.COLUMN_ID)),
                                 cursorCourse.getString(cursorCourse.getColumnIndex(SingleCourse.COLUMN_NAME)),
                                 cursorCourse.getFloat(cursorCourse.getColumnIndex(SingleCourse.COLUMN_XUEFEN)),
                                 cursorCourse.getInt(cursorCourse.getColumnIndex(SingleCourse.COLUMN_CHENGJI)),
@@ -163,6 +164,7 @@ public class DBManager {
         if (cursor.moveToFirst()) {
             do {
                 singleCourses.add(new SingleCourse(
+                        cursor.getInt(cursor.getColumnIndex(SingleCourse.COLUMN_ID)),
                         cursor.getString(cursor.getColumnIndex(SingleCourse.COLUMN_NAME)),
                         cursor.getFloat(cursor.getColumnIndex(SingleCourse.COLUMN_XUEFEN)),
                         cursor.getInt(cursor.getColumnIndex(SingleCourse.COLUMN_CHENGJI)),
