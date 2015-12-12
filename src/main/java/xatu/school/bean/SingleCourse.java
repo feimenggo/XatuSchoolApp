@@ -17,6 +17,7 @@ public class SingleCourse extends BaseSingleCourse implements Serializable {
     public static final String COLUMN_RENKEJIAOSHI = "renkejiaoshi";// 任课老师
     public static final String COLUMN_KAOSHILEIXING = "kaoshileixing";// 考试类型
     public static final String COLUMN_EVALUATE_SCORE = "evaluate_score";// 评教分数
+    public static final String COLUMN_IS_EVALUATED = "is_evaluated";// 已评教
     public static final String COLUMN_URL = "url";// 评价url
     public static final String COLUMN_STATUS = "status";// 状态
 
@@ -27,6 +28,7 @@ public class SingleCourse extends BaseSingleCourse implements Serializable {
     private String renkejiaoshi;// 任课教师
     private String kaoshileixing;// 考试类型：考试, 考查
     private float evaluateScore;// 评教分数
+    private boolean isEvaluated;// 是否评教
     private String url;// 评价url
     private int status;// 状态：1->未考试(无)， 2->归档中(提交)， 3->未评价(归档&未评价)， 4->已评价(归档&已评价)
 
@@ -67,6 +69,10 @@ public class SingleCourse extends BaseSingleCourse implements Serializable {
 
     public float getEvaluateScore() {
         return evaluateScore;
+    }
+
+    public boolean isEvaluated() {
+        return evaluateScore > 0;
     }
 
     public String getUrl() {
@@ -128,6 +134,9 @@ public class SingleCourse extends BaseSingleCourse implements Serializable {
                 break;
             case 4:
                 result = "已评价";
+                break;
+            case 5:
+                result = "未知状态";
                 break;
             default:
                 result = "未知状态";
