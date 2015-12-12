@@ -66,7 +66,7 @@ public class UseAdapter<T> extends TreeListViewAdapter<T> {
             holder.courseScore = (TextView) convertView.findViewById(R.id.item_course_score);
             holder.courseName.setText(node.getName().getCourseName()); //设置课程名称
             holder.courseScore.setText(node.getName().getCouresScore());//设置课程分数
-            final SingleCourse singleCourse = getSingleCourse(holder.courseName.getText().toString());
+            final SingleCourse singleCourse = getSingleCourse(node.getName().getCourseId());
             if(singleCourse.getStatus() == 3)
             {
                 holder.courseScore.setText("点击评价");
@@ -108,12 +108,12 @@ public class UseAdapter<T> extends TreeListViewAdapter<T> {
     }
 
     //得到当前的科目对象
-    private SingleCourse getSingleCourse(String courseName) {
+    private SingleCourse getSingleCourse(int courseId) {
         SingleCourse singleCourse = null;
         if (AllCourseObj != null) {
             int len = AllCourseObj.size();
             for (int i = 0; i < len; i++) {
-                if (courseName.equals(AllCourseObj.get(i).getName())) {
+                if (courseId==(AllCourseObj.get(i).getId())) {
                     singleCourse = AllCourseObj.get(i);
                 }
             }
