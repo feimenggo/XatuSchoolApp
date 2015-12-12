@@ -49,14 +49,14 @@ public class SingleCourseActivity extends BaseActivity {
          course_teacher.setText(singleCourse.getRenkejiaoshi());
          course_type.setText(singleCourse.getKaoshileixing());
          course_status.setText(singleCourse.getStatusContent());
-         course_xuefen.setText(singleCourse.getXuefen()+"");
+         course_xuefen.setText(String.valueOf(singleCourse.getXuefen()));
          if(!singleCourse.isEvaluated())
          {
              evaluateScore.setVisibility(View.GONE);
          }
-          courseEvaluate.setText(singleCourse.getEvaluateScore()+"");
+        courseEvaluate.setText(String.valueOf(singleCourse.getEvaluateScore()));
 
-         course_chengji.setText(singleCourse.getChengji()+"");
+        course_chengji.setText(String.valueOf(singleCourse.getChengji()));
     }
     private void initView()
     {

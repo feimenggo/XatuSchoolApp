@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -49,14 +50,15 @@ public class UseAdapter<T> extends TreeListViewAdapter<T> {
         void onlongClick(SingleCourse singleCourse);
     }
 
-    public UseAdapter(ListView tree, Context context, List<T> datas, int defaultExpandLevel) throws IllegalAccessException {
+    public UseAdapter(ListView tree, Context context, List<T> datas, int defaultExpandLevel,List<SingleCourse> allCourse) throws IllegalAccessException {
         super(tree, context, datas, defaultExpandLevel);
+        this.AllCourseObj=allCourse;
     }
 
     @Override
-    public View getConvertView(Node node, int position, View convertView, ViewGroup parent) {
-
+    public View getConvertView(Node node,final int position, View convertView, ViewGroup parent) {
         final ViewHolder holder;
+      //  SingleCourse singleCourse1=AllCourseObj.get(position);
         if (node.getParent() != null) {   //设置子节点内容
             convertView = mInflater.inflate(R.layout.score_child_item, parent, false);
             holder = new ViewHolder();
@@ -108,8 +110,6 @@ public class UseAdapter<T> extends TreeListViewAdapter<T> {
     //得到当前的科目对象
     private SingleCourse getSingleCourse(String courseName) {
         SingleCourse singleCourse = null;
-        //得到所有的课程信息
-        AllCourseObj = StudyManager.getInstance().getAllCourseInfo();
         if (AllCourseObj != null) {
             int len = AllCourseObj.size();
             for (int i = 0; i < len; i++) {

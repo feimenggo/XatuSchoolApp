@@ -16,6 +16,7 @@ import xatu.school.adapter.UseAdapter;
 import xatu.school.bean.FileBean;
 import xatu.school.bean.SingleCourse;
 import xatu.school.control.CourseGradesManager;
+import xatu.school.control.StudyManager;
 
 /**
  * 课程成绩界面
@@ -26,6 +27,8 @@ public class CourseGradesActivity extends BaseActivity implements View.OnClickLi
     private ListView mTree;
     private UseAdapter<FileBean> mAdapter;
     private List<FileBean> mDatas;
+
+    private List<SingleCourse> AllCourseInfo;
     @Override
     protected void onResume() {
         super.onResume();
@@ -51,7 +54,7 @@ public class CourseGradesActivity extends BaseActivity implements View.OnClickLi
         initData();
         initViews();// 控件初始化
         try {
-            mAdapter = new UseAdapter<>(mTree, this, mDatas, 0);
+            mAdapter = new UseAdapter<>(mTree, this, mDatas, 0,AllCourseInfo);
             mTree.setAdapter(mAdapter);
 
             mAdapter.setEvaluateClick(new UseAdapter.OnEvaluateClick() {
@@ -89,6 +92,7 @@ public class CourseGradesActivity extends BaseActivity implements View.OnClickLi
 
     private void initData() {
         mDatas = CourseGradesManager.getInstance().getCourseGradesInfo();
+        AllCourseInfo = StudyManager.getInstance().getAllCourseInfo();
     }
 
     private void initViews() {

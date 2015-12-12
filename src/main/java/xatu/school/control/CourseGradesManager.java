@@ -74,22 +74,10 @@ public class CourseGradesManager {
         for (int courseId = 0; courseId < mSemester.size(); courseId++) {
             singleCourse = (SingleCourse) mSemester.get(courseId);
             String grade;
-            switch (singleCourse.getStatus()) {
-                case 1:
-                    grade = "未考试";
-                    break;
-                case 2:
-                    grade = "归档中";
-                    break;
-                case 3:
-                    grade = "未评价";
-                    break;
-                case 4:
-                    grade = String.valueOf(singleCourse.getChengji());
-                    break;
-                default:
-                    grade = "未知错误";
-                    break;
+            if (singleCourse.getStatus() == 4) {
+                grade = String.valueOf(singleCourse.getChengji());
+            } else {
+                grade = singleCourse.getStatusContent();
             }
 
             ScoreItem scoreItem = new ScoreItem();

@@ -7,6 +7,15 @@ public class ScoreItem {
     private String session;
     private String courseName;
     private String couresScore;
+    private int courseId;   //该课程在数据库的id
+
+    public int getCourseId() {
+        return courseId;
+    }
+
+    public void setCourseId(int courseId) {
+        this.courseId = courseId;
+    }
 
     public void setSession(String session) {
         this.session = session;
