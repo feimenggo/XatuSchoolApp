@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
@@ -41,7 +42,7 @@ public class EvaluateActivity extends Activity implements View.OnClickListener {
 
     private FrameLayout mProgress;// 进度条
     private TextView mProgressContent;// 进度条显示文字
-
+    boolean isSubmit = false;  //是否可以提交，判断用户选择是否合法
 
     private Handler handler = new Handler() {
         @Override
@@ -66,12 +67,8 @@ public class EvaluateActivity extends Activity implements View.OnClickListener {
                     if (msg.arg1 == Code.RESULT.TRUE) {
                         Log.i("Tag", "评价成功");
                         // 将新的课程成绩更新到数据库
-                        SingleCourse newSingleCourse = CourseGradesManager.getInstance().updateSingleCourseToDB((CourseGrades) msg.obj,
+                        CourseGradesManager.getInstance().updateSingleCourseToDB((CourseGrades) msg.obj,
                                 singleCourse.getName());
-                        if (newSingleCourse != null) {
-                            // 你拿到了更新的单科课程对象，你可以做一些操作
-                            //TODO
-                        }
                         isSucceed = true;
                         finish();
                     } else {
@@ -118,12 +115,20 @@ public class EvaluateActivity extends Activity implements View.OnClickListener {
         mProgressContent = (TextView) findViewById(R.id.progressbar_content);
     }
 
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        Log.i("Tag","不允许点击返回");
+        if(keyCode==KeyEvent.KEYCODE_BACK)
+            if(isSubmit)
+             return true;
+        return super.onKeyDown(keyCode, event);
+    }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.evaluate_btn_submit: //提交选项
-                boolean isSubmit = true;  //是否可以提交，判断用户选择是否合法
+                isSubmit = true;  //是否可以提交，判断用户选择是否合法
                 int len = selectRadio.length;
                 for (int i = 0; i < len; i++) {
                     if (selectRadio[i] == 0) {

@@ -80,8 +80,8 @@
                 android:layout_gravity="center_horizontal"
                 android:text="提交"
                 android:background="@drawable/submit_bg"
-                android:textSize="22sp"
-
+                android:textSize="18sp"
+                android:gravity="center"
                 />
 
         </LinearLayout>

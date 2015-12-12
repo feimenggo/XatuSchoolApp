@@ -24,6 +24,7 @@ public class SingleCourseActivity extends BaseActivity {
     private TextView course_status;
     private TextView course_xuefen;
     private TextView course_chengji;
+    private TextView courseEvaluate;
 
     //actionbar
     private ImageButton btn_left;
@@ -47,6 +48,7 @@ public class SingleCourseActivity extends BaseActivity {
          course_type.setText(singleCourse.getKaoshileixing());
          course_status.setText(singleCourse.getStatusContent());
          course_xuefen.setText(singleCourse.getXuefen()+"");
+         courseEvaluate.setText(singleCourse.getEvaluateScore()+"");
          course_chengji.setText(singleCourse.getChengji()+"");
     }
     private void initView()
@@ -56,6 +58,7 @@ public class SingleCourseActivity extends BaseActivity {
         course_type= (TextView) findViewById(R.id.course_type);
         course_status= (TextView) findViewById(R.id.course_status);
         course_xuefen= (TextView) findViewById(R.id.course_xuefen);
+        courseEvaluate= (TextView) findViewById(R.id.course_evaluate);
         course_chengji= (TextView) findViewById(R.id.course_chengji);
         //actionbar
         btn_left= (ImageButton) findViewById(R.id.btn_left);

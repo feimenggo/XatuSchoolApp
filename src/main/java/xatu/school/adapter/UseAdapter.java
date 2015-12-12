@@ -65,8 +65,7 @@ public class UseAdapter<T> extends TreeListViewAdapter<T> {
             holder.courseName.setText(node.getName().getCourseName()); //设置课程名称
             holder.courseScore.setText(node.getName().getCouresScore());//设置课程分数
             final SingleCourse singleCourse = getSingleCourse(holder.courseName.getText().toString());
-            if(singleCourse.getStatus() == 1)
-
+            if(singleCourse.getStatus() == 3)
             {
                 holder.courseScore.setText("点击评价");
                 int color = mContext.getResources().getColor(R.color.colorPrimary);

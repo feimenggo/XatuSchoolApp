@@ -32,10 +32,19 @@ public class CourseGradesActivity extends BaseActivity implements View.OnClickLi
         if(EvaluateActivity.isSucceed)   //判断是否已经在服务器提交成功
         {
             //重新获取最新数据
-            //mDatas = CourseGradesManager.getInstance().getCourseGradesInfo();
+            mDatas.clear();
+            mDatas.addAll(CourseGradesManager.getInstance().getCourseGradesInfo());
             EvaluateActivity.isSucceed=false;
-            Log.i("Tag","已经提交了dialog,可以刷新页面");
             mAdapter.notifyDataSetChanged();
+            /*Log.i("Tag", "已经提交了dialog,可以刷新页面");
+            try {
+                mAdapter = new UseAdapter<>(mTree, this, mDatas, 0);
+                mTree.setAdapter(mAdapter);
+
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }*/
+
         }else{
             Log.i("Tag","未提交dialog,不需要刷新页面");
         }
