@@ -211,7 +211,7 @@ public class DBManager {
         String sql = "update " + SingleCourse.TABLE_NAME + " set " +
                 SingleCourse.COLUMN_CHENGJI + " = " + newSingleCourse.getChengji() + ", " +
                 SingleCourse.COLUMN_EVALUATE_SCORE + " = " + newSingleCourse.getEvaluateScore() + ", " +
-                SingleCourse.COLUMN_STATUS + " = 4 where " +
+                SingleCourse.COLUMN_STATUS + " = " + newSingleCourse.getStatus() + " where " +
                 SingleCourse.COLUMN_NAME + " = '" + newSingleCourse.getName() + "'";
         mDb.execSQL(sql);
     }

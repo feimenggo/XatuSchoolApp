@@ -17,7 +17,6 @@ public class SingleCourse extends BaseSingleCourse implements Serializable {
     public static final String COLUMN_RENKEJIAOSHI = "renkejiaoshi";// 任课老师
     public static final String COLUMN_KAOSHILEIXING = "kaoshileixing";// 考试类型
     public static final String COLUMN_EVALUATE_SCORE = "evaluate_score";// 评教分数
-    public static final String COLUMN_IS_EVALUATED = "is_evaluated";// 已评教
     public static final String COLUMN_URL = "url";// 评价url
     public static final String COLUMN_STATUS = "status";// 状态
 
