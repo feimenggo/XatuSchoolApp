@@ -92,11 +92,7 @@ public class SourceToSingleCourse {
 //        状态：1->无(无)， 2->未归档(提交)， 3->未评价(归档&未评价)， 4->已评价(归档&已评价)
         int result;
         if (source.getZhuangtai().contains("无")) {// 未考试或者已考试但老师未提交
-            if (singleCourse.isEvaluated()) {// 已评教，教务处有错误
-                result = 5;
-            } else {
-                result = 1;
-            }
+            result = 1;
         } else if (source.getZhuangtai().contains("提交")) {// 老师已提交
             result = 2;
         } else {// 已归档
