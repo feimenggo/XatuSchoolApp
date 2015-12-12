@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.List;
@@ -25,6 +26,7 @@ public class SingleCourseActivity extends BaseActivity {
     private TextView course_xuefen;
     private TextView course_chengji;
     private TextView courseEvaluate;
+    private LinearLayout evaluateScore;
 
     //actionbar
     private ImageButton btn_left;
@@ -48,11 +50,17 @@ public class SingleCourseActivity extends BaseActivity {
          course_type.setText(singleCourse.getKaoshileixing());
          course_status.setText(singleCourse.getStatusContent());
          course_xuefen.setText(singleCourse.getXuefen()+"");
-         courseEvaluate.setText(singleCourse.getEvaluateScore()+"");
+         if(!singleCourse.isEvaluated())
+         {
+             evaluateScore.setVisibility(View.GONE);
+         }
+          courseEvaluate.setText(singleCourse.getEvaluateScore()+"");
+
          course_chengji.setText(singleCourse.getChengji()+"");
     }
     private void initView()
     {
+        evaluateScore= (LinearLayout) findViewById(R.id.evaluate_score);
         course_name= (TextView) findViewById(R.id.course_name);
         course_teacher= (TextView) findViewById(R.id.course_teacher);
         course_type= (TextView) findViewById(R.id.course_type);

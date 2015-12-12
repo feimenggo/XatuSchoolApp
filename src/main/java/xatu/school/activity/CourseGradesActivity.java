@@ -36,15 +36,7 @@ public class CourseGradesActivity extends BaseActivity implements View.OnClickLi
             mDatas.addAll(CourseGradesManager.getInstance().getCourseGradesInfo());
             EvaluateActivity.isSucceed=false;
             mAdapter.notifyDataSetChanged();
-            /*Log.i("Tag", "已经提交了dialog,可以刷新页面");
-            try {
-                mAdapter = new UseAdapter<>(mTree, this, mDatas, 0);
-                mTree.setAdapter(mAdapter);
-
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
-            }*/
-
+            Log.i("Tag", "已经提交了dialog,可以刷新页面");
         }else{
             Log.i("Tag","未提交dialog,不需要刷新页面");
         }
