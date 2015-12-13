@@ -16,6 +16,7 @@ import android.widget.Toast;
 import xatu.school.R;
 import xatu.school.bean.StudentInfo;
 import xatu.school.control.MineManager;
+import xatu.school.view.CircleImageView;
 
 /**
  * Created by mmcc on 2015/11/7.
@@ -24,7 +25,7 @@ public class MineFragment extends Fragment{
 
     private Button mExit; //退出登陆
     private ImageButton mSetting; //设置
-    private ImageView mHeader; //头像
+    private CircleImageView mHeader; //头像
     private TextView mCollege,mProfession,mName,mCard,mClass,mBirth;
     @Nullable
     @Override
@@ -75,7 +76,8 @@ public class MineFragment extends Fragment{
             }
         });
         //头像
-        mHeader= (ImageView) view.findViewById(R.id.id_header);
+       mHeader= (CircleImageView) view.findViewById(R.id.id_header);
+
     }
 
 

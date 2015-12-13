@@ -99,6 +99,7 @@
                 android:textSize="20sp" />
 
             <TextView
+                android:id="@+id/id_zonghepj"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -226,7 +227,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:background="@null"
-                android:text="查看所有课程"
+                android:text="查看所有成绩"
                 android:textSize="20dp" />
 
             <View
@@ -244,6 +245,11 @@
                 quxian:bgColor="#fafafa"
                 quxian:linColorOnCoord="#0093dd"
                 quxian:lineColorOnAxis="#7a7e85" />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@mipmap/linechar_bg"
+                />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

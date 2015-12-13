@@ -36,7 +36,9 @@ public class CourseGradesActivity extends BaseActivity implements View.OnClickLi
         {
             //重新获取最新数据
             mDatas.clear();
+            AllCourseInfo.clear();
             mDatas.addAll(CourseGradesManager.getInstance().getCourseGradesInfo());
+            AllCourseInfo.addAll(StudyManager.getInstance().getAllCourseInfo());
             EvaluateActivity.isSucceed=false;
             mAdapter.notifyDataSetChanged();
             Log.i("Tag", "已经提交了dialog,可以刷新页面");

@@ -35,6 +35,7 @@ public class StudyFragment extends Fragment implements View.OnClickListener {
     private TextView mAllCourse;  //总课程数
     private TextView mTongCourse;  //通过课程数
     private TextView mTongguolv;  //通过率
+    private TextView mPingjia;   //综合评价
     private Button find_all_course, find_course_btn;//进入所有科目，查找单个科目
     private Button mReset;
     private ScrollView mScrollView;
@@ -78,6 +79,7 @@ public class StudyFragment extends Fragment implements View.OnClickListener {
         mAllCourse.setText(String.valueOf(courseInfo.getTotal()));
         mTongCourse.setText(String.valueOf(courseInfo.getPass()));
         mTongguolv.setText(String.valueOf(courseInfo.getPassRate()) + "%");
+        mPingjia.setText(courseInfo.getEvaluation());
     }
 
     private void initView(View view) {
@@ -99,7 +101,7 @@ public class StudyFragment extends Fragment implements View.OnClickListener {
                 return false;
             }
         });
-
+        mPingjia = (TextView) view.findViewById(R.id.id_zonghepj);
         mAllCourse = (TextView) view.findViewById(R.id.id_allkemu);
         mTongCourse = (TextView) view.findViewById(R.id.id_tgkms);
         mTongguolv = (TextView) view.findViewById(R.id.id_tgl);

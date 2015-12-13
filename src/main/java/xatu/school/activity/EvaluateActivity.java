@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
@@ -143,10 +144,14 @@ public class EvaluateActivity extends Activity implements View.OnClickListener {
                         mProgressContent.setText("正在提交数据...");
                         CourseGradesManager.getInstance().evaluate(this, handler, singleCourse, selectRadio);
                     } else {
-                        Toast.makeText(this, submitMessage, Toast.LENGTH_SHORT).show();
+                        Toast toast=Toast.makeText(this, submitMessage, Toast.LENGTH_SHORT);
+                        toast.setGravity(Gravity.CENTER,0,0);
+                        toast.show();
                     }
                 } else {
-                    Toast.makeText(this, "请填写完整!", Toast.LENGTH_SHORT).show();
+                    Toast toast=Toast.makeText(this, "请填写完整!", Toast.LENGTH_SHORT);
+                    toast.setGravity(Gravity.CENTER,0,0);
+                    toast.show();
                 }
 
                 break;
