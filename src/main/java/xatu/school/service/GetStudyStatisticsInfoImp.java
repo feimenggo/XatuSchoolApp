@@ -46,15 +46,15 @@ public class GetStudyStatisticsInfoImp implements IGetStudyStatisticsInfo {
         passR = (pass * 1.0) / (total * 1.0);
         passRate = (int) (passR * 100);
         if (sum >= 90) {
-            evaluation += "学霸";
+            evaluation += "你就是传说中的学霸！";
         } else if (sum >= 80) {
-            evaluation += "优秀";
+            evaluation += "成绩很优秀，继续保持。";
         } else if (sum >= 70) {
-            evaluation += "良好";
+            evaluation += "成绩还不错，继续努力。";
         } else if (sum >= 60) {
-            evaluation += "中等";
+            evaluation += "成绩很悬，要加油了。";
         } else {
-            evaluation += "需加油了";
+            evaluation += "不要再玩了，要留级了！";
         }
 
         return new CoursePassRate(total, pass, passRate, evaluation);
@@ -68,30 +68,28 @@ public class GetStudyStatisticsInfoImp implements IGetStudyStatisticsInfo {
         * int score = 82;// 平均分
         * ave.addData(new SemesterAverageScore.SemesterPoint("大一上", 82));
         */
-        SemesterAverageScore avg=new SemesterAverageScore();
-        List<Semester> semester=courseGrades.getSemester();
+        SemesterAverageScore avg = new SemesterAverageScore();
+        List<Semester> semester = courseGrades.getSemester();
         List<BaseSingleCourse> bc;
 
-        int size=semester.size();
-        int i,l;
-        String name[]={"大一上","大一下","大二上","大二下","大三上","大三下","大四上","大四下"};
-        int semCount=new GetNowSemester().Get(courseGrades);
-        for(i=size-1;i>=size-semCount;--i)
-        {
+        int size = semester.size();
+        int i, l;
+        String name[] = {"大一上", "大一下", "大二上", "大二下", "大三上", "大三下", "大四上", "大四下"};
+        int semCount = new GetNowSemester().Get(courseGrades);
+        for (i = size - 1; i >= size - semCount; --i) {
             double sum = 0;
-            double xuefen =0;
-            for(
-                    l=0,bc=semester.get(i).getSourceSingleCourses();
-                    l<bc.size();
+            double xuefen = 0;
+            for (
+                    l = 0, bc = semester.get(i).getSourceSingleCourses();
+                    l < bc.size();
                     l++
-               )
-            {
+                    ) {
                 SingleCourse source = (SingleCourse) bc.get(l);
-                sum+=source.getChengji() * source.getXuefen();
-                xuefen+=source.getXuefen();
+                sum += source.getChengji() * source.getXuefen();
+                xuefen += source.getXuefen();
             }
-            int avgnum= (int) (sum/xuefen);
-            avg.addData(new SemesterAverageScore.SemesterPoint(name[size-i-1], avgnum));
+            int avgnum = (int) (sum / xuefen);
+            avg.addData(new SemesterAverageScore.SemesterPoint(name[size - i - 1], avgnum));
         }
         return avg;
     }

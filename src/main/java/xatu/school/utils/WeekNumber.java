@@ -12,6 +12,8 @@ import java.util.Locale;
  */
 public class WeekNumber {
 
+    private static int semesterType;
+
     /**
      * 计算两个时间差的周数
      *
@@ -69,5 +71,21 @@ public class WeekNumber {
                 break;
         }
         return day;
+    }
+
+    /**
+     * 得到学期类型：上学期或者下学期
+     *
+     * @return true 上学期，false 下学期
+     */
+    public static boolean getSemesterType() {
+        Calendar cal = Calendar.getInstance();
+        int mouth = cal.get(Calendar.MONTH);
+        mouth++;// 加一才是正常月份
+        if (mouth >= 3 && mouth <= 8) {// 下学期
+            return false;
+        } else {// 上学期
+            return true;
+        }
     }
 }

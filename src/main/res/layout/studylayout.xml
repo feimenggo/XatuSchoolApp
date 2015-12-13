@@ -3,9 +3,8 @@
     xmlns:quxian="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="#fafafa"
-    >
+    android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -41,7 +40,6 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
@@ -53,8 +51,7 @@
                     android:layout_height="35dp"
                     android:layout_margin="30dp"
                     android:layout_weight="1"
-                    android:background="#fafafa"
-                    >
+                    android:background="#fafafa">
 
                     <AutoCompleteTextView
                         android:id="@+id/find_course"
@@ -64,7 +61,7 @@
                         android:layout_toLeftOf="@+id/find_course_btn"
                         android:background="@null"
                         android:completionThreshold="1"
-                        android:hint="搜索 例：(高等数学)"
+                        android:hint="搜索课程 例：高等数学"
                         android:paddingLeft="10dp"
                         android:singleLine="true" />
 
@@ -82,22 +79,22 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:src="@drawable/body_icon"/>
+                android:src="@drawable/body_icon" />
 
-<!--            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="这学期你学的怎么样呢？"
-                android:textColor="#7A7E85"
-                android:textSize="20sp" />-->
+            <!--            <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="这学期你学的怎么样呢？"
+                            android:textColor="#7A7E85"
+                            android:textSize="20sp" />-->
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:gravity="center"
-                android:text="下面的数据显示的是你的学习情况哦"
+                android:text="你的学习情况统计分析"
                 android:textColor="#000000"
                 android:textSize="20sp" />
 
@@ -105,7 +102,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="数学，英语什么的都太简单了!"
+                android:text="数学太简单了!"
                 android:textColor="#7A7E85"
                 android:textSize="15sp" />
 
@@ -231,13 +228,14 @@
                 android:background="@null"
                 android:text="查看所有课程"
                 android:textSize="20dp" />
+
             <View
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="10dp"
-                android:background="#ccc"
-                />
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp"
+                android:background="#ccc" />
+
             <feimeng.linechartview.LineChartView
                 android:id="@+id/linechart"
                 android:layout_width="match_parent"
