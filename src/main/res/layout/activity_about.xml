@@ -25,7 +25,7 @@
         android:layout_below="@id/icon"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
-        android:text="v0.1 内测版"
+        android:text="@string/version_name"
         android:textColor="#969696"
         android:textSize="15sp" />
 

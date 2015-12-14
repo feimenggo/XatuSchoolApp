@@ -278,7 +278,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginRight="20dp"
                         android:text="A ：100 ~ 90分"
-                        android:textColor="#cd7f32"
+                        android:textColor="#00ff33"
                         android:textSize="17sp" />
 
                     <TextView
@@ -286,7 +286,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="20dp"
                         android:text="B ：89 ~ 80分"
-                        android:textColor="#f2c056"
+                        android:textColor="#00ff33"
                         android:textSize="17sp" />
 
                 </LinearLayout>
@@ -304,7 +304,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginRight="20dp"
                         android:text="C ：  79 ~ 70分"
-                        android:textColor="#be7851"
+                        android:textColor="#ff7800"
                         android:textSize="17sp" />
 
                     <TextView
@@ -330,7 +330,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="E ：  59 ~ 00分"
-                        android:textColor="#7a7e85"
+                        android:textColor="#ff0000"
                         android:textSize="17sp" />
                     <TextView
                         android:visibility="invisible"
