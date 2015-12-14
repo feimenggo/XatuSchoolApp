@@ -93,9 +93,6 @@ public class SplashActivity extends BaseActivity {
      * 第三方服务初始化
      */
     private void initOtherService() {
-        // 自动更新检测 使用了友盟s d k
-        UmengUpdateAgent.setUpdateOnlyWifi(false);
-        UmengUpdateAgent.setUpdateCheckConfig(false);
-        UmengUpdateAgent.update(this);
+
     }
 }
