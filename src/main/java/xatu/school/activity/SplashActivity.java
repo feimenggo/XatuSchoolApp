@@ -6,19 +6,20 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.umeng.update.UmengUpdateAgent;
+
 import xatu.school.R;
 
 public class SplashActivity extends BaseActivity {
-
     private Button mToLogin;// 进入登录界面
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_splash);
         checkVersion();//版本检测和登录状态跳转
-        initViews();// 视图初始化
-        initEvent();// 事件初始化
+        initOtherService();// 第三方服务初始化
+//        initViews();// 视图初始化
+//        initEvent();// 事件初始化
     }
 
     /**
@@ -67,7 +68,7 @@ public class SplashActivity extends BaseActivity {
         editor.putBoolean(BaseApplication.SP_HAS_STUDENT_INFO, false);
         editor.putBoolean(BaseApplication.SP_HAS_COURSEGRADES_INFO, false);
         editor.putBoolean(BaseApplication.SP_HAS_COURSETABLE_INFO, false);
-        editor.apply();// 异步提交SP信息
+        editor.commit();// 异步提交SP信息
     }
 
     private void initEvent() {
@@ -83,7 +84,18 @@ public class SplashActivity extends BaseActivity {
     }
 
     private void initViews() {
+        setContentView(R.layout.activity_splash);
         // 得到登录按钮控件
         mToLogin = (Button) findViewById(R.id.btn_to_login);
+    }
+
+    /**
+     * 第三方服务初始化
+     */
+    private void initOtherService() {
+        // 自动更新检测 使用了友盟s d k
+        UmengUpdateAgent.setUpdateOnlyWifi(false);
+        UmengUpdateAgent.setUpdateCheckConfig(false);
+        UmengUpdateAgent.update(this);
     }
 }
