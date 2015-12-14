@@ -238,6 +238,15 @@
                 android:layout_marginTop="5dp"
                 android:background="#ccc" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="`~~学期平均分折线图~~`"
+
+                android:textColor="#000000"
+                android:textSize="20dp" />
+
             <feimeng.linechartview.LineChartView
                 android:id="@+id/linechart"
                 android:layout_width="match_parent"
@@ -268,7 +277,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="20dp"
-                        android:text="A ：100 ~ 90"
+                        android:text="A ：100 ~ 90分"
                         android:textColor="#cd7f32"
                         android:textSize="17sp" />
 
@@ -276,7 +285,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="20dp"
-                        android:text="B ：89 ~ 80"
+                        android:text="B ：89 ~ 80分"
                         android:textColor="#f2c056"
                         android:textSize="17sp" />
 
@@ -294,7 +303,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="20dp"
-                        android:text="C ：  79 ~ 70"
+                        android:text="C ：  79 ~ 70分"
                         android:textColor="#be7851"
                         android:textSize="17sp" />
 
@@ -302,7 +311,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="20dp"
-                        android:text="D ：69 ~ 60"
+                        android:text="D ：69 ~ 60分"
                         android:textColor="#ff7800"
                         android:textSize="17sp" />
 
@@ -317,12 +326,21 @@
                     android:orientation="horizontal">
 
                     <TextView
+                        android:layout_marginRight="20dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="20dp"
-                        android:text="E ：  59 ~ 00"
+                        android:text="E ：  59 ~ 00分"
                         android:textColor="#7a7e85"
                         android:textSize="17sp" />
+                    <TextView
+                        android:visibility="invisible"
+                        android:layout_marginLeft="20dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="D ：69 ~ 60分"
+                        android:textColor="#7a7e85"
+                        android:textSize="17sp" />
+
 
                 </LinearLayout>
 

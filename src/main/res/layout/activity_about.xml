@@ -2,7 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F8F8F8">
+    android:background="#F8F8F8"
+    >
 
     <include
         android:id="@+id/title_bar"
@@ -47,5 +48,26 @@
             android:padding="10dp"
             android:textSize="16sp" />
     </LinearLayout>
+    <LinearLayout
 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/content1"
+        android:layout_marginTop="20dp"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:orientation="vertical"
+        android:paddingLeft="15dp">
+     <Button
+         android:id="@+id/check_update"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:text="检查更新"
+         android:textSize="17sp"
+         android:textColor="#000000"
+         android:layout_gravity="center"
+         android:background="@null"
+         />
+
+    </LinearLayout>
 </RelativeLayout>
