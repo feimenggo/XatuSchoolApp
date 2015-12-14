@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import xatu.school.R;
 import xatu.school.control.AboutManager;
+import xatu.school.control.DefaultManager;
 
 /**
  * Created by penfi on 2015/11/20.
@@ -44,7 +45,7 @@ public class AboutActivity extends BaseActivity implements View.OnClickListener 
                 finish();
                 break;
             case R.id.check_update:
-                AboutManager.getInstance().checkUpdate(this);
+                DefaultManager.getInstance().checkUpdate(this);
         }
     }
 }

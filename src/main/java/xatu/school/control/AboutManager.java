@@ -1,8 +1,12 @@
 package xatu.school.control;
 
 import android.content.Context;
+import android.widget.Toast;
 
 import com.umeng.update.UmengUpdateAgent;
+import com.umeng.update.UmengUpdateListener;
+import com.umeng.update.UpdateResponse;
+import com.umeng.update.UpdateStatus;
 
 /**
  * 关于界面 控制器
@@ -25,18 +29,5 @@ public class AboutManager {
         return mInstance;
     }
 
-    /**
-     * 版本更新
-     *
-     * @param context 上下文
-     */
-    public void checkUpdate(Context context) {
-        UmengUpdateAgent.forceUpdate(context);
-//        UmengUpdateAgent.setUpdateListener(new UmengUpdateListener() {
-//            @Override
-//            public void onUpdateReturned(int statusCode, UpdateResponse updateResponse) {
-//                //状态在statusCode中，0表示有更新，1表示无更新，2表示非wifi状态，3表示请求超时。
-//            }
-//        });
-    }
+
 }

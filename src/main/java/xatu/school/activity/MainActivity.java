@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import xatu.school.R;
+import xatu.school.control.DefaultManager;
 import xatu.school.view.ChangeColorMyView;
 
 public class MainActivity extends BaseActivity implements View.OnClickListener {
@@ -25,6 +26,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        DefaultManager.getInstance().checkAutoUpdate(this);
         setContentView(R.layout.activity_main);
         BaseApplication.getInstance().addActivity(this);
         iniView();    //对ViewPager的初始化
