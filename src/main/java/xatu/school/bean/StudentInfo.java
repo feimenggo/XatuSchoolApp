@@ -2,10 +2,8 @@ package xatu.school.bean;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
-import android.util.Log;
 
 import xatu.school.R;
-import xatu.school.utils.StringUtil;
 
 public class StudentInfo {
     public static final String TABLE_NAME = "tb_student_info";// 学生信息 表名

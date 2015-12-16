@@ -1,10 +1,6 @@
 package xatu.school.adapter;
 
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.Color;
-import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -16,12 +12,8 @@ import android.widget.Toast;
 import java.util.List;
 
 import xatu.school.R;
-import xatu.school.activity.EvaluateActivity;
-import xatu.school.activity.SingleCourseActivity;
-import xatu.school.activity.StudyFragment;
 import xatu.school.bean.Node;
 import xatu.school.bean.SingleCourse;
-import xatu.school.control.StudyManager;
 
 /**
  * Created by mmcc on 2015/11/3.
@@ -50,15 +42,15 @@ public class UseAdapter<T> extends TreeListViewAdapter<T> {
         void onlongClick(SingleCourse singleCourse);
     }
 
-    public UseAdapter(ListView tree, Context context, List<T> datas, int defaultExpandLevel,List<SingleCourse> allCourse) throws IllegalAccessException {
+    public UseAdapter(ListView tree, Context context, List<T> datas, int defaultExpandLevel, List<SingleCourse> allCourse) throws IllegalAccessException {
         super(tree, context, datas, defaultExpandLevel);
-        this.AllCourseObj=allCourse;
+        this.AllCourseObj = allCourse;
     }
 
     @Override
-    public View getConvertView(Node node,final int position, View convertView, ViewGroup parent) {
+    public View getConvertView(Node node, final int position, View convertView, ViewGroup parent) {
         final ViewHolder holder;
-      //  SingleCourse singleCourse1=AllCourseObj.get(position);
+        //  SingleCourse singleCourse1=AllCourseObj.get(position);
         if (node.getParent() != null) {   //设置子节点内容
             convertView = mInflater.inflate(R.layout.score_child_item, parent, false);
             holder = new ViewHolder();
@@ -67,8 +59,7 @@ public class UseAdapter<T> extends TreeListViewAdapter<T> {
             holder.courseName.setText(node.getName().getCourseName()); //设置课程名称
             holder.courseScore.setText(node.getName().getCouresScore());//设置课程分数
             final SingleCourse singleCourse = getSingleCourse(node.getName().getCourseId());
-            if(singleCourse.getStatus() == 3)
-            {
+            if (singleCourse.getStatus() == 3) {
                 holder.courseScore.setText("点击评价");
                 int color = mContext.getResources().getColor(R.color.colorPrimary);
                 holder.courseScore.setTextColor(color);
@@ -113,7 +104,7 @@ public class UseAdapter<T> extends TreeListViewAdapter<T> {
         if (AllCourseObj != null) {
             int len = AllCourseObj.size();
             for (int i = 0; i < len; i++) {
-                if (courseId==(AllCourseObj.get(i).getId())) {
+                if (courseId == (AllCourseObj.get(i).getId())) {
                     singleCourse = AllCourseObj.get(i);
                 }
             }

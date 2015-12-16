@@ -114,10 +114,9 @@ public class LoginManager {
     /**
      * 保存个人信息
      *
-     * @param context 上下文
      * @param stuInfo 学生信息
      */
-    public void saveStudentInfo(Context context, StudentInfo stuInfo) {
+    public void saveStudentInfo(StudentInfo stuInfo) {
         DBManager save = new DBManager();
         save.saveStudentInfo(stuInfo);
 
@@ -129,10 +128,9 @@ public class LoginManager {
     /**
      * 保存课程成绩信息
      *
-     * @param context      上下文
      * @param courseGrades 大学信息
      */
-    public void saveCourseGradesInfo(Context context, CourseGrades courseGrades) {
+    public void saveCourseGradesInfo(CourseGrades courseGrades) {
         DBManager save = new DBManager();
         save.saveCourseGrades(courseGrades);
 
@@ -146,7 +144,7 @@ public class LoginManager {
     /**
      * 保存课程表信息
      *
-     * @param courseTable
+     * @param courseTable 课程表对象
      */
     public void saveCourseTable(CourseTable courseTable) {
         DBManager save = new DBManager();

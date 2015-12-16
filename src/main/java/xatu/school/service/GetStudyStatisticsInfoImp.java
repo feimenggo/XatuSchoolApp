@@ -19,11 +19,10 @@ public class GetStudyStatisticsInfoImp implements IGetStudyStatisticsInfo {
     private int total = 0;// 总课程数
     private int pass = 0;// 通过课程数
     private int passRate;// 通过率
-    private String evaluation = new String();// 评价
+    private String evaluation = "";// 评价
     private double sum = 0;
     private double xf = 0; //已参加考试  的 总学分
     private double passR;
-    int count = 0;
 
     public CoursePassRate getCourseInfoSection(CourseGrades courseGrades) {
         for (Semester s : courseGrades.getSemester()) {
@@ -46,15 +45,15 @@ public class GetStudyStatisticsInfoImp implements IGetStudyStatisticsInfo {
         passR = (pass * 1.0) / (total * 1.0);
         passRate = (int) (passR * 100);
         if (sum >= 90) {
-            evaluation += "你就是传说中的学霸！";
+            evaluation += "你就是传说中的学霸";
         } else if (sum >= 80) {
-            evaluation += "成绩很优秀，继续保持。";
+            evaluation += "成绩很优秀，继续保持";
         } else if (sum >= 70) {
-            evaluation += "成绩还不错，继续努力。";
+            evaluation += "成绩还不错，继续努力";
         } else if (sum >= 60) {
-            evaluation += "成绩很悬，要加油了。";
+            evaluation += "成绩很悬，要加油了";
         } else {
-            evaluation += "不要再玩了，要留级了！";
+            evaluation += "不要再玩了，要留级了";
         }
 
         return new CoursePassRate(total, pass, passRate, evaluation);
@@ -62,12 +61,6 @@ public class GetStudyStatisticsInfoImp implements IGetStudyStatisticsInfo {
 
     @Override
     public SemesterAverageScore getAverageScore(CourseGrades courseGrades) {
-
-        /* SemesterAverageScore ave = new SemesterAverageScore();
-        * String name ="";// 学期名
-        * int score = 82;// 平均分
-        * ave.addData(new SemesterAverageScore.SemesterPoint("大一上", 82));
-        */
         SemesterAverageScore avg = new SemesterAverageScore();
         List<Semester> semester = courseGrades.getSemester();
         List<BaseSingleCourse> bc;

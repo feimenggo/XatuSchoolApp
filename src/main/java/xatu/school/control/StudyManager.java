@@ -1,6 +1,5 @@
 package xatu.school.control;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import xatu.school.bean.CoursePassRate;

@@ -10,7 +10,7 @@ import xatu.school.bean.InitMsg;
  * Created by penfi on 2015/10/25.
  */
 public class CreateInitMsg {
-    public static final InitMsg msg(Context context, Handler handler, int controlCode) {
+    public static InitMsg msg(Context context, Handler handler, int controlCode) {
         return new InitMsg(context, handler, controlCode);
     }
 }

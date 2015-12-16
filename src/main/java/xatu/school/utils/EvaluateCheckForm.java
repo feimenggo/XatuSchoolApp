@@ -1,6 +1,5 @@
 package xatu.school.utils;
 
-import xatu.school.exception.EvaluateException;
 
 /**
  * 评价表单格式检查

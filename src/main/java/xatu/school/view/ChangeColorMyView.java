@@ -191,8 +191,7 @@ public class ChangeColorMyView extends View {
     //设置变换图片
     public void setIconBitmap(int iconId){
         InputStream is=getResources().openRawResource(iconId);
-        Bitmap bitmap= BitmapFactory.decodeStream(is);
-        this.mIconBitmap=bitmap;
+        this.mIconBitmap= BitmapFactory.decodeStream(is);
         invalidate();
     }
 

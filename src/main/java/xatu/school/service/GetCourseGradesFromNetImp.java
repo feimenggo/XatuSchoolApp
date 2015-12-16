@@ -78,7 +78,6 @@ public class GetCourseGradesFromNetImp implements IGetCourseGradesFromNet {
         String url = null;
         Document doc = Jsoup.parse(htmlOfsc);
         Elements link = doc.getElementsByTag("table");
-        List<Semester> xq = new ArrayList<Semester>();
         int i = 0;
         for (Element es : link) {
             Elements ele = es.getElementsByTag("td");
