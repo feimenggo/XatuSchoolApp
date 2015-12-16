@@ -12,12 +12,14 @@ import android.view.ViewGroup;
 import android.view.ViewParent;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import xatu.school.R;
 import xatu.school.control.DefaultManager;
+import xatu.school.control.MainManager;
 import xatu.school.view.ChangeColorMyView;
 
 public class MainActivity extends BaseActivity implements View.OnClickListener {
@@ -41,7 +43,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        DefaultManager.getInstance().checkAutoUpdate(this);
+        initInfo(); //自动刷新和版本更新
+
         setContentView(R.layout.activity_main);
         BaseApplication.getInstance().addActivity(this);
         iniView();    //对ViewPager的初始化
@@ -49,6 +52,13 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
         // 设置默认的Fragment
         setDefaultFragment();
+    }
+
+    private void initInfo() {
+        //自动刷新
+        MainManager.getInstance(this).autoRefresh();
+        //自动检查更新
+        DefaultManager.getInstance().checkAutoUpdate(this);
     }
 
     private void addGuideImage() {
@@ -178,6 +188,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     //刷新结束
     public void reflushOver() {
-        //TODO 进行取消进度条，更新数据等操作
+       
     }
 }

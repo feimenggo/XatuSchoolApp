@@ -97,15 +97,13 @@ public class MainManager {
 
     /**
      * 自动刷新，结束后不回调界面
-     *
-     * @param context 上下文
      */
-    public void autoRefresh(Context context) {
+    public void autoRefresh() {
         if (!CookieUtil.check()) {// cookie 过期 先进行重新登录操作
-            new StudentLoginImp().loginWithOcr(new InitMsg(context, mHandler, 101), CookieUtil.getUsername(), CookieUtil.getPassword());
+            new StudentLoginImp().loginWithOcr(new InitMsg(mContext, mHandler, 101), CookieUtil.getUsername(), CookieUtil.getPassword());
         } else {// cookie 没过期 直接刷新
             IGetCourseGradesFromNet courseGrades = new GetCourseGradesFromNetImp();
-            courseGrades.getCourseGrades(new InitMsg(context, mHandler, Code.CONTROL.AUTO_REFRESH));
+            courseGrades.getCourseGrades(new InitMsg(mContext, mHandler, Code.CONTROL.AUTO_REFRESH));
         }
     }
 

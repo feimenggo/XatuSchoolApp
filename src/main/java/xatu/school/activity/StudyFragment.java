@@ -24,6 +24,7 @@ import xatu.school.R;
 import xatu.school.bean.CoursePassRate;
 import xatu.school.bean.SemesterAverageScore;
 import xatu.school.bean.SingleCourse;
+import xatu.school.control.MainManager;
 import xatu.school.control.StudyManager;
 
 /**
@@ -124,6 +125,7 @@ public class StudyFragment extends Fragment implements View.OnClickListener {
         switch (v.getId()) {
             case R.id.id_reset:
                 Toast.makeText(getActivity(), "点击了刷新", Toast.LENGTH_SHORT).show();
+                MainManager.getInstance(getActivity()).refresh();
                 break;
             case R.id.find_course_btn:
                 if (find_course.getText() != null) {
@@ -157,5 +159,9 @@ public class StudyFragment extends Fragment implements View.OnClickListener {
                 startActivity(new Intent(getActivity(), CourseGradesActivity.class));
                 break;
         }
+    }
+    public void FinishReflush(){
+        //TODO 进行取消进度条，更新数据等操作
+        Toast.makeText(getActivity(), "更新成功", Toast.LENGTH_SHORT).show();
     }
 }
