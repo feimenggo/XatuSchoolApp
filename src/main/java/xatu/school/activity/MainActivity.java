@@ -8,6 +8,10 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.ViewParent;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,11 +21,22 @@ import xatu.school.control.DefaultManager;
 import xatu.school.view.ChangeColorMyView;
 
 public class MainActivity extends BaseActivity implements View.OnClickListener {
+
+
     private ViewPager mViewPager;
     private List<Fragment> mTabs = new ArrayList<Fragment>();
     private FragmentPagerAdapter mAdapter;
     //存放所有的指示器
     private List<ChangeColorMyView> mTabIndicators = new ArrayList<ChangeColorMyView>();
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if(DefaultManager.getInstance().isShowGuide()){
+            addGuideImage();  //添加引导页面
+         }
+
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +49,30 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
         // 设置默认的Fragment
         setDefaultFragment();
+    }
+
+    private void addGuideImage() {
+        //找到根布局
+        View view=getWindow().getDecorView().findViewById(R.id.layout_contentView);
+        if(view==null)return;
+        ViewParent viewParent=view.getParent();
+        if(viewParent instanceof FrameLayout)
+        {
+            final FrameLayout framelayout= (FrameLayout) viewParent;
+            final ImageView guideImage=new ImageView(this);
+            FrameLayout.LayoutParams params=new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+            guideImage.setLayoutParams(params);
+            guideImage.setScaleType(ImageView.ScaleType.FIT_XY);
+            guideImage.setImageResource(R.mipmap.guide_bg);
+            guideImage.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    DefaultManager.getInstance().showGuided();
+                    framelayout.removeView(guideImage);
+                }
+            });
+            framelayout.addView(guideImage);
+        }
     }
 
     private void setDefaultFragment() {

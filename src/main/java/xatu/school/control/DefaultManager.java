@@ -85,5 +85,6 @@ public class DefaultManager {
      */
     public void showGuided() {
         BaseApplication.getEditor().putBoolean(BaseApplication.SP_IS_GUIDE_STUDY, false);
+        BaseApplication.getEditor().commit();
     }
 }
