@@ -99,33 +99,28 @@ public class MainManager {
     /**
      * 自动刷新，结束后不回调界面
      */
-<<<<<<< HEAD
+
     public void autoRefresh() {
         if (!CookieUtil.check()) {// cookie 过期 先进行重新登录操作
             new StudentLoginImp().loginWithOcr(new InitMsg(mContext, mHandler, 101), CookieUtil.getUsername(), CookieUtil.getPassword());
         } else {// cookie 没过期 直接刷新
             IGetCourseGradesFromNet courseGrades = new GetCourseGradesFromNetImp();
             courseGrades.getCourseGrades(new InitMsg(mContext, mHandler, Code.CONTROL.AUTO_REFRESH));
-=======
-    public void autoRefresh(Context context) {
-        if (RefreshTimeUtil.checkAutoRefreshTime(mContext)) {
-            if (!CookieUtil.check()) {// cookie 过期 先进行重新登录操作
-                new StudentLoginImp().loginWithOcr(new InitMsg(context, mHandler, 101), CookieUtil.getUsername(), CookieUtil.getPassword());
-            } else {// cookie 没过期 直接刷新
-                IGetCourseGradesFromNet courseGrades = new GetCourseGradesFromNetImp();
-                courseGrades.getCourseGrades(new InitMsg(context, mHandler, Code.CONTROL.AUTO_REFRESH));
-            }
->>>>>>> tmp
+
+
         }
     }
+
 
     /**
      * 刷新数据库数据
      *
      * @param courseGrades 课程成绩对象
      */
+
     private void refreshToDb(CourseGrades courseGrades) {
         DBManager save = new DBManager();
         save.updateCourseGrades(courseGrades);
+
     }
 }
