@@ -12,6 +12,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -50,6 +51,16 @@ public class StudyFragment extends Fragment implements View.OnClickListener {
     private LineChartView mLineChart; //曲线图
     private List<LineChartView.Coord> mDatas;
 
+
+    private OnClickOnRefresh RefreshListener;
+
+    public void setRefreshListener(OnClickOnRefresh refreshListener) {
+        RefreshListener = refreshListener;
+    }
+
+    interface OnClickOnRefresh{
+        void OnClickOnRefresh();
+    }
 
     @Nullable
     @Override
@@ -102,6 +113,7 @@ public class StudyFragment extends Fragment implements View.OnClickListener {
                 return false;
             }
         });
+
         mPingjia = (TextView) view.findViewById(R.id.id_zonghepj);
         mAllCourse = (TextView) view.findViewById(R.id.id_allkemu);
         mTongCourse = (TextView) view.findViewById(R.id.id_tgkms);
@@ -115,6 +127,13 @@ public class StudyFragment extends Fragment implements View.OnClickListener {
         find_all_course = (Button) view.findViewById(R.id.find_all_course);
         find_all_course.setOnClickListener(this);
         find_course = (AutoCompleteTextView) view.findViewById(R.id.find_course);
+        find_course.setCursorVisible(false);
+        find_course.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                find_course.setCursorVisible(true);
+            }
+        });
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_dropdown_item_1line, mCourse);
         find_course.setAdapter(adapter);
     }
@@ -124,8 +143,10 @@ public class StudyFragment extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.id_reset:
-                Toast.makeText(getActivity(), "点击了刷新", Toast.LENGTH_SHORT).show();
-                MainManager.getInstance(getActivity()).refresh();
+                if(RefreshListener!=null)
+                {
+                   RefreshListener.OnClickOnRefresh();
+                }
                 break;
             case R.id.find_course_btn:
                 if (find_course.getText() != null) {
@@ -151,8 +172,6 @@ public class StudyFragment extends Fragment implements View.OnClickListener {
                 }else{
                     Toast.makeText(getActivity(),"请输入要查询的科目",Toast.LENGTH_SHORT).show();
                 }
-
-
                 break;
             case R.id.find_all_course:
                 //进入成绩页面
@@ -160,8 +179,5 @@ public class StudyFragment extends Fragment implements View.OnClickListener {
                 break;
         }
     }
-    public void FinishReflush(){
-        //TODO 进行取消进度条，更新数据等操作
-        Toast.makeText(getActivity(), "更新成功", Toast.LENGTH_SHORT).show();
-    }
+
 }

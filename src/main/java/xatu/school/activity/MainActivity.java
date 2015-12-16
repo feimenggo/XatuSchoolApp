@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.view.ViewParent;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -31,6 +32,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     //存放所有的指示器
     private List<ChangeColorMyView> mTabIndicators = new ArrayList<ChangeColorMyView>();
 
+    private FrameLayout mProgress;
+    private TextView mProgressContent;
+
     @Override
     protected void onStart() {
         super.onStart();
@@ -44,12 +48,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         initInfo(); //自动刷新和版本更新
-
         setContentView(R.layout.activity_main);
         BaseApplication.getInstance().addActivity(this);
         iniView();    //对ViewPager的初始化
         initDatas();
-
         // 设置默认的Fragment
         setDefaultFragment();
     }
@@ -62,12 +64,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     }
 
     private void addGuideImage() {
-        //找到根布局
-        View view = getWindow().getDecorView().findViewById(R.id.layout_contentView);
-        if (view == null) return;
-        ViewParent viewParent = view.getParent();
-        if (viewParent instanceof FrameLayout) {
-            final FrameLayout framelayout = (FrameLayout) viewParent;
+            final FrameLayout framelayout= (FrameLayout) findViewById(R.id.layout_contentView);
             final ImageView guideImage = new ImageView(this);
             FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
             guideImage.setLayoutParams(params);
@@ -81,7 +78,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 }
             });
             framelayout.addView(guideImage);
-        }
     }
 
     private void setDefaultFragment() {
@@ -111,9 +107,21 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     private void theStudyFragment() {
         StudyFragment studyFragment = new StudyFragment();
         mTabs.add(studyFragment);
+        studyFragment.setRefreshListener(new StudyFragment.OnClickOnRefresh() {
+            @Override
+            public void OnClickOnRefresh() {
+                MainManager.getInstance(MainActivity.this).refresh();
+                mProgress.setVisibility(View.VISIBLE);
+                mProgressContent.setText("正在更新数据...");
+            }
+        });
     }
 
     private void iniView() {
+        //刷新进度条
+        mProgress= (FrameLayout) findViewById(R.id.login_progress);
+        mProgressContent= (TextView) findViewById(R.id.progressbar_content);
+
         //将四个view放入集合统一管理
         ChangeColorMyView one = (ChangeColorMyView) findViewById(R.id.id_study);
         mTabIndicators.add(one);
@@ -188,6 +196,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     //刷新结束
     public void reflushOver() {
-       
+        //TODO 进行取消进度条，更新数据等操作
+        mProgress.setVisibility(View.GONE);
+        Toast.makeText(this, "更新成功", Toast.LENGTH_SHORT).show();
+
     }
 }

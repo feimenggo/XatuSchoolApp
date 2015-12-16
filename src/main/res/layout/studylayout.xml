@@ -6,6 +6,7 @@
     android:background="#fafafa"
     android:orientation="vertical">
 
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
@@ -340,7 +341,6 @@
                         android:text="D ：69 ~ 60分"
                         android:textColor="#7a7e85"
                         android:textSize="17sp" />
-
 
                 </LinearLayout>
 
