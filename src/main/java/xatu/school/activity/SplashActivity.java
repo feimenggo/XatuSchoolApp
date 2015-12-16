@@ -85,6 +85,8 @@ public class SplashActivity extends BaseActivity {
         editor.putBoolean(BaseApplication.SP_HAS_COURSETABLE_INFO, false);
 
         editor.putBoolean(BaseApplication.SP_IS_GUIDE_STUDY, true);
+
+        editor.putLong(BaseApplication.SP_AUTO_REFRESH_TIME, 0);
         editor.commit();
     }
 

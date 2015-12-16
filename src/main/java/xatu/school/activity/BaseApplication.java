@@ -25,8 +25,10 @@ public class BaseApplication extends Application {
     public static final String SP_USERNAME = "username";// 用户名
     public static final String SP_PASSWORD = "passwrod";// 密码
     public static final String SP_COOKIE_TIME = "cookie_time";// 获取或更新cookie的时间戳
+    public static final String SP_AUTO_REFRESH_TIME = "auto_refresh_time";// 上次自动更新的时间戳
 
     public static final int COOKIE_OUT_TIME = 360;// cookie过期时间，秒
+    public static final int AUTO_REFRESH_INTERVAL = 3 * 1440 * 60;// 3天，自动更新间隔，分钟
 
     private static final String SP_NAME = "school_sp";
     public static final int VERSION = 10;

@@ -5,7 +5,6 @@ import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
-import android.widget.Toast;
 
 import xatu.school.activity.MainActivity;
 import xatu.school.bean.CourseGrades;
@@ -16,6 +15,7 @@ import xatu.school.service.IGetCourseGradesFromNet;
 import xatu.school.service.StudentLoginImp;
 import xatu.school.utils.Code;
 import xatu.school.utils.CookieUtil;
+import xatu.school.utils.RefreshTimeUtil;
 
 /**
  * 主界面控制器
@@ -60,6 +60,7 @@ public class MainManager {
                 case Code.CONTROL.AUTO_REFRESH:
                     if (msg.arg1 == Code.RESULT.TRUE) {
                         refreshToDb((CourseGrades) msg.obj);
+                        RefreshTimeUtil.updateAutoRefreshTime(true);// 更新自动刷新时间
                     } else {
                         Log.i("error_msg", "自动刷新：刷新失败");
                     }
@@ -98,12 +99,23 @@ public class MainManager {
     /**
      * 自动刷新，结束后不回调界面
      */
+<<<<<<< HEAD
     public void autoRefresh() {
         if (!CookieUtil.check()) {// cookie 过期 先进行重新登录操作
             new StudentLoginImp().loginWithOcr(new InitMsg(mContext, mHandler, 101), CookieUtil.getUsername(), CookieUtil.getPassword());
         } else {// cookie 没过期 直接刷新
             IGetCourseGradesFromNet courseGrades = new GetCourseGradesFromNetImp();
             courseGrades.getCourseGrades(new InitMsg(mContext, mHandler, Code.CONTROL.AUTO_REFRESH));
+=======
+    public void autoRefresh(Context context) {
+        if (RefreshTimeUtil.checkAutoRefreshTime(mContext)) {
+            if (!CookieUtil.check()) {// cookie 过期 先进行重新登录操作
+                new StudentLoginImp().loginWithOcr(new InitMsg(context, mHandler, 101), CookieUtil.getUsername(), CookieUtil.getPassword());
+            } else {// cookie 没过期 直接刷新
+                IGetCourseGradesFromNet courseGrades = new GetCourseGradesFromNetImp();
+                courseGrades.getCourseGrades(new InitMsg(context, mHandler, Code.CONTROL.AUTO_REFRESH));
+            }
+>>>>>>> tmp
         }
     }
 
