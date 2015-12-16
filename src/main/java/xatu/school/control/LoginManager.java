@@ -17,6 +17,7 @@ import xatu.school.service.StudentInfoImp;
 import xatu.school.service.StudentLoginImp;
 import xatu.school.utils.Code;
 import xatu.school.utils.CreateInitMsg;
+import xatu.school.utils.RefreshTimeUtil;
 
 /**
  * 登录界面管理器
@@ -137,6 +138,8 @@ public class LoginManager {
 
         // 更新状态
         BaseApplication.getEditor().putBoolean(BaseApplication.SP_HAS_COURSEGRADES_INFO, true);
+        // 更新自动刷新时间
+        RefreshTimeUtil.updateAutoRefreshTime(false);
         BaseApplication.getEditor().apply();
     }
 
