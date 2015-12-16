@@ -2,20 +2,16 @@ package xatu.school.service;
 
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
-import android.util.StringBuilderPrinter;
 
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.PersistentCookieStore;
 import com.loopj.android.http.RequestParams;
 
-import java.io.UnsupportedEncodingException;
 
 import cz.msebera.android.httpclient.Header;
 import xatu.school.bean.EvaluateInfo;
 import xatu.school.bean.InitMsg;
-import xatu.school.bean.SourceSingleCourse;
 import xatu.school.bean.WebError;
 import xatu.school.utils.Code;
 import xatu.school.utils.CookieUtil;
@@ -49,7 +45,7 @@ public class CourseEvaluateImp implements ICourseEvaluate {
     private void PostInfo(final InitMsg m, EvaluateInfo evaluateInfo)
     {
         String url = "http://222.25.1.101/student/" + evaluateInfo.getSingleCourse().getUrl();
-        Log.e("test url", url);
+//        Log.e("test url", url);
         AsyncHttpClient clientget = new AsyncHttpClient();
         PersistentCookieStore myCookieStore = new PersistentCookieStore(m.getContext());
         clientget.setCookieStore(myCookieStore);
@@ -101,7 +97,7 @@ public class CourseEvaluateImp implements ICourseEvaluate {
         }
         params.put("APIContenr", "");
         params.put("B1", "保存");
-        Log.e("form", String.valueOf(params));
+//        Log.e("form", String.valueOf(params));
         return params;
     }
 }

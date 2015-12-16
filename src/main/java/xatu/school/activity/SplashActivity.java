@@ -5,8 +5,11 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.umeng.update.UmengUpdateAgent;
+
+import org.jsoup.Connection;
 
 import xatu.school.R;
 
@@ -30,8 +33,12 @@ public class SplashActivity extends BaseActivity {
 
         // 是否初始化(首次启动)
         boolean firstStart = sp.getBoolean(BaseApplication.SP_FIRST_START, true);
+        int version = sp.getInt(BaseApplication.SP_VERSION, 0);
         if (firstStart) {// 首次启动 进行 数据初始化
             initOption();// 配置信息初始化
+        } else if (version < BaseApplication.VERSION) {
+            //版本升级
+            update();
         }
 
         // 是否登录
@@ -53,6 +60,14 @@ public class SplashActivity extends BaseActivity {
         finish();// 销毁
     }
 
+    private void update() {
+        SharedPreferences.Editor editor = BaseApplication.getEditor();
+        editor.putInt(BaseApplication.SP_VERSION, BaseApplication.VERSION);// 修改版本号
+        editor.putBoolean(BaseApplication.SP_IS_GUIDE_STUDY, true);
+        editor.commit();
+        Toast.makeText(SplashActivity.this, "恭喜，版本升级成功！", Toast.LENGTH_SHORT).show();
+    }
+
     /**
      * 配置信息初始化
      */
@@ -68,7 +83,9 @@ public class SplashActivity extends BaseActivity {
         editor.putBoolean(BaseApplication.SP_HAS_STUDENT_INFO, false);
         editor.putBoolean(BaseApplication.SP_HAS_COURSEGRADES_INFO, false);
         editor.putBoolean(BaseApplication.SP_HAS_COURSETABLE_INFO, false);
-        editor.commit();// 异步提交SP信息
+
+        editor.putBoolean(BaseApplication.SP_IS_GUIDE_STUDY, true);
+        editor.commit();
     }
 
     private void initEvent() {

@@ -20,6 +20,7 @@ public class BaseApplication extends Application {
     public static final String SP_HAS_STUDENT_INFO = "has_student_info";// 是否存在学生信息
     public static final String SP_HAS_COURSEGRADES_INFO = "has_coursegrades_info";// 是否存在课程成绩信息
     public static final String SP_HAS_COURSETABLE_INFO = "has_coursetable_info";// 是否存在课程表信息
+    public static final String SP_IS_GUIDE_STUDY = "is_guide_study";// 是否显示引导界面
 
     public static final String SP_USERNAME = "username";// 用户名
     public static final String SP_PASSWORD = "passwrod";// 密码
@@ -28,7 +29,7 @@ public class BaseApplication extends Application {
     public static final int COOKIE_OUT_TIME = 360;// cookie过期时间，秒
 
     private static final String SP_NAME = "school_sp";
-    public static final int VERSION = 1;
+    public static final int VERSION = 10;
 
     private static SharedPreferences mSp;
     private static SharedPreferences.Editor mEditor;
