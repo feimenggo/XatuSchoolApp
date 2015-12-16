@@ -9,6 +9,8 @@ import com.umeng.update.UmengUpdateListener;
 import com.umeng.update.UpdateResponse;
 import com.umeng.update.UpdateStatus;
 
+import xatu.school.activity.BaseApplication;
+
 /**
  * 默认控制器
  * Created by penfi on 2015/12/14.
@@ -67,5 +69,21 @@ public class DefaultManager {
 
         );
         UmengUpdateAgent.forceUpdate(context);
+    }
+
+    /**
+     * 检测是否需要显示引导界面
+     *
+     * @return true 要显示，false 不需要显示
+     */
+    public boolean isShowGuide() {
+        return BaseApplication.getSp().getBoolean(BaseApplication.SP_IS_GUIDE_STUDY, false);
+    }
+
+    /**
+     * 已经显示过引导界面
+     */
+    public void showGuided() {
+        BaseApplication.getEditor().putBoolean(BaseApplication.SP_IS_GUIDE_STUDY, false);
     }
 }
