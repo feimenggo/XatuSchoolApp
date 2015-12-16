@@ -17,7 +17,8 @@ public class Code {
         public static final int LOGIN_WITH_OCR = 6;//登录，自动识别验证码
 
         public static final int COURSE_EVALUATE = 7;//单科课程评教
-        public static final int GET_SINGLECOURSE = 8;//获得单科课程
+        public static final int REFRESH = 8;//刷新数据
+        public static final int AUTO_REFRESH = 8;//自动刷新数据
     }
 
     /**

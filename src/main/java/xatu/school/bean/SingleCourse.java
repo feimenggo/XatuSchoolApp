@@ -150,7 +150,7 @@ public class SingleCourse extends BaseSingleCourse implements Serializable {
                 result = "未评价";
                 break;
             case 4:
-                result = "已评价";
+                result = "已归档";
                 break;
             default:
                 result = "未知状态";

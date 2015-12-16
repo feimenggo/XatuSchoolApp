@@ -133,7 +133,7 @@ public class LoginManager {
      */
     public void saveCourseGradesInfo(Context context, CourseGrades courseGrades) {
         DBManager save = new DBManager();
-        save.saveUniversity(courseGrades);
+        save.saveCourseGrades(courseGrades);
 
         // 更新状态
         BaseApplication.getEditor().putBoolean(BaseApplication.SP_HAS_COURSEGRADES_INFO, true);

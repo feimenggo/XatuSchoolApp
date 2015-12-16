@@ -97,10 +97,11 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                         binder.saveStudentInfo((StudentInfo) msg.obj);
                         break;
                     case Code.CONTROL.COURSEGRADES:// 得到大学年级信息
-                        // 将年级信息存入数据库
+                        // 将课程成绩存入数据库
                         binder.saveCourseGradesInfo((CourseGrades) msg.obj);
                         break;
                     case Code.CONTROL.COURSETABLE:// 得到课程表信息
+                        // 将课程表存入数据库
                         binder.saveCourseTableInfo((CourseTable) msg.obj);
                         break;
                     case Code.CONTROL.LOGIN_WITH_OCR://登录，自动识别验证码

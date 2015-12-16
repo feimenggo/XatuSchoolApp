@@ -45,10 +45,9 @@ public class DBManager {
     }
 
     /**
-     * 将学期信息存入数据库
+     * 将课程成绩信息存入数据库
      */
-    public void saveUniversity(CourseGrades courseGrades) {
-
+    public void saveCourseGrades(CourseGrades courseGrades) {
         List<Semester> semesters = courseGrades.getSemester();
         ContentValues values = new ContentValues();
         long semesterId;
@@ -59,6 +58,22 @@ public class DBManager {
 //            Log.i("test_semester", semesterId + " 学期：" + semester.getName());
             saveCourse(values, semesterId, semester.getSourceSingleCourses());
         }
+    }
+
+    /**
+     * 更新课程成绩信息
+     */
+    public void updateCourseGrades(CourseGrades courseGrades) {
+        //先清空学期表和课程成绩表
+        mDb.execSQL("delete from " + Semester.TABLE_NAME);  //清空学期表数据
+        mDb.execSQL("update sqlite_sequence SET seq = 0 where name ='" +
+                Semester.TABLE_NAME + "'");//设置自增长ID为0
+
+        mDb.execSQL("delete from " + SingleCourse.TABLE_NAME);  //清空课程成绩表数据
+        mDb.execSQL("update sqlite_sequence SET seq = 0 where name ='" +
+                SingleCourse.TABLE_NAME + "'");//设置自增长ID为0
+        //再把新的课程成绩存入数据库，以完成更新操作
+        this.saveCourseGrades(courseGrades);
     }
 
     /**
@@ -226,7 +241,7 @@ public class DBManager {
         mDb.execSQL("update sqlite_sequence SET seq = 0 where name ='" +
                 Semester.TABLE_NAME + "'");//设置自增长ID为0
 
-        mDb.execSQL("delete from " + SingleCourse.TABLE_NAME);  //清空课程信息表数据
+        mDb.execSQL("delete from " + SingleCourse.TABLE_NAME);  //清空课程成绩表数据
         mDb.execSQL("update sqlite_sequence SET seq = 0 where name ='" +
                 SingleCourse.TABLE_NAME + "'");//设置自增长ID为0
 

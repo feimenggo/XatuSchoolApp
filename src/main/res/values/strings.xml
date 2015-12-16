@@ -3,5 +3,5 @@
     <string name="prompt_id">学号</string>
     <string name="prompt_password">密码</string>
     <string name="action_sign_in">登陆</string>
-    <string name="version_name">v0.2 正式版</string>
+    <string name="version_name">v1.0 正式版</string>
 </resources>
