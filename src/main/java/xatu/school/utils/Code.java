@@ -18,7 +18,7 @@ public class Code {
 
         public static final int COURSE_EVALUATE = 7;//单科课程评教
         public static final int REFRESH = 8;//刷新数据
-        public static final int AUTO_REFRESH = 8;//自动刷新数据
+        public static final int AUTO_REFRESH = 9;//自动刷新数据
     }
 
     /**

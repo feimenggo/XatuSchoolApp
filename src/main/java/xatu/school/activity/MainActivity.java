@@ -32,9 +32,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     @Override
     protected void onStart() {
         super.onStart();
-        if(DefaultManager.getInstance().isShowGuide()){
+        if (DefaultManager.getInstance().isShowGuide()) {
             addGuideImage();  //添加引导页面
-         }
+        }
 
     }
 
@@ -53,14 +53,13 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     private void addGuideImage() {
         //找到根布局
-        View view=getWindow().getDecorView().findViewById(R.id.layout_contentView);
-        if(view==null)return;
-        ViewParent viewParent=view.getParent();
-        if(viewParent instanceof FrameLayout)
-        {
-            final FrameLayout framelayout= (FrameLayout) viewParent;
-            final ImageView guideImage=new ImageView(this);
-            FrameLayout.LayoutParams params=new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        View view = getWindow().getDecorView().findViewById(R.id.layout_contentView);
+        if (view == null) return;
+        ViewParent viewParent = view.getParent();
+        if (viewParent instanceof FrameLayout) {
+            final FrameLayout framelayout = (FrameLayout) viewParent;
+            final ImageView guideImage = new ImageView(this);
+            FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
             guideImage.setLayoutParams(params);
             guideImage.setScaleType(ImageView.ScaleType.FIT_XY);
             guideImage.setImageResource(R.mipmap.guide_bg);
@@ -177,4 +176,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         mTabIndicators.get(2).setIconBitmap(R.mipmap.mine_icon);
     }
 
+    //刷新结束
+    public void reflushOver() {
+        //TODO 进行取消进度条，更新数据等操作
+    }
 }
