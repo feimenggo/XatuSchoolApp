@@ -21,10 +21,11 @@
            />
        <xatu.school.view.CircleImageView
            android:id="@+id/id_header"
-           android:layout_width="60dp"
-           android:layout_height="60dp"
+           android:layout_width="70dp"
+           android:layout_height="70dp"
            android:layout_gravity="center"
-
+           android:layout_marginBottom="20dp"
+           android:src="@mipmap/head_boy"
            app:type="circle"
            />
        </FrameLayout>

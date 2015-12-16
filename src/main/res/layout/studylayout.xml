@@ -134,7 +134,7 @@
                             android:layout_marginBottom="15dp"
                             android:text="总课程数"
                             android:textColor="#7A7E85"
-                            android:textSize="15sp" />
+                            android:textSize="14sp" />
 
                         <TextView
                             android:id="@+id/id_allkemu"
@@ -170,7 +170,7 @@
                             android:layout_marginBottom="15dp"
                             android:text="通过课程数"
                             android:textColor="#7A7E85"
-                            android:textSize="15sp" />
+                            android:textSize="14sp" />
 
                         <TextView
                             android:id="@+id/id_tgkms"
@@ -205,7 +205,7 @@
                             android:layout_marginBottom="15dp"
                             android:text="通过率"
                             android:textColor="#7A7E85"
-                            android:textSize="15sp" />
+                            android:textSize="14sp" />
 
                         <TextView
                             android:id="@+id/id_tgl"
@@ -278,33 +278,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginRight="20dp"
                         android:text="A ：100 ~ 90分"
-                        android:textColor="#00ff33"
-                        android:textSize="17sp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="20dp"
-                        android:text="B ：89 ~ 80分"
-                        android:textColor="#00ff33"
-                        android:textSize="17sp" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="2dp"
-                    android:layout_marginTop="2dp"
-                    android:gravity="center"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="20dp"
-                        android:text="C ：  79 ~ 70分"
-                        android:textColor="#ff7800"
+                        android:textColor="#32cd32"
                         android:textSize="17sp" />
 
                     <TextView
@@ -326,11 +300,37 @@
                     android:orientation="horizontal">
 
                     <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="20dp"
+                        android:text="B ：  89 ~ 80分"
+                        android:textColor="#228B22"
+                        android:textSize="17sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:text="E ：59 ~ 50分"
+                        android:textColor="#ff0000"
+                        android:textSize="17sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp"
+                    android:layout_marginTop="2dp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView
                         android:layout_marginRight="20dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="E ：  59 ~ 00分"
-                        android:textColor="#ff0000"
+                        android:text="C ：  79 ~ 70分"
+                        android:textColor="#ff7800"
                         android:textSize="17sp" />
                     <TextView
                         android:visibility="invisible"
@@ -343,7 +343,6 @@
 
 
                 </LinearLayout>
-
 
             </LinearLayout>
         </LinearLayout>
