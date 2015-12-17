@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
+import android.widget.Toast;
 
 import xatu.school.activity.MainActivity;
 import xatu.school.bean.CourseGrades;
@@ -50,11 +51,13 @@ public class MainManager {
                 case Code.CONTROL.REFRESH:
                     if (msg.arg1 == Code.RESULT.TRUE) {
                         // 回调界面
-                        ((MainActivity) mContext).reflushOver();
+                        ((MainActivity) mContext).reflushOver(true);
                         // 刷新数据库
                         refreshToDb((CourseGrades) msg.obj);
                     } else {
-                        Log.i("error_msg", "刷新：刷新失败");
+                        // 回调界面
+                        ((MainActivity) mContext).reflushOver(false);
+                        Log.i("error_msg", "刷新：刷新失败" + msg.arg1);
                     }
                     break;
                 case Code.CONTROL.AUTO_REFRESH:
@@ -89,6 +92,7 @@ public class MainManager {
      */
     public void refresh() {
         if (!CookieUtil.check()) {// cookie 过期 先进行重新登录操作
+            Log.i("error_msg", "cookie过期了");
             new StudentLoginImp().loginWithOcr(new InitMsg(mContext, mHandler, 100), CookieUtil.getUsername(), CookieUtil.getPassword());
         } else {// cookie 没过期 直接刷新
             IGetCourseGradesFromNet courseGrades = new GetCourseGradesFromNetImp();
@@ -99,15 +103,15 @@ public class MainManager {
     /**
      * 自动刷新，结束后不回调界面
      */
-
     public void autoRefresh() {
-        if (!CookieUtil.check()) {// cookie 过期 先进行重新登录操作
-            new StudentLoginImp().loginWithOcr(new InitMsg(mContext, mHandler, 101), CookieUtil.getUsername(), CookieUtil.getPassword());
-        } else {// cookie 没过期 直接刷新
-            IGetCourseGradesFromNet courseGrades = new GetCourseGradesFromNetImp();
-            courseGrades.getCourseGrades(new InitMsg(mContext, mHandler, Code.CONTROL.AUTO_REFRESH));
-
-
+        if (RefreshTimeUtil.checkAutoRefreshTime()) {
+            Toast.makeText(mContext, "自动刷新", Toast.LENGTH_SHORT).show();
+            if (!CookieUtil.check()) {// cookie 过期 先进行重新登录操作
+                new StudentLoginImp().loginWithOcr(new InitMsg(mContext, mHandler, 101), CookieUtil.getUsername(), CookieUtil.getPassword());
+            } else {// cookie 没过期 直接刷新
+                IGetCourseGradesFromNet courseGrades = new GetCourseGradesFromNetImp();
+                courseGrades.getCourseGrades(new InitMsg(mContext, mHandler, Code.CONTROL.AUTO_REFRESH));
+            }
         }
     }
 
@@ -117,7 +121,6 @@ public class MainManager {
      *
      * @param courseGrades 课程成绩对象
      */
-
     private void refreshToDb(CourseGrades courseGrades) {
         DBManager save = new DBManager();
         save.updateCourseGrades(courseGrades);
