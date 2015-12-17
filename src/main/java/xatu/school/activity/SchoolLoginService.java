@@ -49,9 +49,7 @@ public class SchoolLoginService extends Service {
             new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    LoginManager.getInstance().saveStudentInfo(SchoolLoginService.this,
-                            studentInfo);
-                    Intent intent = new Intent();
+                    LoginManager.getInstance().saveStudentInfo(studentInfo);
                     SchoolLoginService.this.sendBroadcast(Code.CONTROL.STUDENTINFO);
                 }
             }).start();
@@ -61,8 +59,7 @@ public class SchoolLoginService extends Service {
             new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    LoginManager.getInstance().saveCourseGradesInfo(SchoolLoginService.this,
-                            courseGrades);
+                    LoginManager.getInstance().saveCourseGradesInfo(courseGrades);
                     SchoolLoginService.this.sendBroadcast(Code.CONTROL.COURSEGRADES);
                 }
             }).start();

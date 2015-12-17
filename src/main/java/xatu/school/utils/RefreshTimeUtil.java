@@ -15,8 +15,7 @@ public class RefreshTimeUtil {
      *
      * @return true 需要自动刷新，false 不需要自动刷新
      */
-    public static boolean checkAutoRefreshTime(Context context) {
-        Toast.makeText(context, "自动刷新", Toast.LENGTH_SHORT).show();
+    public static boolean checkAutoRefreshTime() {
         long lastRefreshTime = BaseApplication.getSp().getLong(BaseApplication.SP_AUTO_REFRESH_TIME, 0);
         long nowTime = System.currentTimeMillis();
         return nowTime > ((BaseApplication.AUTO_REFRESH_INTERVAL * 1000) + lastRefreshTime);

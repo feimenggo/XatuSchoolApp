@@ -1,7 +1,5 @@
 package xatu.school.utils;
 
-import android.util.Log;
-
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -36,36 +34,6 @@ public class SourceToSingleCourse {
         checkStatus(source, singleCourse);
 
         return singleCourse;
-    }
-
-
-    /**
-     * 判断当前课程的状态
-     *
-     * @param source 原始单科课程对象
-     * @return 状态码
-     */
-    private static int judgeStatus(SourceSingleCourse source) {
-//        状态：1->无(无)， 2->未归档(提交)， 3->未评价(归档&未评价)， 4->已评价(归档&已评价)
-        int result;
-        if (source.getZhuangtai().contains("无")) {
-            result = 1;
-        } else if (source.getZhuangtai().contains("提交")) {
-            result = 2;
-        } else if (source.getZhuangtai().contains("归档") & source.getCaozuo().contains("已")) {
-            result = 4;
-        } else {
-            if (!source.getCaozuo().contains("评价")) {
-                result = 4;
-            } else {
-                if (Integer.valueOf(source.getYuanshichengji()) > 0) {
-                    result = 4;
-                } else {
-                    result = 3;
-                }
-            }
-        }
-        return result;
     }
 
     private static void checkEvaluate(SourceSingleCourse source, SingleCourse singleCourse) {

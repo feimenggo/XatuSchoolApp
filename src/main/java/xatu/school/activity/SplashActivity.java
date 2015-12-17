@@ -7,10 +7,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.umeng.update.UmengUpdateAgent;
-
-import org.jsoup.Connection;
-
 import xatu.school.R;
 
 public class SplashActivity extends BaseActivity {
@@ -73,20 +69,19 @@ public class SplashActivity extends BaseActivity {
      */
     private void initOption() {
         SharedPreferences.Editor editor = BaseApplication.getEditor();
+        editor.putInt(BaseApplication.SP_VERSION, BaseApplication.VERSION);
         editor.putBoolean(BaseApplication.SP_FIRST_START, false);
         editor.putBoolean(BaseApplication.SP_IS_LOGIN, false);
-        editor.putInt(BaseApplication.SP_VERSION, BaseApplication.VERSION);
-        editor.putLong(BaseApplication.SP_COOKIE_TIME, 0);
         editor.putString(BaseApplication.SP_USERNAME, "");
         editor.putString(BaseApplication.SP_PASSWORD, "");
 
         editor.putBoolean(BaseApplication.SP_HAS_STUDENT_INFO, false);
         editor.putBoolean(BaseApplication.SP_HAS_COURSEGRADES_INFO, false);
         editor.putBoolean(BaseApplication.SP_HAS_COURSETABLE_INFO, false);
-
         editor.putBoolean(BaseApplication.SP_IS_GUIDE_STUDY, true);
 
         editor.putLong(BaseApplication.SP_AUTO_REFRESH_TIME, 0);
+        editor.putLong(BaseApplication.SP_COOKIE_TIME, 0);
         editor.commit();
     }
 

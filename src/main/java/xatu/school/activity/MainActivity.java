@@ -64,20 +64,20 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     }
 
     private void addGuideImage() {
-            final FrameLayout framelayout= (FrameLayout) findViewById(R.id.layout_contentView);
-            final ImageView guideImage = new ImageView(this);
-            FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-            guideImage.setLayoutParams(params);
-            guideImage.setScaleType(ImageView.ScaleType.FIT_XY);
-            guideImage.setImageResource(R.mipmap.guide_bg);
-            guideImage.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    DefaultManager.getInstance().showGuided();
-                    framelayout.removeView(guideImage);
-                }
-            });
-            framelayout.addView(guideImage);
+        final FrameLayout framelayout = (FrameLayout) findViewById(R.id.layout_contentView);
+        final ImageView guideImage = new ImageView(this);
+        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        guideImage.setLayoutParams(params);
+        guideImage.setScaleType(ImageView.ScaleType.FIT_XY);
+        guideImage.setImageResource(R.mipmap.guide_bg);
+        guideImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DefaultManager.getInstance().showGuided();
+                framelayout.removeView(guideImage);
+            }
+        });
+        framelayout.addView(guideImage);
     }
 
     private void setDefaultFragment() {
@@ -119,8 +119,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     private void iniView() {
         //刷新进度条
-        mProgress= (FrameLayout) findViewById(R.id.login_progress);
-        mProgressContent= (TextView) findViewById(R.id.progressbar_content);
+        mProgress = (FrameLayout) findViewById(R.id.login_progress);
+        mProgressContent = (TextView) findViewById(R.id.progressbar_content);
 
         //将四个view放入集合统一管理
         ChangeColorMyView one = (ChangeColorMyView) findViewById(R.id.id_study);
@@ -194,11 +194,18 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         mTabIndicators.get(2).setIconBitmap(R.mipmap.mine_icon);
     }
 
-    //刷新结束
-    public void reflushOver() {
-        //TODO 进行取消进度条，更新数据等操作
+    /**
+     * 刷新结束
+     *
+     * @param status 状态 true 成功，false 失败
+     */
+    public void reflushOver(boolean status) {
+        // 成功或者失败都隐藏进度条
         mProgress.setVisibility(View.GONE);
-        Toast.makeText(this, "更新成功", Toast.LENGTH_SHORT).show();
-
+        if (status) {
+            Toast.makeText(this, "更新成功！", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, "更新失败！", Toast.LENGTH_SHORT).show();
+        }
     }
 }
