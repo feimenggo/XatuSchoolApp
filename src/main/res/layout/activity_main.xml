@@ -60,15 +60,36 @@
     </LinearLayout>
 </LinearLayout>
 
-    <FrameLayout
-        android:id="@+id/login_progress"
+    <LinearLayout
+        android:id="@+id/refresh_progress"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#66000000"
         android:clickable="true"
+        android:gravity="center"
         android:visibility="gone"
         >
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/progressbar_bg"
+            android:padding="15dp">
+            <ProgressBar
+                android:id="@+id/progress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:paddingBottom="5dp" />
 
-        <include layout="@layout/progressbar" />
-    </FrameLayout>
+            <TextView
+                android:id="@+id/pro_content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/progress"
+                android:layout_centerHorizontal="true"
+                android:text="正在加载数据..."
+                android:textColor="@android:color/white" />
+        </RelativeLayout>
+    </LinearLayout>
 </FrameLayout>
