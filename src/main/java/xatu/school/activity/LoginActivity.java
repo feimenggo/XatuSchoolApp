@@ -130,7 +130,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 if (msg.obj != null) {
                     switch ((WebError) msg.obj) {
                         case userAndPwdError:
-                            error = "用户名或密码错误";
+                            error = "学号或密码错误";
                             reset(true);
                             break;
                         case checkcodeError:
@@ -142,7 +142,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                             reset(false);
                             break;
                         case other:
-                            error = "未知错误";
+                            error = "未知错误，请重试！";
                             reset(false);
                             break;
                         default:
