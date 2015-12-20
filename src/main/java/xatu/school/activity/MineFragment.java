@@ -63,7 +63,7 @@ public class MineFragment extends Fragment{
                 MineManager.getInstance().logout();
                 Intent intent2 = new Intent(getActivity(), LoginActivity.class);
                 startActivity(intent2);
-                getActivity().finish();
+                System.exit(0);
             }
         });
         //设置按钮

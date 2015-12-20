@@ -41,7 +41,6 @@ public class CourseGradesActivity extends BaseActivity implements View.OnClickLi
             AllCourseInfo.addAll(StudyManager.getInstance().getAllCourseInfo());
             EvaluateActivity.isSucceed=false;
             mAdapter.notifyDataSetChanged();
-            Log.i("Tag", "已经提交了dialog,可以刷新页面");
         }else{
             Log.i("Tag","未提交dialog,不需要刷新页面");
         }

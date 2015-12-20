@@ -256,7 +256,6 @@
                 quxian:bgColor="#fafafa"
                 quxian:linColorOnCoord="#0093dd"
                 quxian:lineColorOnAxis="#7a7e85" />
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -312,7 +311,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="20dp"
-                        android:text="E ：59 ~ 50分"
+                        android:text="E ：59 ~ 00分"
                         android:textColor="#ff0000"
                         android:textSize="17sp" />
 
@@ -345,6 +344,7 @@
                 </LinearLayout>
 
             </LinearLayout>
+
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

@@ -6,12 +6,14 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,8 +34,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     //存放所有的指示器
     private List<ChangeColorMyView> mTabIndicators = new ArrayList<ChangeColorMyView>();
 
-    private FrameLayout mProgress;
+    private LinearLayout mProgress;
     private TextView mProgressContent;
+
+    StudyFragment studyFragment;
 
     @Override
     protected void onStart() {
@@ -41,7 +45,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         if (DefaultManager.getInstance().isShowGuide()) {
             addGuideImage();  //添加引导页面
         }
-
     }
 
     @Override
@@ -105,23 +108,23 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     }
 
     private void theStudyFragment() {
-        StudyFragment studyFragment = new StudyFragment();
+        studyFragment = new StudyFragment();
         mTabs.add(studyFragment);
         studyFragment.setRefreshListener(new StudyFragment.OnClickOnRefresh() {
             @Override
             public void OnClickOnRefresh() {
-                MainManager.getInstance(MainActivity.this).refresh();
                 mProgress.setVisibility(View.VISIBLE);
                 mProgressContent.setText("正在更新数据...");
+                MainManager.getInstance(MainActivity.this).refresh();
+
             }
         });
     }
 
     private void iniView() {
         //刷新进度条
-        mProgress = (FrameLayout) findViewById(R.id.login_progress);
-        mProgressContent = (TextView) findViewById(R.id.progressbar_content);
-
+        mProgress = (LinearLayout) findViewById(R.id.refresh_progress);
+        mProgressContent = (TextView) findViewById(R.id.pro_content);
         //将四个view放入集合统一管理
         ChangeColorMyView one = (ChangeColorMyView) findViewById(R.id.id_study);
         mTabIndicators.add(one);
@@ -200,12 +203,24 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
      * @param status 状态 true 成功，false 失败
      */
     public void reflushOver(boolean status) {
-        // 成功或者失败都隐藏进度条
-        mProgress.setVisibility(View.GONE);
+        GoneTheProgress();
         if (status) {
             Toast.makeText(this, "更新成功！", Toast.LENGTH_SHORT).show();
         } else {
             Toast.makeText(this, "更新失败！", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    private void GoneTheProgress() {
+        // 成功或者失败都隐藏进度条
+        mProgress.setVisibility(View.GONE);
+    }
+
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        System.exit(0);
+        Log.i("Tag", "Main is destroy");
     }
 }
