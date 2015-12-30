@@ -42,7 +42,7 @@ public class CourseGradesActivity extends BaseActivity implements View.OnClickLi
             EvaluateActivity.isSucceed=false;
             mAdapter.notifyDataSetChanged();
         }else{
-            Log.i("Tag","未提交dialog,不需要刷新页面");
+          //  Log.i("Tag","未提交dialog,不需要刷新页面");
         }
 
     }

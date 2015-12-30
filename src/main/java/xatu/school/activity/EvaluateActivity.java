@@ -58,15 +58,13 @@ public class EvaluateActivity extends Activity implements View.OnClickListener {
                     } else {
                         // 得到失败提示信息
                         if (msg.obj == WebError.renzhenpingjiao) {
-                            Log.i("Tag", "两次评价间隔太短");
                         } else {
-                            Log.i("Tag", "评价失败，未知原因");
+                        //    Log.i("Tag", "评价失败，未知原因");
                         }
                     }
                     break;
                 case Code.CONTROL.COURSEGRADES:// 返回新的课程成绩
                     if (msg.arg1 == Code.RESULT.TRUE) {
-                        Log.i("Tag", "评价成功");
                         // 将新的课程成绩更新到数据库
                         CourseGradesManager.getInstance().updateSingleCourseToDB((CourseGrades) msg.obj,
                                 singleCourse.getName());
@@ -89,7 +87,7 @@ public class EvaluateActivity extends Activity implements View.OnClickListener {
         singleCourse = (SingleCourse) bundle.getSerializable(StudyFragment.SINGLE_COURSE);
         initData();
         initView();
-        Log.i("Tag", "isSucceed=" + isSucceed);
+
     }
 
     private void initData() {
@@ -118,7 +116,7 @@ public class EvaluateActivity extends Activity implements View.OnClickListener {
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        Log.i("Tag","不允许点击返回");
+       // Log.i("Tag","不允许点击返回");
         if(keyCode==KeyEvent.KEYCODE_BACK)
             if(isSubmit)
              return true;

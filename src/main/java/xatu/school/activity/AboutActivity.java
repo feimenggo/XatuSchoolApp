@@ -2,6 +2,7 @@ package xatu.school.activity;
 
 import android.content.ClipboardManager;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -62,6 +63,8 @@ public class AboutActivity extends BaseActivity implements View.OnClickListener 
         String contact="497230675";
         ClipboardManager cmb= (ClipboardManager) getSystemService(this.CLIPBOARD_SERVICE);
         cmb.setText(contact);
-        Toast.makeText(this,"群号已复制到剪切板!",Toast.LENGTH_SHORT).show();
+        Toast toast=Toast.makeText(this, "群号已复制到剪切板!", Toast.LENGTH_SHORT);
+        toast.setGravity(Gravity.CENTER,0,0);
+        toast.show();
     }
 }
