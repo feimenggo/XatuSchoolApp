@@ -90,17 +90,25 @@ public class CourseEvaluateImp implements ICourseEvaluate {
 
     }
 
-    private RequestParams getparams(EvaluateInfo evaluateInfo) {
+    private RequestParams getparams(EvaluateInfo evaluateInfo,int type) {
         char value[] = {'A', 'B', 'C', 'D', 'E'};
         String name1[] = {"R1_72", "R1_73", "R1_74", "R1_75", "R1_106", "R1_107", "R1_108", "R1_109", "R1_110", "R1_111"};
+<<<<<<< HEAD
         String name2[] = {"R1_29", "R1_30", "R1_32", "R1_33", "R1_34", "R1_35", "R1_36", "R1_37", "R1_38", "R1_39", "R1_40", "R1_41", "R1_42", "R1_43"};
+=======
+        String name2[] = {"R1_29", "R1_30", "R1_32", "R1_33", "R1_34", "R1_35", "R1_36", "R1_37", "R1_38", "R1_39","R1_40","R1_41","R1_42","R1_43"};
+>>>>>>> fei
         RequestParams params = new RequestParams();
         for (int i = 0; i < 10; i++) {
             params.put(name1[i], String.valueOf(value[(evaluateInfo.getForm()[i]) - 1]));
             params.put(name2[i], String.valueOf(value[(evaluateInfo.getForm()[i]) - 1]));
         }
         for (int i = 10; i < 14; i++) {
+<<<<<<< HEAD
             params.put(name2[i], value[i % 5 + 1]);
+=======
+            params.put(name2[i], value[i%5+1]);
+>>>>>>> fei
         }
         params.put("APIContenr", "");
         params.put("B1", "保存");
