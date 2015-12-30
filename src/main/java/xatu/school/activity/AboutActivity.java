@@ -62,10 +62,6 @@ public class AboutActivity extends BaseActivity implements View.OnClickListener 
         String contact="497230675";
         ClipboardManager cmb= (ClipboardManager) getSystemService(this.CLIPBOARD_SERVICE);
         cmb.setText(contact);
-<<<<<<< HEAD
         Toast.makeText(this,"群号已复制到剪切板!",Toast.LENGTH_SHORT).show();
-=======
-        Toast.makeText(this,"群号已复制剪切板!",Toast.LENGTH_SHORT).show();
->>>>>>> fei
     }
 }
