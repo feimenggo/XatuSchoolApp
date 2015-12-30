@@ -49,7 +49,7 @@
             android:textSize="16sp" />
     </LinearLayout>
     <LinearLayout
-
+        android:id="@+id/check_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/content1"
@@ -68,6 +68,26 @@
          android:layout_gravity="center"
          android:background="@null"
          />
+    </LinearLayout>
+    <LinearLayout
 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/check_layout"
+        android:layout_marginTop="20dp"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:orientation="vertical"
+        android:paddingLeft="15dp">
+        <Button
+            android:id="@+id/our_contact"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="交流QQ群：497230675"
+            android:textSize="17sp"
+            android:textColor="#000000"
+            android:layout_gravity="center"
+            android:background="@null"
+            />
     </LinearLayout>
 </RelativeLayout>
