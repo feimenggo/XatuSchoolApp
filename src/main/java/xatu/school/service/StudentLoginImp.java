@@ -93,6 +93,8 @@ public class StudentLoginImp implements IStudentLogin {
                 Message msg = Message.obtain();
                 msg.what = m.getControlCode();
                 try {
+                    if (responseBody.length == 0)
+                        return;
                     String htmlOfsc = new String(responseBody, "GB2312");
                     //Log.e("lo", htmlOfsc);
                     //Log.e("lo", String.valueOf(htmlOfsc.indexOf("message.asp?id=2")));
