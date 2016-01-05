@@ -12,6 +12,7 @@ import android.widget.Toast;
 import java.util.List;
 
 import xatu.school.R;
+import xatu.school.bean.FileBean;
 import xatu.school.bean.Node;
 import xatu.school.bean.SingleCourse;
 
@@ -48,7 +49,16 @@ public class UseAdapter<T> extends TreeListViewAdapter<T> {
     }
 
     @Override
-    public View getConvertView(Node node, final int position, View convertView, ViewGroup parent) {
+    public View getConvertView(Node node, final int position,List<FileBean> mDatas, View convertView, ViewGroup parent) {
+       FileBean currentCourse=null;
+        int size=mDatas.size();
+        for(int i=0;i<size;i++)
+       {
+           if(mDatas.get(i).getLabel().getCourseId()==node.getName().getCourseId())
+           {
+               currentCourse=mDatas.get(i);
+           }
+       }
         final ViewHolder holder;
         //  SingleCourse singleCourse1=AllCourseObj.get(position);
         if (node.getParent() != null) {   //设置子节点内容
@@ -56,8 +66,7 @@ public class UseAdapter<T> extends TreeListViewAdapter<T> {
             holder = new ViewHolder();
             holder.courseName = (TextView) convertView.findViewById(R.id.item_course_name);
             holder.courseScore = (TextView) convertView.findViewById(R.id.item_course_score);
-            holder.courseName.setText(node.getName().getCourseName()); //设置课程名称
-            holder.courseScore.setText(node.getName().getCouresScore());//设置课程分数
+            holder.courseName.setText(currentCourse.getLabel().getCourseName()); //设置课程名称
             final SingleCourse singleCourse = getSingleCourse(node.getName().getCourseId());
             if (singleCourse.getStatus() == 3) {
                 holder.courseScore.setText("点击评价");
@@ -71,7 +80,8 @@ public class UseAdapter<T> extends TreeListViewAdapter<T> {
                         }
                     }
                 });
-
+            }else{
+                holder.courseScore.setText(currentCourse.getLabel().getCouresScore());//设置课程分数
             }
             convertView.setOnClickListener(new View.OnClickListener() {
                 @Override

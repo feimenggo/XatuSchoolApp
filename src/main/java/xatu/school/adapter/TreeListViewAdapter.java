@@ -9,8 +9,10 @@ import android.widget.BaseAdapter;
 import android.widget.ListView;
 
 
+import java.io.File;
 import java.util.List;
 
+import xatu.school.bean.FileBean;
 import xatu.school.bean.Node;
 import xatu.school.utils.TreeHelper;
 
@@ -22,6 +24,7 @@ public abstract class  TreeListViewAdapter<T> extends BaseAdapter {
     protected Context mContext;
     protected List<Node> mAllNodes;    //将用户传入的datas转换为真正的数结点类型
     protected List<Node> mVisibleNodes;  //得到真正的 可见 的结点
+    protected List<FileBean> mDatas; //用户得到datas
     protected LayoutInflater mInflater;
     protected ListView mTree;
 
@@ -39,6 +42,7 @@ public abstract class  TreeListViewAdapter<T> extends BaseAdapter {
 
     public TreeListViewAdapter(ListView tree ,Context context, List<T> datas, int defaultExpandLevel) throws IllegalAccessException {
         mContext = context;
+        mDatas= (List<FileBean>) datas;
         mInflater = LayoutInflater.from(context);
         mAllNodes = TreeHelper.getSortedNodes(datas, defaultExpandLevel);
         mVisibleNodes = TreeHelper.filterVisibleNodes(mAllNodes);
@@ -86,11 +90,11 @@ public abstract class  TreeListViewAdapter<T> extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         Node node=mVisibleNodes.get(position);
-        convertView=getConvertView(node,position,convertView,parent);
+        convertView=getConvertView(node,position,mDatas,convertView,parent);
         //设置子View展示的左边框距*30
         convertView.setPadding(node.getLevel()*20,3,3,3);
 
         return convertView;
     }
-        public abstract View getConvertView(Node node,int position, View convertView,ViewGroup parent);
+        public abstract View getConvertView(Node node,int position,List<FileBean> mDatas, View convertView,ViewGroup parent);
 }
