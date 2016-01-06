@@ -28,67 +28,63 @@ public class CourseGradesActivity extends BaseActivity implements View.OnClickLi
     private UseAdapter<FileBean> mAdapter;
     private List<FileBean> mDatas;
 
-    public static boolean isSubmit=false;  //通知adapter知否提交成功
+    public static boolean isSubmit = false;  //通知adapter知否提交成功
 
     private List<SingleCourse> AllCourseInfo;
+
     @Override
     protected void onResume() {
         super.onResume();
-        if(EvaluateActivity.isSucceed)   //判断是否已经在服务器提交成功
+        if (EvaluateActivity.isSucceed)   //判断是否已经在服务器提交成功
         {
-            isSubmit=true;
+            isSubmit = true;
             //重新获取最新数据
             mDatas.clear();
             AllCourseInfo.clear();
             mDatas.addAll(CourseGradesManager.getInstance().getCourseGradesInfo());
             AllCourseInfo.addAll(StudyManager.getInstance().getAllCourseInfo());
-            EvaluateActivity.isSucceed=false;
+            EvaluateActivity.isSucceed = false;
             mAdapter.notifyDataSetChanged();
-
-
-        }else{
-          //  Log.i("Tag","未提交dialog,不需要刷新页面");
+        } else {
+            //  Log.i("Tag","未提交dialog,不需要刷新页面");
         }
-
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_score);
+        isSubmit = false;
         mTree = (ListView) findViewById(R.id.score_listview);
         initData();
         initViews();// 控件初始化
         try {
-            mAdapter = new UseAdapter<>(mTree, this, mDatas, 0,AllCourseInfo);
+            mAdapter = new UseAdapter<>(mTree, this, mDatas, 0, AllCourseInfo);
             mTree.setAdapter(mAdapter);
 
             mAdapter.setEvaluateClick(new UseAdapter.OnEvaluateClick() {
                 @Override
                 public void onEvaluateClick(SingleCourse singleCourse) {   //需要评价时的点击事件
-                        if(singleCourse!=null)
-                        {
-                            Intent intent = new Intent(CourseGradesActivity.this, EvaluateActivity.class);
-                            Bundle bundle = new Bundle();
-                            bundle.putSerializable(StudyFragment.SINGLE_COURSE, singleCourse);
-                            intent.putExtras(bundle);
-                            startActivity(intent);
-                        }
+                    if (singleCourse != null) {
+                        Intent intent = new Intent(CourseGradesActivity.this, EvaluateActivity.class);
+                        Bundle bundle = new Bundle();
+                        bundle.putSerializable(StudyFragment.SINGLE_COURSE, singleCourse);
+                        intent.putExtras(bundle);
+                        startActivity(intent);
+                    }
 
                 }
             });
-
             mAdapter.setOnClick(new UseAdapter.OnLongClick() {
                 @Override
                 public void onlongClick(SingleCourse singleCourse) {
-                       if(singleCourse!=null)
-                       {
-                           Intent intent = new Intent(CourseGradesActivity.this, SingleCourseActivity.class);
-                           Bundle bundle = new Bundle();
-                           bundle.putSerializable(StudyFragment.SINGLE_COURSE,singleCourse);
-                           intent.putExtras(bundle);
-                           startActivity(intent);
-                       }
+                    if (singleCourse != null) {
+                        Intent intent = new Intent(CourseGradesActivity.this, SingleCourseActivity.class);
+                        Bundle bundle = new Bundle();
+                        bundle.putSerializable(StudyFragment.SINGLE_COURSE, singleCourse);
+                        intent.putExtras(bundle);
+                        startActivity(intent);
+                    }
                 }
             });
         } catch (Exception e) {
@@ -99,8 +95,7 @@ public class CourseGradesActivity extends BaseActivity implements View.OnClickLi
     private void initData() {
         mDatas = CourseGradesManager.getInstance().getCourseGradesInfo();
         AllCourseInfo = StudyManager.getInstance().getAllCourseInfo();
-      //  Map<String>
-
+        //  Map<String>
     }
 
     private void initViews() {
