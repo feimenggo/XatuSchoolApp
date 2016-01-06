@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Map;
 
 import xatu.school.R;
+import xatu.school.activity.CourseGradesActivity;
 import xatu.school.activity.EvaluateActivity;
 import xatu.school.bean.FileBean;
 import xatu.school.bean.Node;
@@ -61,9 +62,9 @@ public class UseAdapter<T> extends TreeListViewAdapter<T> {
     public View getConvertView(Node node, final int position,List<FileBean> mDatas, View convertView, ViewGroup parent) {
         FileBean currentCourse=null; //单个课程信息
         //当提交时也会重新更新数据
-        if((AllCourse==null&&Datas==null)|| EvaluateActivity.isSucceed)
+        if((AllCourse==null&&Datas==null)|| CourseGradesActivity.isSubmit)
         {
-            Log.i("Tag","转换map");
+            //Log.i("Tag","转换map");
             AllCourse = new HashMap<Integer,SingleCourse>();
             Datas = new HashMap<Integer,FileBean>();
             for(int i=0;i< mDatas.size();i++)
