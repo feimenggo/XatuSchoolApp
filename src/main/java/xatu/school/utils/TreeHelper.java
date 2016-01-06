@@ -42,6 +42,7 @@ public class TreeHelper {
                 if (field.getAnnotation(TreeNodeLabel.class) != null) {
                     field.setAccessible(true);
                     Label = (ScoreItem) field.get(t);
+
                 }
             }
             node = new Node(id, pid, Label);
