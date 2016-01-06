@@ -54,7 +54,6 @@ public class CourseGradesActivity extends BaseActivity implements View.OnClickLi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_score);
-        isSubmit = false;
         mTree = (ListView) findViewById(R.id.score_listview);
         initData();
         initViews();// 控件初始化

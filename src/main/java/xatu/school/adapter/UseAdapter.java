@@ -29,8 +29,8 @@ public class UseAdapter<T> extends TreeListViewAdapter<T> {
 
     private List<SingleCourse> AllCourseObj; //课程的所有信息
 
-    Map<Integer,SingleCourse> AllCourse=null;
-    Map<Integer,FileBean> Datas=null;
+    Map<Integer, SingleCourse> AllCourse = null;
+    Map<Integer, FileBean> Datas = null;
 
 
     private OnEvaluateClick onEvaluateClick;
@@ -59,23 +59,23 @@ public class UseAdapter<T> extends TreeListViewAdapter<T> {
     }
 
     @Override
-    public View getConvertView(Node node, final int position,List<FileBean> mDatas, View convertView, ViewGroup parent) {
-        FileBean currentCourse=null; //单个课程信息
+    public View getConvertView(Node node, final int position, List<FileBean> mDatas, View convertView, ViewGroup parent) {
+        FileBean currentCourse = null; //单个课程信息
         //当提交时也会重新更新数据
-        if((AllCourse==null&&Datas==null)|| CourseGradesActivity.isSubmit)
-        {
-            //Log.i("Tag","转换map");
-            AllCourse = new HashMap<Integer,SingleCourse>();
-            Datas = new HashMap<Integer,FileBean>();
-            for(int i=0;i< mDatas.size();i++)
-            {
+        if ((AllCourse == null && Datas == null) || CourseGradesActivity.isSubmit) {
+            if (CourseGradesActivity.isSubmit)
+                CourseGradesActivity.isSubmit = false;
+//            Log.i("Tag", "转换map");
+            AllCourse = new HashMap<Integer, SingleCourse>();
+            Datas = new HashMap<Integer, FileBean>();
+            for (int i = 0; i < mDatas.size(); i++) {
                 Datas.put(mDatas.get(i).getLabel().getCourseId(), mDatas.get(i));
-                if(i<AllCourseObj.size()){
-                    AllCourse.put(AllCourseObj.get(i).getId(),AllCourseObj.get(i));
+                if (i < AllCourseObj.size()) {
+                    AllCourse.put(AllCourseObj.get(i).getId(), AllCourseObj.get(i));
                 }
             }
         }
-         currentCourse=Datas.get(node.getName().getCourseId());
+        currentCourse = Datas.get(node.getName().getCourseId());
         final ViewHolder holder;
         if (node.getParent() != null) {   //设置子节点内容
             convertView = mInflater.inflate(R.layout.score_child_item, parent, false);
@@ -97,7 +97,7 @@ public class UseAdapter<T> extends TreeListViewAdapter<T> {
                         }
                     }
                 });
-            }else{
+            } else {
                 holder.courseScore.setText(currentCourse.getLabel().getCouresScore());//设置课程分数
             }
             convertView.setOnClickListener(new View.OnClickListener() {
