@@ -1,7 +1,10 @@
 package xatu.school.service;
 
 
+import android.util.Log;
+
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import xatu.school.bean.BaseSingleCourse;
@@ -62,12 +65,10 @@ public class GetStudyStatisticsInfoImp implements IGetStudyStatisticsInfo {
     @Override
     public SemesterAverageScore getAverageScore(CourseGrades courseGrades) {
         SemesterAverageScore avg = new SemesterAverageScore();
-        List<Semester> semester = courseGrades.getSemester();
-        List<BaseSingleCourse> bc;
+        List<Semester> semesters = courseGrades.getSemester();
+        Collections.reverse(semesters);
 
-        int size = semester.size();
-        int i, l;
-        String name[] = {"大一上", "大一下", "大二上", "大二下", "大三上", "大三下", "大四上", "大四下"};
+/*        String name[] = {"大一上", "大一下", "大二上", "大二下", "大三上", "大三下", "大四上", "大四下"};
         int semCount = new GetNowSemester().Get(courseGrades);
         for (i = size - 1; i >= size - semCount; --i) {
             double sum = 0;
@@ -83,7 +84,22 @@ public class GetStudyStatisticsInfoImp implements IGetStudyStatisticsInfo {
             }
             int avgnum = (int) (sum / xuefen);
             avg.addData(new SemesterAverageScore.SemesterPoint(name[size - i - 1], avgnum));
+        }*/
+
+        for (Semester semester : semesters) {//遍历学期
+            double allChengji = 0, allXuefen = 0;
+            for (BaseSingleCourse singleCourse :
+                    semester.getSourceSingleCourses()) {
+                allChengji += ((SingleCourse) singleCourse).getChengji() * ((SingleCourse) singleCourse).getXuefen();
+                allXuefen += ((SingleCourse) singleCourse).getXuefen();
+            }
+            if (allChengji != 0)
+                avg.addData(new SemesterAverageScore.SemesterPoint(changeSemesterName(semester.getName()), (int) (allChengji / allXuefen)));
         }
         return avg;
+    }
+
+    private String changeSemesterName(String name) {
+        return name.replace("第1学期", "上").replace("第2学期", "下");
     }
 }

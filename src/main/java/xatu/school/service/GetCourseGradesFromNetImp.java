@@ -177,11 +177,13 @@ public class GetCourseGradesFromNetImp implements IGetCourseGradesFromNet {
             max = max > tmp ? max : tmp;
         }
         if (b2) {
-            int tmp = Integer.parseInt(replace(c.getJidian()));
+//            int tmp = Integer.parseInt(replace(c.getJidian())); 有些绩点带有小数点
+            int tmp = (int) Double.parseDouble(replace(c.getJidian()));
             max = max > tmp ? max : tmp;
         }
         if (b3) {
-            int tmp = Integer.parseInt(replace(c.getYuanshichengji()));
+//            int tmp = Integer.parseInt(replace(c.getYuanshichengji())); 有些原始成绩带有小数点
+            int tmp = (int) Double.parseDouble(replace(c.getYuanshichengji()));
             max = max > tmp ? max : tmp;
         }
         return max;
