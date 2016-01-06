@@ -39,8 +39,9 @@ public class CourseGradesActivity extends BaseActivity implements View.OnClickLi
             AllCourseInfo.clear();
             mDatas.addAll(CourseGradesManager.getInstance().getCourseGradesInfo());
             AllCourseInfo.addAll(StudyManager.getInstance().getAllCourseInfo());
-            EvaluateActivity.isSucceed=false;
             mAdapter.notifyDataSetChanged();
+            EvaluateActivity.isSucceed=false;
+
         }else{
           //  Log.i("Tag","未提交dialog,不需要刷新页面");
         }
@@ -94,6 +95,8 @@ public class CourseGradesActivity extends BaseActivity implements View.OnClickLi
     private void initData() {
         mDatas = CourseGradesManager.getInstance().getCourseGradesInfo();
         AllCourseInfo = StudyManager.getInstance().getAllCourseInfo();
+      //  Map<String>
+
     }
 
     private void initViews() {
