@@ -28,19 +28,23 @@ public class CourseGradesActivity extends BaseActivity implements View.OnClickLi
     private UseAdapter<FileBean> mAdapter;
     private List<FileBean> mDatas;
 
+    public static boolean isSubmit=false;  //通知adapter知否提交成功
+
     private List<SingleCourse> AllCourseInfo;
     @Override
     protected void onResume() {
         super.onResume();
         if(EvaluateActivity.isSucceed)   //判断是否已经在服务器提交成功
         {
+            isSubmit=true;
             //重新获取最新数据
             mDatas.clear();
             AllCourseInfo.clear();
             mDatas.addAll(CourseGradesManager.getInstance().getCourseGradesInfo());
             AllCourseInfo.addAll(StudyManager.getInstance().getAllCourseInfo());
-            mAdapter.notifyDataSetChanged();
             EvaluateActivity.isSucceed=false;
+            mAdapter.notifyDataSetChanged();
+
 
         }else{
           //  Log.i("Tag","未提交dialog,不需要刷新页面");

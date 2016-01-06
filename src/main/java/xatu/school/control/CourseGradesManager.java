@@ -102,7 +102,11 @@ public class CourseGradesManager {
             info = new EvaluateInfo(singleCourse, radios);
 
             ICourseEvaluate courseEvaluate = new CourseEvaluateImp();
-            courseEvaluate.evaluate(CreateInitMsg.msg(context, handler, Code.CONTROL.COURSE_EVALUATE), info);
+           // courseEvaluate.evaluate(CreateInitMsg.msg(context, handler, Code.CONTROL.COURSE_EVALUATE), info);
+            Message msg = Message.obtain();
+            msg.what = Code.CONTROL.COURSE_EVALUATE;
+            msg.arg1 = Code.RESULT.TRUE;
+            handler.sendMessage(msg);
         } catch (EvaluateException e) {
             Message msg = Message.obtain();
             msg.what = Code.CONTROL.COURSE_EVALUATE;

@@ -71,7 +71,7 @@ public class TreeHelper {
         for (Node n : nodes) {
             setNodeIcon(n);
         }
-        Log.i("Tag", nodes.size() + "");
+       // Log.i("Tag", nodes.size() + "");
         return nodes;
     }
 
@@ -92,7 +92,7 @@ public class TreeHelper {
             * */
             addNode(result, node, defaultExpandLevel, 1);
         }
-        Log.i("Tag", result.size() + "");
+      //  Log.i("Tag", result.size() + "");
         return result;
     }
 
