@@ -7,14 +7,16 @@ import xatu.school.activity.BaseApplication;
 import xatu.school.bean.CourseTable;
 import xatu.school.bean.StudentInfo;
 import xatu.school.bean.CourseGrades;
-import xatu.school.service.CourseTableImp;
+import xatu.school.service.CourseTableImp2;
 import xatu.school.service.DBManager;
+import xatu.school.service.GetCourseGradesFromNetImp2;
 import xatu.school.service.ICourseTable;
 import xatu.school.service.IGetCourseGradesFromNet;
 import xatu.school.service.IStudentInfo;
-import xatu.school.service.GetCourseGradesFromNetImp;
-import xatu.school.service.StudentInfoImp;
+import xatu.school.service.IStudentLogin;
+import xatu.school.service.StudentInfoImp2;
 import xatu.school.service.StudentLoginImp;
+import xatu.school.service.StudentLoginImp2;
 import xatu.school.utils.Code;
 import xatu.school.utils.CreateInitMsg;
 import xatu.school.utils.RefreshTimeUtil;
@@ -40,30 +42,30 @@ public class LoginManager {
         return mInstance;
     }
 
-    /**
-     * 获取验证码
-     *
-     * @param context 上下文
-     * @param handler handler
-     */
-    public void checkcode(Context context, Handler handler) {
-        StudentLoginImp studentLogin = new StudentLoginImp();
-        studentLogin.getCheckcodePic(CreateInitMsg.msg(context, handler, Code.CONTROL.CHECKCODE));
-    }
+//    /**
+//     * 获取验证码
+//     *
+//     * @param context 上下文
+//     * @param handler handler
+//     */
+//    public void checkcode(Context context, Handler handler) {
+//        StudentLoginImp studentLogin = new StudentLoginImp();
+//        studentLogin.getCheckcodePic(CreateInitMsg.msg(context, handler, Code.CONTROL.CHECKCODE));
+//    }
 
-    /**
-     * @param context   上下文
-     * @param handler   handler
-     * @param username  用户名
-     * @param password  密码
-     * @param checkcode 验证码
-     */
-    public void login(Context context, Handler handler,
-                      String username, String password, String checkcode) {
-        StudentLoginImp studentLogin = new StudentLoginImp();
-        studentLogin.login(CreateInitMsg.msg(context, handler, Code.CONTROL.LOGIN),
-                username, password, checkcode);
-    }
+//    /**
+//     * @param context   上下文
+//     * @param handler   handler
+//     * @param username  用户名
+//     * @param password  密码
+//     * @param checkcode 验证码
+//     */
+//    public void login(Context context, Handler handler,
+//                      String username, String password, String checkcode) {
+//        StudentLoginImp studentLogin = new StudentLoginImp();
+//        studentLogin.login(CreateInitMsg.msg(context, handler, Code.CONTROL.LOGIN),
+//                username, password, checkcode);
+//    }
 
     /**
      * 登录 不需验证码
@@ -73,10 +75,15 @@ public class LoginManager {
      * @param username 用户名
      * @param password 密码
      */
-    public void login(Context context, Handler handler, String username, String password) {
-        StudentLoginImp studentLogin = new StudentLoginImp();
-        studentLogin.loginWithOcr(CreateInitMsg.msg(context, handler, Code.CONTROL.LOGIN_WITH_OCR),
-                username, password);
+    public void login(final Context context, final Handler handler, final String username, final String password) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                IStudentLogin studentLogin = new StudentLoginImp2();
+                studentLogin.loginWithOcr(CreateInitMsg.msg(context, handler, Code.CONTROL.LOGIN_WITH_OCR),
+                        username, password);
+            }
+        }).start();
     }
 
     /**
@@ -85,19 +92,30 @@ public class LoginManager {
      * @param context 上下文
      * @param handler handler
      */
-    public void getStudentInfoFromWeb(Context context, Handler handler) {
-        IStudentInfo stuInfo = new StudentInfoImp();
-        stuInfo.getStudentInfo(CreateInitMsg.msg(context, handler, Code.CONTROL.STUDENTINFO));
+    public void getStudentInfoFromWeb(final Context context, final Handler handler) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                IStudentInfo stuInfo = new StudentInfoImp2();
+                stuInfo.getStudentInfo(CreateInitMsg.msg(context, handler, Code.CONTROL.STUDENTINFO));
+            }
+        }).start();
     }
 
 
     /**
      * 从网络获取课程表信息
      */
-    public void getCourseTableFromWeb(Context context, Handler handler) {
-        ICourseTable courseTable = new CourseTableImp();
-        courseTable.getCourseTableFromWeb(CreateInitMsg.msg(context,
-                handler, Code.CONTROL.COURSETABLE));
+    public void getCourseTableFromWeb(final Context context, final Handler handler) {
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                ICourseTable courseTable = new CourseTableImp2();
+                courseTable.getCourseTableFromWeb(CreateInitMsg.msg(context,
+                        handler, Code.CONTROL.COURSETABLE));
+            }
+        }).start();
     }
 
     /**
@@ -106,9 +124,14 @@ public class LoginManager {
      * @param context 上下文
      * @param handler handler
      */
-    public void getCourseGradesFromWeb(Context context, Handler handler) {
-        IGetCourseGradesFromNet courseGrades = new GetCourseGradesFromNetImp();
-        courseGrades.getCourseGrades(CreateInitMsg.msg(context, handler, Code.CONTROL.COURSEGRADES));
+    public void getCourseGradesFromWeb(final Context context, final Handler handler) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                IGetCourseGradesFromNet courseGrades = new GetCourseGradesFromNetImp2();
+                courseGrades.getCourseGrades(CreateInitMsg.msg(context, handler, Code.CONTROL.COURSEGRADES));
+            }
+        }).start();
     }
 
     /**
@@ -155,28 +178,28 @@ public class LoginManager {
         BaseApplication.getEditor().apply();
     }
 
-    /**
-     * 从数据库检测是否存在学生信息
-     *
-     * @param context 上下文
-     * @return 存在 true ， 不存在 false
-     */
-    private boolean checkStudentInfoFromDB(Context context) {
-        boolean result;
-        BaseApplication con = (BaseApplication) context.getApplicationContext();
-        result = BaseApplication.getSp().getBoolean(BaseApplication.SP_HAS_STUDENT_INFO, false);
-        return result;
-    }
-
-    /**
-     * 从数据库检测年级信息
-     *
-     * @return 存在 true ，不存在 false
-     */
-    private boolean checkSemesterInfoFromDB(Context context) {
-        boolean result;
-        BaseApplication con = (BaseApplication) context.getApplicationContext();
-        result = BaseApplication.getSp().getBoolean(BaseApplication.SP_HAS_STUDENT_INFO, false);
-        return result;
-    }
+//    /**
+//     * 从数据库检测是否存在学生信息
+//     *
+//     * @param context 上下文
+//     * @return 存在 true ， 不存在 false
+//     */
+//    private boolean checkStudentInfoFromDB(Context context) {
+//        boolean result;
+//        BaseApplication con = (BaseApplication) context.getApplicationContext();
+//        result = BaseApplication.getSp().getBoolean(BaseApplication.SP_HAS_STUDENT_INFO, false);
+//        return result;
+//    }
+//
+//    /**
+//     * 从数据库检测年级信息
+//     *
+//     * @return 存在 true ，不存在 false
+//     */
+//    private boolean checkSemesterInfoFromDB(Context context) {
+//        boolean result;
+//        BaseApplication con = (BaseApplication) context.getApplicationContext();
+//        result = BaseApplication.getSp().getBoolean(BaseApplication.SP_HAS_STUDENT_INFO, false);
+//        return result;
+//    }
 }

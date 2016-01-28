@@ -1,9 +1,6 @@
 package xatu.school.service;
 
 
-import android.util.Log;
-
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -13,7 +10,6 @@ import xatu.school.bean.CoursePassRate;
 import xatu.school.bean.Semester;
 import xatu.school.bean.SemesterAverageScore;
 import xatu.school.bean.SingleCourse;
-import xatu.school.utils.GetNowSemester;
 
 /**
  * Created by Administrator on 2015-11-5.

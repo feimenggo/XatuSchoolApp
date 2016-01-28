@@ -17,9 +17,9 @@ import xatu.school.bean.Semester;
 import xatu.school.bean.SingleCourse;
 import xatu.school.bean.SourceSingleCourse;
 import xatu.school.exception.EvaluateException;
-import xatu.school.service.CourseEvaluateImp;
+import xatu.school.service.CourseEvaluateImp2;
 import xatu.school.service.DBManager;
-import xatu.school.service.GetCourseGradesFromNetImp;
+import xatu.school.service.GetCourseGradesFromNetImp2;
 import xatu.school.service.ICourseEvaluate;
 import xatu.school.service.IGetCourseGradesFromNet;
 import xatu.school.utils.Code;
@@ -96,12 +96,12 @@ public class CourseGradesManager {
      * @param singleCourse 要评教的单科课程对象
      * @param radios       单选 整形数组 值：1->A,2->B,3->C,4->D,5->E
      */
-    public void evaluate(Context context, Handler handler, SingleCourse singleCourse, int[] radios) {
-        EvaluateInfo info;
+    public void evaluate(final Context context, final Handler handler, SingleCourse singleCourse, int[] radios) {
+        final EvaluateInfo info;
         try {
             info = new EvaluateInfo(singleCourse, radios);
 
-            ICourseEvaluate courseEvaluate = new CourseEvaluateImp();
+            ICourseEvaluate courseEvaluate = new CourseEvaluateImp2();
             courseEvaluate.evaluate(CreateInitMsg.msg(context, handler, Code.CONTROL.COURSE_EVALUATE), info);
         } catch (EvaluateException e) {
             Message msg = Message.obtain();
@@ -123,9 +123,14 @@ public class CourseGradesManager {
      * 获取全年级课程成绩
      * 异步返回 课程成绩对象
      */
-    public void getNewCourseGradesFromNet(Context context, Handler handler) {
-        IGetCourseGradesFromNet courseGrades = new GetCourseGradesFromNetImp();
-        courseGrades.getCourseGrades(CreateInitMsg.msg(context, handler, Code.CONTROL.COURSEGRADES));
+    public void getNewCourseGradesFromNet(final Context context, final Handler handler) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                IGetCourseGradesFromNet courseGrades = new GetCourseGradesFromNetImp2();
+                courseGrades.getCourseGrades(CreateInitMsg.msg(context, handler, Code.CONTROL.COURSEGRADES));
+            }
+        }).start();
     }
 
     /**

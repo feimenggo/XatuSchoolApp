@@ -3,7 +3,7 @@ package xatu.school.control;
 import java.text.ParseException;
 
 import xatu.school.bean.CourseTable;
-import xatu.school.service.CourseTableImp;
+import xatu.school.service.CourseTableImp2;
 import xatu.school.service.DBManager;
 import xatu.school.service.ICourseTable;
 import xatu.school.utils.WeekNumber;
@@ -48,7 +48,7 @@ public class CourseTableManager {
             e.printStackTrace();
         }
         //获取当前周的课程表信息
-        ICourseTable table = new CourseTableImp();
+        ICourseTable table = new CourseTableImp2();
         return table.getCourseTableByWeek(courseTable, nowWeek);
     }
 

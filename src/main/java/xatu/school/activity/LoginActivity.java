@@ -54,44 +54,44 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         public void handleMessage(Message msg) {
             if (msg.arg1 == Code.RESULT.TRUE) {
                 switch (msg.what) {
-                    case Code.CONTROL.CHECKCODE:// 获取验证码
-                        Bitmap bitmap = (Bitmap) msg.obj;
-                        mIvCheckcode.setImageBitmap(bitmap);
-                        if (mIvCheckcode.isOpaque())
-                            mIvCheckcode.setImageAlpha(255);
-
-                        // 识别验证码
-                        String text = null;
-                        try {
-                            text = CheckcodeOcr.getOcr(LoginActivity.this, bitmap);
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                        mCheckcode.setText(text);
-
-                        break;
-                    case Code.CONTROL.LOGIN:// 登录
-                        // 修改登录状态 (PersistentCookieStore 会自动保存Cookie信息)
-                        BaseApplication.getEditor().putBoolean(BaseApplication.SP_IS_LOGIN, true);
-
-                        // 保存登录信息
-                        BaseApplication.getEditor().putString(BaseApplication.SP_USERNAME, mUsernameValue);
-                        BaseApplication.getEditor().putString(BaseApplication.SP_PASSWORD, mPasswordValue);
-                        // 更新cookie时间
-//                        BaseApplication.getEditor().putLong(BaseApplication.SP_COOKIE_TIME, System.currentTimeMillis());
-                        CookieUtil.updateCookieTime(false);
-                        BaseApplication.getEditor().apply();
-
-                        Toast.makeText(LoginActivity.this, "登录成功！", Toast.LENGTH_SHORT).show();
-                        mProgressContent.setText("正在加载数据...");
-
-                        //从网络获取学生信息
-                        LoginManager.getInstance().getStudentInfoFromWeb(LoginActivity.this, mHandler);
-                        //从网络获取全年级课程成绩
-                        LoginManager.getInstance().getCourseGradesFromWeb(LoginActivity.this, mHandler);
-                        //从网络获取课程表信息
-                        LoginManager.getInstance().getCourseTableFromWeb(LoginActivity.this, mHandler);
-                        break;
+//                    case Code.CONTROL.CHECKCODE:// 获取验证码
+//                        Bitmap bitmap = (Bitmap) msg.obj;
+//                        mIvCheckcode.setImageBitmap(bitmap);
+//                        if (mIvCheckcode.isOpaque())
+//                            mIvCheckcode.setImageAlpha(255);
+//
+//                        // 识别验证码
+//                        String text = null;
+//                        try {
+//                            text = CheckcodeOcr.getOcr(LoginActivity.this, bitmap);
+//                        } catch (Exception e) {
+//                            e.printStackTrace();
+//                        }
+//                        mCheckcode.setText(text);
+//
+//                        break;
+//                    case Code.CONTROL.LOGIN:// 登录
+//                        // 修改登录状态 (PersistentCookieStore 会自动保存Cookie信息)
+//                        BaseApplication.getEditor().putBoolean(BaseApplication.SP_IS_LOGIN, true);
+//
+//                        // 保存登录信息
+//                        BaseApplication.getEditor().putString(BaseApplication.SP_USERNAME, mUsernameValue);
+//                        BaseApplication.getEditor().putString(BaseApplication.SP_PASSWORD, mPasswordValue);
+//                        // 更新cookie时间
+////                        BaseApplication.getEditor().putLong(BaseApplication.SP_COOKIE_TIME, System.currentTimeMillis());
+//                        CookieUtil.updateCookieTime(false);
+//                        BaseApplication.getEditor().apply();
+//
+//                        Toast.makeText(LoginActivity.this, "登录成功！", Toast.LENGTH_SHORT).show();
+//                        mProgressContent.setText("正在加载数据...");
+//
+//                        //从网络获取学生信息
+//                        LoginManager.getInstance().getStudentInfoFromWeb(LoginActivity.this, mHandler);
+//                        //从网络获取全年级课程成绩
+//                        LoginManager.getInstance().getCourseGradesFromWeb(LoginActivity.this, mHandler);
+//                        //从网络获取课程表信息
+//                        LoginManager.getInstance().getCourseTableFromWeb(LoginActivity.this, mHandler);
+//                        break;
                     case Code.CONTROL.STUDENTINFO:// 得到个人信息
                         // 将学生信息存入数据库
                         binder.saveStudentInfo((StudentInfo) msg.obj);
@@ -127,31 +127,28 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 }
             } else {
                 String error;
-                if (msg.obj != null) {
-                    switch ((WebError) msg.obj) {
-                        case userAndPwdError:
-                            error = "学号或密码错误";
-                            reset(true);
-                            break;
-                        case checkcodeError:
-                            error = "验证码错误";
-                            reset(false);
-                            break;
-                        case noResponse:
-                            error = "服务器无响应";
-                            reset(false);
-                            break;
-                        case other:
-                            error = "未知错误，请重试！";
-                            reset(false);
-                            break;
-                        default:
-                            error = "未知错误来源";
-                            reset(false);
-                            break;
-                    }
-                } else {
-                    error = "未知错误来源";
+                switch ((WebError) msg.obj) {
+                    case userAndPwdError:
+                        error = "亲，学号或密码不正确哦！";
+                        break;
+                    case checkcodeError:
+                        error = "验证码错误！";
+                        break;
+                    case TIMEOUT:
+                        error = "啊，教务网崩溃啦！";
+                        break;
+                    case OFTEN:
+                        error = "登录频繁，惩罚你10秒内不能登录！";
+                        break;
+                    case FAIL:
+                        error = "教务网，你肿么了！";
+                        break;
+                    case OTHER:
+                        error = "未知错误，请重试！";
+                        break;
+                    default:
+                        error = "未知错误来源。";
+                        break;
                 }
                 reset(true);
                 Toast.makeText(LoginActivity.this, error, Toast.LENGTH_SHORT).show();
@@ -187,10 +184,10 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         mProgress.setVisibility(View.GONE);
         //激活登录按钮
         mLogin.setClickable(true);
-        //隐藏当前验证码
-        mIvCheckcode.setImageAlpha(0);
-        //获取新的验证码
-        LoginManager.getInstance().checkcode(LoginActivity.this, mHandler);
+//        //隐藏当前验证码
+//        mIvCheckcode.setImageAlpha(0);
+//        //获取新的验证码
+//        LoginManager.getInstance().checkcode(LoginActivity.this, mHandler);
     }
 
 
@@ -256,9 +253,9 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.iv_checkcode:
-                changeCheckcode();
-                break;
+//            case R.id.iv_checkcode:
+//                changeCheckcode();
+//                break;
             case R.id.btn_login:
                 login();
                 break;
@@ -275,12 +272,12 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         unbindService(conn);
     }
 
-    /**
-     * 更换验证码
-     */
-    private void changeCheckcode() {
-        initCheckcode();
-    }
+//    /**
+//     * 更换验证码
+//     */
+//    private void changeCheckcode() {
+//        initCheckcode();
+//    }
 
     /**
      * 登录
@@ -317,14 +314,14 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         LoginManager.getInstance().login(this, mHandler, username, password);
     }
 
-    /**
-     * 验证码初始化
-     */
-    public void initCheckcode() {
-        if (!checkNetwork()) return;
-        //获取验证码 操作
-        LoginManager.getInstance().checkcode(this, mHandler);
-    }
+//    /**
+//     * 验证码初始化
+//     */
+//    public void initCheckcode() {
+//        if (!checkNetwork()) return;
+//        //获取验证码 操作
+//        LoginManager.getInstance().checkcode(this, mHandler);
+//    }
 
     private boolean checkNetwork() {
         if (NetworkUtil.isConnectingToInternet(this)) {

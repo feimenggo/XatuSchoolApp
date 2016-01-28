@@ -57,10 +57,26 @@ public class EvaluateActivity extends Activity implements View.OnClickListener {
                         mProgressContent.setText("正在更新课程...");
                     } else {
                         // 得到失败提示信息
+                        String error;
                         if (msg.obj == WebError.renzhenpingjiao) {
+                            error = "请稍后再评教！";
+                            Log.i("Tag", "请您认真评教！！");
+                        } else if (msg.obj == WebError.TIMEOUT) {
+                            error = "啊，教务网崩溃啦！";
+                            Log.i("Tag", "连接超时！");
+                        } else if (msg.obj == WebError.FAIL) {
+                            error = "教务网，你肿么了！";
+                            Log.i("Tag", "访问服务器失败！");
+                        } else if (msg.obj == WebError.OTHER) {
+                            error = "评教失败！";
+                            Log.i("Tag", "评教失败，未知原因！");
                         } else {
-                        //    Log.i("Tag", "评价失败，未知原因");
+                            error = "评教失败，未知原因！";
+                            Log.i("Tag", "评教失败，未知原因！");
                         }
+                        Toast.makeText(EvaluateActivity.this, error, Toast.LENGTH_SHORT).show();
+                        isSucceed = false;
+                        finish();
                     }
                     break;
                 case Code.CONTROL.COURSEGRADES:// 返回新的课程成绩
@@ -69,10 +85,23 @@ public class EvaluateActivity extends Activity implements View.OnClickListener {
                         CourseGradesManager.getInstance().updateSingleCourseToDB((CourseGrades) msg.obj,
                                 singleCourse.getName());
                         isSucceed = true;
-                        finish();
                     } else {
-                        Toast.makeText(EvaluateActivity.this, "更新失败", Toast.LENGTH_SHORT).show();
+                        String error;
+                        switch ((WebError) msg.obj) {
+                            case TIMEOUT:
+                                error = "啊，教务网崩溃啦！";
+                                break;
+                            case FAIL:
+                                error = "教务网，你肿么了！";
+                                break;
+                            default:
+                                error = "未知错误来源";
+                                break;
+                        }
+                        Toast.makeText(EvaluateActivity.this, error, Toast.LENGTH_SHORT).show();
+                        isSucceed = false;
                     }
+                    finish();
                     break;
             }
         }
@@ -95,9 +124,9 @@ public class EvaluateActivity extends Activity implements View.OnClickListener {
         String formRadiosTitles[] = EvaluateInfo.formRadioTitles;
         int radiosTitlesLength = formRadiosTitles.length;
         selectRadio = new int[radiosTitlesLength];
-        mData = new ArrayList<RadioCheck>();
-        for (int j = 0; j < radiosTitlesLength; j++) {
-            mData.add(new RadioCheck(formRadiosTitles[j]));
+        mData = new ArrayList<>();
+        for (String formRadiosTitle : formRadiosTitles) {
+            mData.add(new RadioCheck(formRadiosTitle));
         }
     }
 
@@ -116,10 +145,10 @@ public class EvaluateActivity extends Activity implements View.OnClickListener {
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-       // Log.i("Tag","不允许点击返回");
-        if(keyCode==KeyEvent.KEYCODE_BACK)
-            if(isSubmit)
-             return true;
+        // Log.i("Tag","不允许点击返回");
+        if (keyCode == KeyEvent.KEYCODE_BACK)
+            if (isSubmit)
+                return true;
         return super.onKeyDown(keyCode, event);
     }
 
@@ -129,8 +158,8 @@ public class EvaluateActivity extends Activity implements View.OnClickListener {
             case R.id.evaluate_btn_submit: //提交选项
                 isSubmit = true;  //是否可以提交，判断用户选择是否合法
                 int len = selectRadio.length;
-                for (int i = 0; i < len; i++) {
-                    if (selectRadio[i] == 0) {
+                for (int aSelectRadio : selectRadio) {
+                    if (aSelectRadio == 0) {
                         isSubmit = false;
                     }
                 }
@@ -142,13 +171,13 @@ public class EvaluateActivity extends Activity implements View.OnClickListener {
                         mProgressContent.setText("正在提交数据...");
                         CourseGradesManager.getInstance().evaluate(this, handler, singleCourse, selectRadio);
                     } else {
-                        Toast toast=Toast.makeText(this, submitMessage, Toast.LENGTH_SHORT);
-                        toast.setGravity(Gravity.CENTER,0,0);
+                        Toast toast = Toast.makeText(this, submitMessage, Toast.LENGTH_SHORT);
+                        toast.setGravity(Gravity.CENTER, 0, 0);
                         toast.show();
                     }
                 } else {
-                    Toast toast=Toast.makeText(this, "请填写完整!", Toast.LENGTH_SHORT);
-                    toast.setGravity(Gravity.CENTER,0,0);
+                    Toast toast = Toast.makeText(this, "请填写完整!", Toast.LENGTH_SHORT);
+                    toast.setGravity(Gravity.CENTER, 0, 0);
                     toast.show();
                 }
 

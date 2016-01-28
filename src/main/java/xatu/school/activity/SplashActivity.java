@@ -1,5 +1,6 @@
 package xatu.school.activity;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -8,6 +9,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import xatu.school.R;
+import xatu.school.control.MineManager;
 
 public class SplashActivity extends BaseActivity {
     private Button mToLogin;// 进入登录界面
@@ -34,7 +36,8 @@ public class SplashActivity extends BaseActivity {
             initOption();// 配置信息初始化
         } else if (version < BaseApplication.VERSION) {
             //版本升级
-            update();
+            update(version);
+            MineManager.getInstance().logout();// 重新登录
         }
 
         // 是否登录
@@ -56,12 +59,20 @@ public class SplashActivity extends BaseActivity {
         finish();// 销毁
     }
 
-    private void update() {
+    private void update(int version) {
         SharedPreferences.Editor editor = BaseApplication.getEditor();
-        editor.putInt(BaseApplication.SP_VERSION, BaseApplication.VERSION);// 修改版本号
-        editor.putBoolean(BaseApplication.SP_IS_GUIDE_STUDY, true);
+
+        // 判断版本
+        switch (version) {
+            case 10:// v1.0版本
+                editor.putString(BaseApplication.SP_COOKIE_CONTENT, "");// Cookie
+            default:
+                editor.putInt(BaseApplication.SP_VERSION, BaseApplication.VERSION);// 修改版本号
+//                editor.putBoolean(BaseApplication.SP_IS_GUIDE_STUDY, true);// 重置引导界面
+                break;
+        }
         editor.commit();
-        Toast.makeText(SplashActivity.this, "恭喜，版本升级成功！", Toast.LENGTH_SHORT).show();
+        Toast.makeText(SplashActivity.this, "版本升级成功！\n如果你在使用过程中遇到问题，一定要告诉我们哦！\n交流QQ群:497230675", Toast.LENGTH_LONG).show();
     }
 
     /**
@@ -82,6 +93,9 @@ public class SplashActivity extends BaseActivity {
 
         editor.putLong(BaseApplication.SP_AUTO_REFRESH_TIME, 0);
         editor.putLong(BaseApplication.SP_COOKIE_TIME, 0);
+
+        // v1.1 版本新增
+        editor.putString(BaseApplication.SP_COOKIE_CONTENT, "");// Cookie
         editor.commit();
     }
 

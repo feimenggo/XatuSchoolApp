@@ -1,6 +1,8 @@
 package xatu.school.service;
 
 
+import java.io.IOException;
+
 import xatu.school.bean.InitMsg;
 
 
@@ -26,7 +28,7 @@ public interface IStudentLogin {
      * @param checkcode 验证码
      *                  不需返回对象
      */
-    void login(InitMsg msg, String username, String password, String checkcode);
+    void login(InitMsg msg, String username, String password, String checkcode) throws IOException;
 
     /**
      * 学生登出(预留方法)

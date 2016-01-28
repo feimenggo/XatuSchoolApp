@@ -2,6 +2,7 @@ package xatu.school.service;
 
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -30,6 +31,8 @@ public class CourseEvaluateImp implements ICourseEvaluate {
                     if (msg.arg1 == Code.RESULT.TRUE) {
                         CookieUtil.updateCookieTime(true);
                         PostInfo(m, evaluateInfo);
+                    } else {
+                        Log.i("Tag", "3");
                     }
                     break;
             }
@@ -51,6 +54,8 @@ public class CourseEvaluateImp implements ICourseEvaluate {
         clientget.setCookieStore(myCookieStore);
         clientget.addHeader("Referer", "http://222.25.1.101/student/Report.asp?tmid=1");
         clientget.addHeader("Host", "222.25.1.101");
+        clientget.setConnectTimeout(10000);
+        clientget.setTimeout(10000);
         clientget.post(url, getparams(evaluateInfo), new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -60,6 +65,8 @@ public class CourseEvaluateImp implements ICourseEvaluate {
                     msg.what = m.getControlCode();
                     msg.arg1 = Code.RESULT.FALSE;
                     m.getHandler().sendMessage(msg);
+                } else {
+                    Log.i("Tag", "1");
                 }
             }
 
@@ -72,6 +79,8 @@ public class CourseEvaluateImp implements ICourseEvaluate {
                     msg.arg1 = Code.RESULT.TRUE;
                     m.getHandler().sendMessage(msg);
 
+                } else {
+                    Log.i("Tag", "2");
                 }
             }
         });

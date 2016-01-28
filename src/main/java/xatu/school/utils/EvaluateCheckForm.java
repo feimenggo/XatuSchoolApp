@@ -32,8 +32,8 @@ public class EvaluateCheckForm {
         }
         // 判断数量
         int size = form.length - 3;
-        if (na >= 5) {
-            result = "选A的个数要小于5";
+        if (na >= 3) {
+            result = "选A的个数要小于3";
         } else if (nb >= size) {
             result = "B选的太多了";
         } else if (nc >= size) {

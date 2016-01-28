@@ -80,10 +80,10 @@ public class StudentLoginImp implements IStudentLogin {
                     e.printStackTrace();
                 }
                 if (statusCode == 404)
-                    msg.obj = WebError.noResponse;
+                    msg.obj = WebError.NO_RESPONSE;
                 msg.what = m.getControlCode();
                 msg.arg1 = Code.RESULT.FALSE;
-                msg.obj = WebError.other;
+                msg.obj = WebError.OTHER;
                 m.getHandler().sendMessage(msg);
             }
 
@@ -141,7 +141,7 @@ public class StudentLoginImp implements IStudentLogin {
 
             @Override
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable errorr) {
-                //Log.i("TAG", "get picture  onFailure");
+                Log.i("TAG", "get picture  onFailure");
             }
         });
     }

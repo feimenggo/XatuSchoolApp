@@ -30,8 +30,10 @@ public class BaseApplication extends Application {
     public static final int COOKIE_OUT_TIME = 360;// cookie过期时间，秒
     public static final int AUTO_REFRESH_INTERVAL = 3 * 1440 * 60;// 3天，自动更新间隔，分钟
 
+    public static final String SP_COOKIE_CONTENT = "cookie_content";// cookie信息
+
     private static final String SP_NAME = "school_sp";
-    public static final int VERSION = 10;
+    public static final int VERSION = 11;// 1.0 1.1
 
     private static SharedPreferences mSp;
     private static SharedPreferences.Editor mEditor;
