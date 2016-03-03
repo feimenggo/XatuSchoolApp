@@ -56,7 +56,7 @@
         <activity
             android:name="com.umeng.update.UpdateDialogActivity"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-        <activity android:name=".activity.CreateCourseTableActivity"></activity>
+        <activity android:name=".activity.CreateCourseTableActivity"/>
     </application>
 
 </manifest>
