@@ -3,10 +3,12 @@ package xatu.school.service;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.text.TextUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import feimeng.coursetableview.SimpleSection;
 import xatu.school.activity.BaseApplication;
 import xatu.school.bean.BaseSingleCourse;
 import xatu.school.bean.CourseTable;
@@ -104,6 +106,8 @@ public class DBManager {
             day = courseTable.get(i);
             for (int j = 1; j <= 5; j++) {
                 subject = day.get(j);
+                if (TextUtils.isEmpty(subject.courseName))
+                    continue;
                 values.put(CourseTable.COLUMN_day, i);
                 values.put(CourseTable.COLUMN_JIECI_ID, j);
                 values.put(CourseTable.COLUMN_NAME, subject.courseName);
@@ -114,6 +118,18 @@ public class DBManager {
                 values.clear();
             }
         }
+    }
+
+    public void saveNewCourse(CourseTable.Subject course) {
+        ContentValues values = new ContentValues();
+        values.put(CourseTable.COLUMN_NAME, course.courseName);
+        values.put(CourseTable.COLUMN_day, course.day);
+        values.put(CourseTable.COLUMN_ZHOUCI, course.zhouci);
+        values.put(CourseTable.COLUMN_JIECI_ID, 1);
+        values.put(CourseTable.COLUMN_JIECI, course.jieci);
+        values.put(CourseTable.COLUMN_JIAOSHI, course.jiaoshi);
+        mDb.insert(CourseTable.TABLE_NAME, null, values);
+        values.clear();
     }
 
     public StudentInfo getStudentInfo() {
@@ -195,30 +211,25 @@ public class DBManager {
         return singleCourses;
     }
 
-    public CourseTable getCourseTable() {
-        CourseTable courseTable = new CourseTable();
+    public List<SimpleSection> getCourseTableDatas() {
+        List<SimpleSection> datas = new ArrayList<>();
         String sql = "select * from " + CourseTable.TABLE_NAME;
         Cursor cursor = mDb.rawQuery(sql, null);
-        String courseName, zhouci, jieci, jiaoshi;
-        CourseTable.Subject subject;
+        String courseName, jiaoshi;
+        String[] zhouci;
+        String[] jieci;
+        int day;
         if (cursor.moveToFirst()) {
             do {
                 courseName = cursor.getString(cursor.getColumnIndex(CourseTable.COLUMN_NAME));// 课程名
-                zhouci = cursor.getString(cursor.getColumnIndex(CourseTable.COLUMN_ZHOUCI));//周次
-                jieci = cursor.getString(cursor.getColumnIndex(CourseTable.COLUMN_JIECI));// 节次
+                day = cursor.getInt(cursor.getColumnIndex(CourseTable.COLUMN_day));
+                zhouci = cursor.getString(cursor.getColumnIndex(CourseTable.COLUMN_ZHOUCI)).split("-");//周次
+                jieci = cursor.getString(cursor.getColumnIndex(CourseTable.COLUMN_JIECI)).split("-");// 节次
                 jiaoshi = cursor.getString(cursor.getColumnIndex(CourseTable.COLUMN_JIAOSHI));// 教室
-
-                subject = courseTable.get(cursor.getInt(cursor.getColumnIndex(CourseTable.COLUMN_day))).get(
-                        cursor.getInt(cursor.getColumnIndex(CourseTable.COLUMN_JIECI_ID)));
-
-                subject.courseName = courseName;
-                subject.zhouci = zhouci;
-                subject.jieci = jieci;
-                subject.jiaoshi = jiaoshi;
+                datas.add(new SimpleSection(day, Integer.valueOf(zhouci[0]), Integer.valueOf(zhouci[1]), Integer.valueOf(jieci[0]), Integer.valueOf(jieci[1]), courseName + "@" + jiaoshi));
             } while (cursor.moveToNext());
         }
-        cursor.close();
-        return courseTable;
+        return datas;
     }
 
     /**

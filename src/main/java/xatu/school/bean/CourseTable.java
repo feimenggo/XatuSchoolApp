@@ -11,6 +11,7 @@ public class CourseTable {
     public static final String COLUMN_ZHOUCI = "zhouci";// 周次
     public static final String COLUMN_JIECI = "jieci";// 节次
     public static final String COLUMN_JIAOSHI = "jiaoshi";// 教室
+    public static final String COLUMN_TYPE = "type";// 类型 1：系统，2：自定义
     public static final String COLUMN_JIECI_ID = "jieciid";// 节次编号
 
     public static final int MONDAY = 1;// 星期一
@@ -22,16 +23,17 @@ public class CourseTable {
     /**
      * 内部类 科目类
      */
-    public class Subject {
+    public static class Subject {
         public String courseName = "";// 课程名
+        public int day = 0;// 星期
         public String zhouci = "";//周次
         public String jieci = "";// 节次
         public String jiaoshi = "";// 教室
 
         public void init() {
+            courseName = "";
             zhouci = "";
             jieci = "";
-            courseName = "";
             jiaoshi = "";
         }
     }

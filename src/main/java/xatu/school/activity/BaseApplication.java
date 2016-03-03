@@ -33,7 +33,7 @@ public class BaseApplication extends Application {
     public static final String SP_COOKIE_CONTENT = "cookie_content";// cookie信息
 
     private static final String SP_NAME = "school_sp";
-    public static final int VERSION = 11;// 1.0 1.1
+    public static final int VERSION = 12;// 1.0 1.1 1.2
 
     private static SharedPreferences mSp;
     private static SharedPreferences.Editor mEditor;

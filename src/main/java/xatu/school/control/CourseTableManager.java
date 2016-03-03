@@ -1,11 +1,10 @@
 package xatu.school.control;
 
 import java.text.ParseException;
+import java.util.List;
 
-import xatu.school.bean.CourseTable;
-import xatu.school.service.CourseTableImp2;
+import feimeng.coursetableview.SimpleSection;
 import xatu.school.service.DBManager;
-import xatu.school.service.ICourseTable;
 import xatu.school.utils.WeekNumber;
 
 /**
@@ -29,14 +28,13 @@ public class CourseTableManager {
         return instance;
     }
 
-    public CourseTable getPresentCuCourseTable() {
-        CourseTable courseTable = this.getAllCourseTable();
+    public int getNowWeek() {
         // 判断学期类型 上学期还是下学期
         String startDate;
         if (WeekNumber.getSemesterType()) {
-            startDate = "2015-9-07";// 第一周起始日期
+            startDate = "2015-9-07";// 上学期第一周起始日期
         } else {
-            startDate = "2015-3-01";// 第一周起始日期
+            startDate = "2016-2-29";// 下学期第一周起始日期
         }
         String endDate = WeekNumber.getNowDate();// 当前日期
 
@@ -47,14 +45,12 @@ public class CourseTableManager {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        //获取当前周的课程表信息
-        ICourseTable table = new CourseTableImp2();
-        return table.getCourseTableByWeek(courseTable, nowWeek);
+        return nowWeek;
     }
 
-    public CourseTable getAllCourseTable() {
-        //从数据库获取课程表信息
+    public List<SimpleSection> getCourseTable() {
         DBManager dbManager = new DBManager();
-        return dbManager.getCourseTable();
+        return dbManager.getCourseTableDatas();
     }
+
 }

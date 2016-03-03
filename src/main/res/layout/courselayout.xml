@@ -5,12 +5,14 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <include layout="@layout/switchview" />
+    <!--<include layout="@layout/switchview" />-->
+    <include layout="@layout/coursetable_title_week" />
 
-    <feimeng.coursetableview.CouresTableView
+    <feimeng.coursetableview.CourseTableView
         android:id="@+id/coursetable"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        fm:borderColor="@color/colorPrimary"
-        fm:drawBorder="false" />
+        fm:coursetable_background="@mipmap/background"
+        fm:coursetable_borderColor="@color/colorPrimary"
+        fm:coursetable_drawBorder="false" />
 </LinearLayout>
