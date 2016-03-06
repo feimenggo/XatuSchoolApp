@@ -16,7 +16,11 @@ import org.jsoup.select.Elements;
 
 import java.io.IOException;
 import java.net.SocketTimeoutException;
+import java.util.ArrayList;
+import java.util.List;
 
+import feimeng.coursetableview.Section;
+import feimeng.coursetableview.SimpleSection;
 import xatu.school.bean.CourseTable;
 import xatu.school.bean.InitMsg;
 import xatu.school.bean.WebError;
@@ -138,6 +142,23 @@ public class CourseTableImp2 implements ICourseTable {
         Message msg = Message.obtain();
         msg.what = m.getControlCode();
         msg.obj = ct;
+
+        //例子 obj存：List<SimpleSection> sections
+        List<SimpleSection> sections = new ArrayList<>();
+        SimpleSection section = new SimpleSection();
+        section.setCourseName("课程名");
+        section.setTeacher("老师");
+        section.setRoom("教室");
+        section.setDay(1);// 星期一
+        section.setStartSection(1);// 1-2节
+        section.setEndSection(2);
+        section.setWeekStart(1);// 1-10周
+        section.setWeekEnd(10);
+
+        sections.add(section);
+
+
+
         msg.arg1 = Code.RESULT.TRUE;
         m.getHandler().sendMessage(msg);
     }

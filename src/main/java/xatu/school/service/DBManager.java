@@ -98,7 +98,7 @@ public class DBManager {
         }
     }
 
-    public void saveCourseTable(CourseTable courseTable) {
+/*    public void saveCourseTable(CourseTable courseTable) {
         ContentValues values = new ContentValues();
         CourseTable.Day day;
         CourseTable.Subject subject;
@@ -117,6 +117,20 @@ public class DBManager {
                 mDb.insert(CourseTable.TABLE_NAME, null, values);
                 values.clear();
             }
+        }
+    }*/
+
+    public void saveCourseTable(List<SimpleSection> sections) {
+        ContentValues values = new ContentValues();
+        for (SimpleSection section : sections) {
+            values.put(CourseTable.COLUMN_NAME, section.getCourseName());
+            values.put(CourseTable.COLUMN_day, section.getDay());
+            values.put(CourseTable.COLUMN_ZHOUCI, section.getWeekStart() + "-" + section.getWeekEnd());
+            values.put(CourseTable.COLUMN_JIECI_ID, 1);
+            values.put(CourseTable.COLUMN_JIECI, section.getStartSection() + "-" + section.getEndSection());
+            values.put(CourseTable.COLUMN_JIAOSHI, section.getRoom());
+            mDb.insert(CourseTable.TABLE_NAME, null, values);
+            values.clear();
         }
     }
 

@@ -5,6 +5,9 @@ import android.content.Intent;
 import android.os.Binder;
 import android.os.IBinder;
 
+import java.util.List;
+
+import feimeng.coursetableview.SimpleSection;
 import xatu.school.bean.CourseGrades;
 import xatu.school.bean.CourseTable;
 import xatu.school.bean.StudentInfo;
@@ -65,11 +68,11 @@ public class SchoolLoginService extends Service {
             }).start();
         }
 
-        public void saveCourseTableInfo(final CourseTable courseTable) {
+        public void saveCourseTableInfo(final List<SimpleSection> sections) {
             new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    LoginManager.getInstance().saveCourseTable(courseTable);
+                    LoginManager.getInstance().saveCourseSection(sections);
                     SchoolLoginService.this.sendBroadcast(Code.CONTROL.COURSETABLE);
                 }
             }).start();

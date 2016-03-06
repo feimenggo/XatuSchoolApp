@@ -20,6 +20,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.List;
+
+import feimeng.coursetableview.SimpleSection;
 import xatu.school.R;
 import xatu.school.bean.CourseTable;
 import xatu.school.bean.StudentInfo;
@@ -102,7 +105,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                         break;
                     case Code.CONTROL.COURSETABLE:// 得到课程表信息
                         // 将课程表存入数据库
-                        binder.saveCourseTableInfo((CourseTable) msg.obj);
+                        binder.saveCourseTableInfo((List<SimpleSection>) msg.obj);
                         break;
                     case Code.CONTROL.LOGIN_WITH_OCR://登录，自动识别验证码
                         // 修改登录状态 (PersistentCookieStore 会自动保存Cookie信息)

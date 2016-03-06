@@ -3,6 +3,9 @@ package xatu.school.control;
 import android.content.Context;
 import android.os.Handler;
 
+import java.util.List;
+
+import feimeng.coursetableview.SimpleSection;
 import xatu.school.activity.BaseApplication;
 import xatu.school.bean.CourseTable;
 import xatu.school.bean.StudentInfo;
@@ -164,14 +167,26 @@ public class LoginManager {
         BaseApplication.getEditor().apply();
     }
 
+//    /**
+//     * 保存课程表信息
+//     *
+//     * @param courseTable 课程表对象
+//     */
+//    public void saveCourseTable(CourseTable courseTable) {
+//        DBManager save = new DBManager();
+//        save.saveCourseTable(courseTable);
+//
+//        // 更新状态
+//        BaseApplication.getEditor().putBoolean(BaseApplication.SP_HAS_COURSETABLE_INFO, true);
+//        BaseApplication.getEditor().apply();
+//    }
+
     /**
-     * 保存课程表信息
-     *
-     * @param courseTable 课程表对象
+     * 保存课程节信息
      */
-    public void saveCourseTable(CourseTable courseTable) {
+    public void saveCourseSection(List<SimpleSection> sections){
         DBManager save = new DBManager();
-        save.saveCourseTable(courseTable);
+        save.saveCourseTable(sections);
 
         // 更新状态
         BaseApplication.getEditor().putBoolean(BaseApplication.SP_HAS_COURSETABLE_INFO, true);
