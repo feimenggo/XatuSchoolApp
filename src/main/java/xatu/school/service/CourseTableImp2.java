@@ -123,9 +123,9 @@ public class CourseTableImp2 implements ICourseTable {
                 String str=td.get(l).text().replaceAll(" ","");
                 //Log.e("jsoup", i + " " + l + ":" + str);
                 if(!TextUtils.isEmpty(str))
-                {
-                    rule1(sections,str,i,l*2-1);
-                    rule2(sections, str, i, l * 2 - 1);
+                {         
+                    rule1(sections,str,l,i*2-1);
+                    rule2(sections, str, l, i * 2 - 1);
                 }
             }
         }
