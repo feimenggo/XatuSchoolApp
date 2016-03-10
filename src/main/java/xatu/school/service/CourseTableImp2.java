@@ -4,78 +4,107 @@ import android.os.Message;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.loopj.android.http.AsyncHttpClient;
-import com.loopj.android.http.AsyncHttpResponseHandler;
-import com.loopj.android.http.PersistentCookieStore;
+import com.squareup.okhttp.Call;
+import com.squareup.okhttp.OkHttpClient;
+import com.squareup.okhttp.Request;
+import com.squareup.okhttp.Response;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import java.io.UnsupportedEncodingException;
+import java.io.IOException;
+import java.net.SocketTimeoutException;
 import java.util.ArrayList;
 import java.util.List;
 
-
-import cz.msebera.android.httpclient.Header;
+import feimeng.coursetableview.Section;
 import feimeng.coursetableview.SimpleSection;
 import xatu.school.bean.CourseTable;
 import xatu.school.bean.InitMsg;
+import xatu.school.bean.WebError;
 import xatu.school.utils.Code;
+import xatu.school.utils.CookieUtil;
 
 /**
- * Created by Administrator on 2015-11-7.
+ * Created by feimeng on 2016/1/27.
  */
-public class CourseTableImp implements ICourseTable {
+public class CourseTableImp2 implements ICourseTable {
     @Override
-    public void getCourseTableFromWeb(final InitMsg m) {
-        AsyncHttpClient clientget = new AsyncHttpClient();
-        PersistentCookieStore myCookieStore = new PersistentCookieStore(m.getContext());
-        clientget.setCookieStore(myCookieStore);
-        clientget.addHeader("Referer", "http://222.25.1.101/student/navtree.asp");
-        clientget.addHeader("Host", "222.25.1.101");
-        clientget.get("http://222.25.1.101/student/KCB.asp", new AsyncHttpResponseHandler() {
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-                String htmlOfc;
-                try {
-                    htmlOfc = new String(responseBody, "GB2312");
-                    JsoupC(htmlOfc,m);
-                } catch (UnsupportedEncodingException e) {
-                    e.printStackTrace();
-                }
-            }
-            @Override
-            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-//                Log.e("info", String.valueOf(statusCode));
-                Message msg = Message.obtain();
-                msg.what = m.getControlCode();
-                msg.obj = null;
-                msg.arg1 = Code.RESULT.FALSE;
-                m.getHandler().sendMessage(msg);
-            }
-        });
+    public void getCourseTableFromWeb(final InitMsg msg) {
+        String cookie = CookieUtil.getCookieContent();// 最近的Cookie
+        String url = "http://222.25.1.101/student/KCB.asp";
+
+        String Host = "222.25.1.101";
+        String User_Agent = "Mozilla/5.0 (Windows NT 10.0; WOW64; rv:43.0) Gecko/20100101 Firefox/43.0";
+        String Accept = "image/png,image/*;q=0.8,*/*;q=0.5";
+        String Accept_Language = "zh-CN,zh;q=0.8,en-US;q=0.5,en;q=0.3";
+        String Referer = "http://222.25.1.101/student/navtree.asp";
+        String Connection = "keep-alive";
+        String Cache_Control = "max-age=0";
+        // 创建okHttpClient对象
+        OkHttpClient client = new OkHttpClient();
+        client.setFollowRedirects(false);// 禁止跟随重定向
+
+        // 创建Request对象
+        Request request = new Request.Builder().url(url)
+                .header("Host", Host)
+                .header("User-Agent", User_Agent)
+                .header("Accept", Accept)
+                .header("Accept-Language", Accept_Language)
+                .header("Referer", Referer)
+                .header("Cookie", cookie)
+                .header("Connection", Connection)
+                .header("Cache-Control", Cache_Control).build();
+
+        // 创建一个Call对象
+        Call call = client.newCall(request);
+
+        try {
+            Response response = call.execute();
+            if (!response.isSuccessful())
+                throw new IOException("状态码：" + response.code());
+            String htmlOfc = new String(response.body().bytes(), "GB2312");
+            JsoupC(htmlOfc, msg);
+
+        } catch (SocketTimeoutException e) {
+            Log.i("tag", "课程表信息：" + e.getMessage());
+
+            // 创建消息
+            Message newMsg = Message.obtain();
+            newMsg.what = msg.getControlCode();
+            newMsg.arg1 = Code.RESULT.FALSE;
+            newMsg.obj = WebError.TIMEOUT;
+            msg.getHandler().sendMessage(newMsg);
+        } catch (IOException e) {
+            Log.i("tag", "课程表信息：" + e.getMessage());
+
+            // 创建消息
+            Message newMsg = Message.obtain();
+            newMsg.what = msg.getControlCode();
+            newMsg.arg1 = Code.RESULT.FALSE;
+            newMsg.obj = WebError.FAIL;
+            msg.getHandler().sendMessage(newMsg);
+        }
     }
 
     @Override
     public CourseTable getCourseTableByWeek(CourseTable cst, int week) {
-        for(int i=1;i<=5;i++)
-        {
-            for(int l=1;l<=5;l++)
-            {
-                if(!TextUtils.isEmpty(cst.get(i).get(l).zhouci))
-                {
-                    String str1=cst.get(i).get(l).zhouci.split("-")[0];
-                    String str2=cst.get(i).get(l).zhouci.split("-")[1];
-                    if(!(week>=Integer.parseInt(str1) && week<=Integer.parseInt(str2)))
+        for (int i = 1; i <= 5; i++) {
+            for (int l = 1; l <= 5; l++) {
+                if (!TextUtils.isEmpty(cst.get(i).get(l).zhouci)) {
+                    String str1 = cst.get(i).get(l).zhouci.split("-")[0];
+                    String str2 = cst.get(i).get(l).zhouci.split("-")[1];
+                    if (!(week >= Integer.parseInt(str1) && week <= Integer.parseInt(str2)))
                         cst.get(i).get(l).init();
                 }
             }
         }
         return cst;
     }
-    
+
+
     private void JsoupC(String htmlOfc, InitMsg m)
     {
         int tmp;
@@ -169,12 +198,12 @@ public class CourseTableImp implements ICourseTable {
             String week[]=str2[0].split("-");
             int WeekStart,WeekEnd;
             try {
-                 WeekStart = Integer.parseInt(week[0]);
-                 WeekEnd = Integer.parseInt(week[1]);
+                WeekStart = Integer.parseInt(week[0]);
+                WeekEnd = Integer.parseInt(week[1]);
             }catch (NumberFormatException E)
             {
-                 WeekStart=1;
-                 WeekEnd=20;
+                WeekStart=1;
+                WeekEnd=20;
             }
             section.setCourseName(CourseName);
             section.setTeacher(Teacher);
@@ -189,4 +218,3 @@ public class CourseTableImp implements ICourseTable {
         }
     }
 }
-
