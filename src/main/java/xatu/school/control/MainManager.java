@@ -146,6 +146,7 @@ public class MainManager {
     public void refresh() {
         if (!CookieUtil.check()) {// cookie 过期 先进行重新登录操作
             Log.i("error_msg", "cookie过期了");
+            Toast.makeText(mContext, "refresh:cookie过期了", Toast.LENGTH_SHORT).show();
             new StudentLoginImp().loginWithOcr(new InitMsg(mContext, mHandler, 100), CookieUtil.getUsername(), CookieUtil.getPassword());
         } else {// cookie 没过期 直接刷新
             new Thread(new Runnable() {
@@ -165,6 +166,7 @@ public class MainManager {
         if (RefreshTimeUtil.checkAutoRefreshTime()) {
             Toast.makeText(mContext, "自动刷新", Toast.LENGTH_SHORT).show();
             if (!CookieUtil.check()) {// cookie 过期 先进行重新登录操作
+                Toast.makeText(mContext, "autoRefresh:cookie过期了", Toast.LENGTH_SHORT).show();
                 new StudentLoginImp().loginWithOcr(new InitMsg(mContext, mHandler, 101), CookieUtil.getUsername(), CookieUtil.getPassword());
             } else {// cookie 没过期 直接刷新
                 new Thread(new Runnable() {

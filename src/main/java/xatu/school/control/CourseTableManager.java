@@ -32,7 +32,7 @@ public class CourseTableManager {
         // 判断学期类型 上学期还是下学期
         String startDate;
         if (WeekNumber.getSemesterType()) {
-            startDate = "2015-9-07";// 上学期第一周起始日期
+            startDate = "2016-8-29";// 上学期第一周起始日期
         } else {
             startDate = "2016-2-29";// 下学期第一周起始日期
         }
@@ -52,5 +52,4 @@ public class CourseTableManager {
         DBManager dbManager = new DBManager();
         return dbManager.getCourseTableDatas();
     }
-
 }

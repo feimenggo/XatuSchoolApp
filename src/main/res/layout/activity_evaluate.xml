@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
     tools:context="xatu.school.activity.EvaluateActivity">
 
     <LinearLayout
@@ -49,7 +48,6 @@
                 android:orientation="horizontal">
 
 
-
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -78,15 +76,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:text="提交"
                 android:background="@drawable/submit_bg"
-                android:textSize="18sp"
                 android:gravity="center"
-                />
+                android:text="提交"
+                android:textSize="18sp" />
 
         </LinearLayout>
 
     </LinearLayout>
+
     <FrameLayout
         android:id="@+id/submit_progress"
         android:layout_width="match_parent"

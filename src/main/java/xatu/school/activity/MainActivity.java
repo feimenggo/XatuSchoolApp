@@ -23,8 +23,6 @@ import xatu.school.control.MainManager;
 import xatu.school.view.ChangeColorMyView;
 
 public class MainActivity extends BaseActivity implements View.OnClickListener {
-
-
     private ViewPager mViewPager;
     private List<Fragment> mTabs = new ArrayList<Fragment>();
     private FragmentPagerAdapter mAdapter;
